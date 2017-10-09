@@ -131,6 +131,9 @@
     <bean class="service.IUserBookServiceImpl" name="iUserBookService">
         <property name="iUserbookDao" ref="iUserbookDaoImpl"></property>
     </bean>
+    <bean class="service.IForumServiceImpl" name="iForumService">
+        <property ref="iForumDaoImpl" name="iForumDao"></property>
+    </bean>
 
     <bean class="action.Action" id="loginAction" scope="prototype">
         <property name="userService" ref="IUserServiceImpl"></property>
