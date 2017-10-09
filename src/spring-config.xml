@@ -114,5 +114,8 @@
     <bean class="action.Action" id="loginAction" scope="prototype">
         <property name="userService" ref="IUserServiceImpl"></property>
     </bean>
+    <bean class="action.LoginCheckAction" id="loginCheckAction" scope="prototype">
+        <property name="userService" ref="IUserServiceImpl"></property>
+    </bean>
 
 </beans>

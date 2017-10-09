@@ -28,10 +28,11 @@
     <constant name="struts.objectFactory.spring.autoWire.alwaysRespect" value="true" />
 
     <package name="login" namespace="/" extends="struts-default">
-        <action name="login" class="loginAction" method="list">
+        <action name="login" class="loginCheckAction" >
             <interceptor-ref name="params"></interceptor-ref>
             <interceptor-ref name="timer"></interceptor-ref>
-            <result name="success">/pages/home.jsp</result>
+            <result name="success">index.jsp</result>
+            <result name="error">login.jsp</result>
         </action>
     </package>
 </struts>
