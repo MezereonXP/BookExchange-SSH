@@ -133,10 +133,14 @@
     $(document)
             .ready(function() {
                 $("#login").click(function(){
-                    location.href = "/pages/login/login.jsp";});
+                    location.href = "/login.jsp";});
                 $("#login1").click(function(){
-                    location.href = "/pages/login/login.jsp";});
-              // fix menu when passed
+                    location.href = "/login.jsp";});
+                $("#register1").click(function(){
+                    location.href = "/pages/register/register.jsp";});
+                $("#register").click(function(){
+                    location.href = "/pages/register/register.jsp";});
+                // fix menu when passed
               $('.masthead')
                       .visibility({
                         once: false,
@@ -170,7 +174,7 @@
           <a class="ui button" id="login1">登陆</a>
         </div>
         <div class="item">
-          <a class="ui primary button">注册</a>
+          <a class="ui primary button" id="register1">注册</a>
         </div>
       </div>
     </div>
@@ -201,7 +205,7 @@
           <a class="item">讨论区</a>
           <div class="right item">
             <a class="ui inverted button" id="login">登陆</a>
-            <a class="ui inverted button">注册</a>
+            <a class="ui inverted button" id ="register">注册</a>
           </div>
         </div>
       </div>
