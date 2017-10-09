@@ -91,7 +91,7 @@
                 登陆你的账户
             </div>
         </h2>
-        <form class="ui large form" action="login.action">
+        <form class="ui large form" action="login.action" method="post">
             <div class="ui stacked segment">
                 <div class="field">
                     <div class="ui left icon input">
