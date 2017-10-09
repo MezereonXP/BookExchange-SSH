@@ -4,6 +4,7 @@ import dao.IExchangeDaoImpl;
 import entity.ExchangeEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate5.HibernateTemplate;
+import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -11,6 +12,8 @@ import java.util.List;
 /**
  * Created by Mezereon on 2017/10/9.
  */
+
+@Service
 public class IExchangeServiceImpl implements IExchangeService {
 
     @Autowired
@@ -39,5 +42,13 @@ public class IExchangeServiceImpl implements IExchangeService {
     @Override
     public boolean isExists(int id) throws SQLException {
         return iExchangeDao.isExists(id);
+    }
+
+    public IExchangeDaoImpl getiExchangeDao() {
+        return iExchangeDao;
+    }
+
+    public void setiExchangeDao(IExchangeDaoImpl iExchangeDao) {
+        this.iExchangeDao = iExchangeDao;
     }
 }

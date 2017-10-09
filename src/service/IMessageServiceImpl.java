@@ -41,4 +41,12 @@ public class IMessageServiceImpl implements IMessageService {
     public boolean isExists(int id) throws SQLException {
         return iMessageDao.isExists(id);
     }
+
+    public IMessageDaoImpl getiMessageDao() {
+        return iMessageDao;
+    }
+
+    public void setiMessageDao(IMessageDaoImpl iMessageDao) {
+        this.iMessageDao = iMessageDao;
+    }
 }

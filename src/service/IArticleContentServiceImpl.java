@@ -7,6 +7,7 @@ import entity.ArticlecommentEntity;
 import entity.ArticlecontentEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -14,11 +15,12 @@ import java.util.List;
 /**
  * Created by Mezereon on 2017/10/8.
  */
+
+@Service
 public class IArticleContentServiceImpl implements IArticleContentService{
 
     @Autowired
     private IArticleContentDaoImpl iArticleContentDao;
-
 
     @Override
     public List<ArticlecontentEntity> getAllArticleComment() throws SQLException {
@@ -43,5 +45,13 @@ public class IArticleContentServiceImpl implements IArticleContentService{
     @Override
     public boolean isExists(int id) throws SQLException {
         return iArticleContentDao.isExists(id);
+    }
+
+    public IArticleContentDaoImpl getiArticleContentDao() {
+        return iArticleContentDao;
+    }
+
+    public void setiArticleContentDao(IArticleContentDaoImpl iArticleContentDao) {
+        this.iArticleContentDao = iArticleContentDao;
     }
 }

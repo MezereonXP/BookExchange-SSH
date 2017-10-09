@@ -7,6 +7,7 @@ import entity.BeuserEntity;
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
@@ -19,6 +20,8 @@ import java.util.List;
 /**
  * Created by Mezereon on 2017/10/8.
  */
+
+@Service
 public class IArticleCommentServiceImpl implements IArticleCommentService {
 
     @Autowired
@@ -48,5 +51,13 @@ public class IArticleCommentServiceImpl implements IArticleCommentService {
     @Cacheable(cacheNames="isExists", key="#id")
     public boolean isExists(int id) throws SQLException {
         return iArticleCommentDao.isExists(id);
+    }
+
+    public IArticleCommentDaoImpl getiArticleCommentDao() {
+        return iArticleCommentDao;
+    }
+
+    public void setiArticleCommentDao(IArticleCommentDaoImpl iArticleCommentDao) {
+        this.iArticleCommentDao = iArticleCommentDao;
     }
 }

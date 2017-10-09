@@ -110,6 +110,27 @@
     <bean id="IUserServiceImpl" class="service.IUserServiceImpl">
         <property name="iBeuserEntityDaoImpl" ref="iBeuserEntityDaoImpl"></property>
     </bean>
+    <bean id="IArticleCommentServiceImpl" class="service.IArticleCommentServiceImpl">
+        <property name="iArticleCommentDao" ref="iArticleCommentDaoImpl"></property>
+    </bean>
+    <bean class="service.IArticleContentServiceImpl" id="iArticleContentService">
+        <property ref="iArticleContentDaoImpl" name="iArticleContentDao"></property>
+    </bean>
+    <bean class="service.IBookArticleServiceImpl" id="iBookArticleService">
+        <property name="iBookArticleDao" ref="iBookArticleDaoImpl"></property>
+    </bean>
+    <bean class="service.IForumCommentServiceImpl" id="iForumCommentService">
+        <property name="iForumCommentDaoImpl" ref="iForumCommentDaoImpl"></property>
+    </bean>
+    <bean class="service.IExchangeServiceImpl" name="iExchangeService">
+        <property name="iExchangeDao" ref="iExchangeDaoImpl"></property>
+    </bean>
+    <bean class="service.IMessageServiceImpl" name="iMessageService">
+        <property name="iMessageDao" ref="iMessageDaoImpl"></property>
+    </bean>
+    <bean class="service.IUserBookServiceImpl" name="iUserBookService">
+        <property name="iUserbookDao" ref="iUserbookDaoImpl"></property>
+    </bean>
 
     <bean class="action.Action" id="loginAction" scope="prototype">
         <property name="userService" ref="IUserServiceImpl"></property>

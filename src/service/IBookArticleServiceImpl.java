@@ -3,6 +3,7 @@ package service;
 import dao.IBookArticleDaoImpl;
 import entity.BookarticleEntity;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -10,6 +11,7 @@ import java.util.List;
 /**
  * Created by Mezereon on 2017/10/8.
  */
+@Service
 public class IBookArticleServiceImpl implements IBookArticleService {
     @Autowired
     private IBookArticleDaoImpl iBookArticleDao;
@@ -37,5 +39,13 @@ public class IBookArticleServiceImpl implements IBookArticleService {
     @Override
     public boolean isExists(int id) throws SQLException {
         return iBookArticleDao.isExists(id);
+    }
+
+    public IBookArticleDaoImpl getiBookArticleDao() {
+        return iBookArticleDao;
+    }
+
+    public void setiBookArticleDao(IBookArticleDaoImpl iBookArticleDao) {
+        this.iBookArticleDao = iBookArticleDao;
     }
 }
