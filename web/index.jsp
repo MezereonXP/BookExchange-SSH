@@ -39,11 +39,9 @@
   <script src="./pages/semantic/dist/components/sidebar.js"></script>
   <script src="./pages/semantic/dist/components/transition.js"></script>
   <style type="text/css">
-
     .hidden.menu {
       display: none;
     }
-
     .masthead.segment {
       min-height: 700px;
       padding: 1em 0em;
@@ -134,7 +132,10 @@
   <script>
     $(document)
             .ready(function() {
-
+                $("#login").click(function(){
+                    location.href = "/login.jsp";});
+                $("#login1").click(function(){
+                    location.href = "/login.jsp";});
               // fix menu when passed
               $('.masthead')
                       .visibility({
@@ -156,20 +157,20 @@
             })
     ;
   </script>
-  <body>
+  <body >
   <!-- Following Menu -->
   <div class="ui large top fixed hidden menu">
     <div class="ui container">
-      <a class="active item">Home</a>
-      <a class="item">Work</a>
-      <a class="item">Company</a>
-      <a class="item">Careers</a>
+      <a class="active item">主页</a>
+      <a class="item">书籍交换</a>
+      <a class="item">书评</a>
+      <a class="item">讨论区</a>
       <div class="right menu">
         <div class="item">
-          <a class="ui button">Log in</a>
+          <a class="ui button" id="login1">登陆</a>
         </div>
         <div class="item">
-          <a class="ui primary button">Sign Up</a>
+          <a class="ui primary button">注册</a>
         </div>
       </div>
     </div>
@@ -180,14 +181,13 @@
     <a class="active item">Home</a>
     <a class="item">Work</a>
     <a class="item">Company</a>
-    <a class="item">Careers</a>
     <a class="item">Login</a>
     <a class="item">Signup</a>
   </div>
 
 
   <!-- Page Contents -->
-  <div class="pusher" id="pusher">
+  <div class="pusher">
     <div class="ui inverted vertical masthead center aligned segment">
 
       <div class="ui container">
@@ -195,35 +195,34 @@
           <a class="toc item">
             <i class="sidebar icon"></i>
           </a>
-          <a class="active item">Home</a>
-          <a class="item">Work</a>
-          <a class="item">Company</a>
-          <a class="item">Careers</a>
+          <a class="active item">主页</a>
+          <a class="item">书籍交换</a>
+          <a class="item">书评</a>
+          <a class="item">讨论区</a>
           <div class="right item">
-            <a class="ui inverted button">Log in</a>
-            <a class="ui inverted button">Sign Up</a>
+            <a class="ui inverted button" id="login">登陆</a>
+            <a class="ui inverted button">注册</a>
           </div>
         </div>
       </div>
 
       <div class="ui text container">
         <h1 class="ui inverted header">
-          Imagine-a-Company
+          还在为房间里堆满的旧书而烦恼吗?
         </h1>
-        <h2>Do whatever you want when you want to.</h2>
-        <div class="ui huge primary button" onclick="show()">Get Started <i class="right arrow icon"></i></div>
+        <h2>这里有你想要的一切</h2>
+        <div class="ui huge primary button">开始交换吧 <i class="right arrow icon"></i></div>
       </div>
-
     </div>
 
     <div class="ui vertical stripe segment">
       <div class="ui middle aligned stackable grid container">
         <div class="row">
           <div class="eight wide column">
-            <h3 class="ui header">We Help Companies and Companions</h3>
-            <p>We can give your company superpowers to do things that they never thought possible. Let us delight your customers and empower your needs...through pure data analytics.</p>
-            <h3 class="ui header">We Make Bananas That Can Dance</h3>
-            <p>Yes that's right, you thought it was the stuff of dreams, but even bananas can be bioengineered.</p>
+            <h3 class="ui header">在这里不仅仅只是换书！</h3>
+            <p>分享书评似乎是件更激动人心的事情！阅读与发布书评让爱好读书的你沉醉于此。</p>
+            <h3 class="ui header">另外，这里还是你们讨论的天堂！</h3>
+            <p>在讨论区里你可以遇见广大书友，阅读完后就你的感受与他们辩驳一番吧！</p>
           </div>
           <div class="six wide right floated column">
             <img src="assets/images/wireframe/white-image.png" class="ui large bordered rounded image">
@@ -231,7 +230,7 @@
         </div>
         <div class="row">
           <div class="center aligned column">
-            <a class="ui huge button">Check Them Out</a>
+            <a class="ui huge button">进入讨论区</a>
           </div>
         </div>
       </div>
@@ -257,15 +256,18 @@
 
     <div class="ui vertical stripe segment">
       <div class="ui text container">
-        <h3 class="ui header">Breaking The Grid, Grabs Your Attention</h3>
-        <p>Instead of focusing on content creation and hard work, we have learned how to master the art of doing nothing by providing massive amounts of whitespace and generic content that can seem massive, monolithic and worth your attention.</p>
-        <a class="ui large button">Read More</a>
         <h4 class="ui horizontal header divider">
-          <a href="#">Case Studies</a>
+          热门讨论
         </h4>
-        <h3 class="ui header">Did We Tell You About Our Bananas?</h3>
-        <p>Yes I know you probably disregarded the earlier boasts as non-sequitur filler content, but its really true. It took years of gene splicing and combinatory DNA research, but our bananas can really dance.</p>
-        <a class="ui large button">I'm Still Quite Interested</a>
+        <h3 class="ui header" style="text-overflow:ellipsis"> 点滴的记录，那些年我读过的书（文学类居多+不定时更新+读后感）</h3>
+        <p style="font-size: 16px">很久很久没有在讨论里发表过只言片语了，长久以来，我只是把所有的思想隐藏在心里....</p>
+        <a class="ui large button">开始讨论</a>
+        <h4 class="ui horizontal header divider">
+          热门书评
+        </h4>
+        <h3 class="ui header">罗为民之死</h3>
+        <p style="font-size: 16px">最近，我看了一本书，书的名字叫《看不清的真相》，看书的简介，是作者百年如歌的新作（在这之前，并未看过她的作品），书又是社会派推理大神，紫金陈（闻其名，不知其人，提其作品，恍然大悟，最近由秦昊，邓家佳主演的悬疑热剧《无证之罪》）、周浩晖（郭京飞主演的《暗黑者：死亡通知单》，这个剧当时也是大燥）推荐，两位专业的推理大神推荐的书，如何，请允许我以第一人称，给大家捋捋。.....</p>
+        <a class="ui large button">阅读全文</a>
       </div>
     </div>
 
@@ -299,10 +301,6 @@
       </div>
     </div>
   </div>
-  <script>
-    function show() {
-      $('#pusher').transition("fly left");
-    }
-  </script>
+
   </body>
 </html>
