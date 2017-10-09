@@ -16,29 +16,29 @@
 
     <!-- Site Properties -->
     <title>Login Example - Semantic</title>
-    <link rel="stylesheet" type="text/css" href="../semantic/dist/semantic.min.css">
-    <script src="../semantic/dist/semantic.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="../semantic/dist/components/reset.css">
-    <link rel="stylesheet" type="text/css" href="../semantic/dist/components/site.css">
+    <link rel="stylesheet" type="text/css" href="pages/semantic/dist/semantic.min.css">
+    <script src="pages/semantic/dist/semantic.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="pages/semantic/dist/components/reset.css">
+    <link rel="stylesheet" type="text/css" href="pages/semantic/dist/components/site.css">
 
-    <link rel="stylesheet" type="text/css" href="../semantic/dist/components/container.css">
-    <link rel="stylesheet" type="text/css" href="../semantic/dist/components/grid.css">
-    <link rel="stylesheet" type="text/css" href="../semantic/dist/components/header.css">
-    <link rel="stylesheet" type="text/css" href="../semantic/dist/components/image.css">
-    <link rel="stylesheet" type="text/css" href="../semantic/dist/components/menu.css">
+    <link rel="stylesheet" type="text/css" href="pages/semantic/dist/components/container.css">
+    <link rel="stylesheet" type="text/css" href="pages/semantic/dist/components/grid.css">
+    <link rel="stylesheet" type="text/css" href="pages/semantic/dist/components/header.css">
+    <link rel="stylesheet" type="text/css" href="pages/semantic/dist/components/image.css">
+    <link rel="stylesheet" type="text/css" href="pages/semantic/dist/components/menu.css">
 
-    <link rel="stylesheet" type="text/css" href="../semantic/dist/components/divider.css">
-    <link rel="stylesheet" type="text/css" href="../semantic/dist/components/segment.css">
-    <link rel="stylesheet" type="text/css" href="../semantic/dist/components/form.css">
-    <link rel="stylesheet" type="text/css" href="../semantic/dist/components/input.css">
-    <link rel="stylesheet" type="text/css" href="../semantic/dist/components/button.css">
-    <link rel="stylesheet" type="text/css" href="../semantic/dist/components/list.css">
-    <link rel="stylesheet" type="text/css" href="../semantic/dist/components/message.css">
-    <link rel="stylesheet" type="text/css" href="../semantic/dist/components/icon.css">
+    <link rel="stylesheet" type="text/css" href="pages/semantic/dist/components/divider.css">
+    <link rel="stylesheet" type="text/css" href="pages/semantic/dist/components/segment.css">
+    <link rel="stylesheet" type="text/css" href="pages/semantic/dist/components/form.css">
+    <link rel="stylesheet" type="text/css" href="pages/semantic/dist/components/input.css">
+    <link rel="stylesheet" type="text/css" href="pages/semantic/dist/components/button.css">
+    <link rel="stylesheet" type="text/css" href="pages/semantic/dist/components/list.css">
+    <link rel="stylesheet" type="text/css" href="pages/semantic/dist/components/message.css">
+    <link rel="stylesheet" type="text/css" href="pages/semantic/dist/components/icon.css">
 
     <script src="https://code.jquery.com/jquery.min.js"></script>
-    <script src="../semantic/dist/components/form.js"></script>
-    <script src="../semantic/dist/components/transition.js"></script>
+    <script src="pages/semantic/dist/components/form.js"></script>
+    <script src="pages/semantic/dist/components/transition.js"></script>
 
     <style type="text/css">
         body > .grid {

@@ -49,8 +49,8 @@ public class IUserServiceImpl implements IUserService {
     }
 
     public boolean login(String username, String password){
-        BeuserEntity beuserEntity = iBeuserEntityDaoImpl.getUserByName(username);
         if(isExists(username)){
+            BeuserEntity beuserEntity = iBeuserEntityDaoImpl.getUserByName(username);
             return username.equals(beuserEntity.getUsername())
                     &&password.equals(beuserEntity.getPassword());
         }else{
