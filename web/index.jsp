@@ -137,9 +137,9 @@
                 $("#login1").click(function(){
                     location.href = "/login.jsp";});
                 $("#register1").click(function(){
-                    location.href = "/pages/register/register.jsp";});
+                    location.href = "/register.jsp";});
                 $("#register").click(function(){
-                    location.href = "/pages/register/register.jsp";});
+                    location.href = "/register.jsp";});
                 // fix menu when passed
               $('.masthead')
                       .visibility({
