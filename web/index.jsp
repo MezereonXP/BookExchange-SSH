@@ -140,23 +140,23 @@
                     location.href = "/register.jsp";});
                 $("#register").click(function(){
                     location.href = "/register.jsp";});
-                // fix menu when passed
-              $('.masthead')
-                      .visibility({
-                        once: false,
-                        onBottomPassed: function() {
-                          $('.fixed.menu').transition('fade in');
-                        },
-                        onBottomPassedReverse: function() {
-                          $('.fixed.menu').transition('fade out');
-                        }
-                      })
-              ;
-
-              // create sidebar and attach to menu open
-              $('.ui.sidebar')
-                      .sidebar('attach events', '.toc.item')
-              ;
+                $("#exchange").click(function () {
+                    location.href = "/exchange.jsp";
+                })
+                  // fix menu when passed
+                $('.masthead')
+                        .visibility({
+                          once: false,
+                          onBottomPassed: function() {
+                            $('.fixed.menu').transition('fade in');
+                          },
+                          onBottomPassedReverse: function() {
+                            $('.fixed.menu').transition('fade out');
+                          }
+                        });
+                // create sidebar and attach to menu open
+                $('.ui.sidebar')
+                        .sidebar('attach events', '.toc.item');
 
             })
     ;
@@ -200,7 +200,7 @@
             <i class="sidebar icon"></i>
           </a>
           <a class="active item">主页</a>
-          <a class="item">书籍交换</a>
+          <a class="item" id="exchange">书籍交换</a>
           <a class="item">书评</a>
           <a class="item">讨论区</a>
           <div class="right item">
