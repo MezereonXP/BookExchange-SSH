@@ -32,7 +32,7 @@
             <interceptor-ref name="params"></interceptor-ref>
             <interceptor-ref name="timer"></interceptor-ref>
             <result name="success">index.jsp</result>
-            <result name="error">login.jsp</result>
+            <result name="error">./pages/login/login.jsp</result>
         </action>
     </package>
 </struts>
