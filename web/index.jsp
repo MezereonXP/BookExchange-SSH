@@ -142,7 +142,7 @@
                 $("#register").click(function(){
                     location.href = "/register.jsp";});
                 $("#exchange").click(function () {
-                    location.href = "/showExchange.action";
+                    location.href = "/showExchange.action?page=1";
                 })
                   // fix menu when passed
                 $('.masthead')

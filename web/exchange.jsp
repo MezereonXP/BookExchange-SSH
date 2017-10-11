@@ -298,7 +298,7 @@
         //window.alert(user);
     }
     function changePage(num) {
-        window.alert(""+num);
+        //window.alert(""+num);
         self.location ="showExchange.action?page="+num;
     }
 </script>
