@@ -42,7 +42,7 @@
         </action>
     </package>
     <package name="exchange" namespace="/" extends="struts-default">
-        <action name="showExhcnage" class="action.ShowExchangeAction">
+        <action name="showExchange" class="showExchangeAction">
             <result name="success">exchange.jsp</result>
         </action>
     </package>
