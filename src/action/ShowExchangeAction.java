@@ -48,7 +48,7 @@ public class ShowExchangeAction extends ActionSupport {
             }
         }
         pageNum = new ArrayList<Page>();
-        for(int i=2;i<(int) (userbookEntities.size()/5.1+1);i++){
+        for(int i=1;i<(int) (userbookEntities.size()/5.1+1);i++){
             Page page = new Page();
             page.setNum(i+"");
             pageNum.add(page);

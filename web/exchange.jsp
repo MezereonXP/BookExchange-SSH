@@ -232,12 +232,8 @@
     <div class="center row">
         <div class="center column" style="text-align: center">
             <div class="ui pagination menu">
-
-                <a class="active item">
-                    1
-                </a>
                 <s:iterator value="pageNum">
-                    <a class="item" onclick="changePage('<s:property value="num"/>')">
+                    <a class="item <s:if test="num==page">active</s:if>" onclick="changePage('<s:property value="num"/>')">
                         <s:property value="num"/>
                     </a>
                 </s:iterator>
