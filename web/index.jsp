@@ -5,6 +5,7 @@
   Time: 11:15
   To change this template use File | Settings | File Templates.
 --%>
+<%@ taglib prefix="s" uri="/struts-tags" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
   <head>
@@ -163,6 +164,19 @@
     ;
   </script>
   <body >
+  <script>
+      function getCookie(name) {
+          var arr, reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)");
+          if (arr = document.cookie.match(reg))
+              return unescape(arr[2]);
+          else
+              return 'null';
+      }
+      function test() {
+          window.alert(getCookie("USERNAME"));
+      }
+
+  </script>
   <!-- Following Menu -->
   <div class="ui large top fixed hidden menu">
     <div class="ui container">
@@ -171,6 +185,7 @@
       <a class="item">书评</a>
       <a class="item">讨论区</a>
       <div class="right menu">
+
         <div class="item">
           <a class="ui button" id="login1">登陆</a>
         </div>
@@ -205,8 +220,14 @@
           <a class="item">书评</a>
           <a class="item">讨论区</a>
           <div class="right item">
-            <a class="ui inverted button" id="login">登陆</a>
-            <a class="ui inverted button" id ="register">注册</a>
+            <s:if test="getCookie('USERNAME')=='null'">
+              <a class="ui inverted button" id="login">登陆</a>
+              <a class="ui inverted button" id ="register">注册</a>
+            </s:if>
+            <s:else>
+              <img  id="userPic" class="ui avatar image"
+                    src="<s:if test="getCookie('USERNAME')!='null'">getCookie("SRC")</s:if>">
+            </s:else>
           </div>
         </div>
       </div>
@@ -272,7 +293,7 @@
         </h4>
         <h3 class="ui header">罗为民之死</h3>
         <p style="font-size: 16px">最近，我看了一本书，书的名字叫《看不清的真相》，看书的简介，是作者百年如歌的新作（在这之前，并未看过她的作品），书又是社会派推理大神，紫金陈（闻其名，不知其人，提其作品，恍然大悟，最近由秦昊，邓家佳主演的悬疑热剧《无证之罪》）、周浩晖（郭京飞主演的《暗黑者：死亡通知单》，这个剧当时也是大燥）推荐，两位专业的推理大神推荐的书，如何，请允许我以第一人称，给大家捋捋。.....</p>
-        <a class="ui large button">阅读全文</a>
+        <a class="ui large button" onclick="test()">阅读全文</a>
       </div>
     </div>
 
