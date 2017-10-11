@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -26,6 +27,19 @@ public class SprintHibernateTest {
             System.out.println("ID号：" + user.getId() + "；用户名：" + user.getUsername() +
                     "；密码：" + user.getPassword() + "；邮件：" + user.getEmail());
         }
+    }
+
+    @Test
+    public void testAdd() throws SQLException {
+        BeuserEntity beuserEntity=new BeuserEntity();
+        beuserEntity.setUsername("caster");
+        beuserEntity.setSrc("http://mezereon.gotoip2.com/simple.jpg");
+        beuserEntity.setEmail("857547214@qq.com");
+        beuserEntity.setPhone("13032494890");
+        beuserEntity.setSex("男");
+        beuserEntity.setPassword("123456789");
+        beuserEntity.setSignatrue("这个人很懒!");
+        userService.addUser(beuserEntity);
     }
 
     @Test
