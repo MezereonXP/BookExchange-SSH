@@ -15,7 +15,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
     <!-- Site Properties -->
-    <title>Login Example - Semantic</title>
+    <title>用户登陆</title>
     <link rel="stylesheet" type="text/css" href="pages/semantic/dist/semantic.min.css">
     <script src="pages/semantic/dist/semantic.min.js"></script>
     <link rel="stylesheet" type="text/css" href="pages/semantic/dist/components/reset.css">

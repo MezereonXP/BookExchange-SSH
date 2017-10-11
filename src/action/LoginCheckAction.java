@@ -17,7 +17,6 @@ public class LoginCheckAction extends ActionSupport{
 
     @Override
     public String execute() throws Exception {
-        System.out.println("submit");
         state="success";
       boolean right = getUserService().login(username,password);
       if(right){
