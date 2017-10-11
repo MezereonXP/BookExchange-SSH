@@ -1,3 +1,4 @@
+<%@ taglib prefix="s" uri="/struts-tags" %>
 <%--
   Created by IntelliJ IDEA.
   User: Administrator
@@ -120,7 +121,12 @@
                 <div class="field" style="margin-bottom: 25px">
                     <label>用户名</label>
                     <div class="ui left icon input">
-                        <input type="text" placeholder="用户名" name="username">
+                        <s:if test="exist == 'true'">
+                            <input type="text" name="username" value="<s:property value="username"/>" placeholder="用户名"  >
+                        </s:if>
+                        <s:else>
+                            <input type="text" name="username" placeholder="用户名" >
+                        </s:else>
                         <i class="user icon"></i>
                     </div>
                 </div>
@@ -156,26 +162,33 @@
                 <div class="field" style="margin-bottom: 25px">
                     <label>电子邮箱</label>
                     <div class="ui left icon input">
-                        <input type="text" placeholder="请输入你的电子邮箱" name="email">
+                        <s:if test="exist == 'true'">
+                            <input type="text" name="email" value="<s:property value="email"/>" placeholder="请输入你的电子邮箱"  >
+                        </s:if>
+                        <s:else>
+                            <input type="text"placeholder="请输入你的电子邮箱" name="email" >
+                        </s:else>
                         <i class="Mail Outline icon"></i>
                     </div>
                 </div>
                 <div class="field" style="margin-bottom: 25px">
                     <label>手机号码</label>
                     <div class="ui left icon input">
-                        <input type="text" placeholder="请输入你的手机号码" name="phone">
+                        <s:if test="exist == 'true'">
+                            <input type="text" name="phone" value="<s:property value="phone"/>" placeholder="请输入你的手机号码"  >
+                        </s:if>
+                        <s:else>
+                            <input type="text"placeholder="请输入你的手机号码" name="phone" >
+                        </s:else>
                         <i class="Call icon"></i>
                     </div>
                 </div>
                 <div class="ui error message"></div>
-                <s:if test="exist == 'error'">
+                <s:if test="exist == 'true'">
                     <div class="ui negative message" id="a">
                         <i id="close" class="close icon" onclick="hideTheWrong()"></i>
                         用户名已存在！
                     </div>
-                    <script>
-                        $('#form').transition("tada");
-                    </script>
                 </s:if>
                 <div class="field" style="margin-bottom: 25px ;text-align: center" >
                     <div class="ui fluid large teal submit button"style="  margin-left:auto;margin-left:auto;" id="register"  >
