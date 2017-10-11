@@ -35,4 +35,9 @@
             <result name="error">login.jsp</result>
         </action>
     </package>
+    <package name="exchange" namespace="/" extends="struts-default">
+        <action name="showExchange" class="action.ShowExchangeAction">
+            <result name="success">exchange.jsp</result>
+        </action>
+    </package>
 </struts>

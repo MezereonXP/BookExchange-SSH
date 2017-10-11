@@ -141,5 +141,9 @@
     <bean class="action.LoginCheckAction" id="loginCheckAction" scope="prototype">
         <property name="userService" ref="IUserServiceImpl"></property>
     </bean>
+    <bean class="action.ShowExchangeAction" id="showExchangeAction" scope="prototype">
+        <property name="iUserBookService" ref="iUserBookService"></property>
+        <property name="iUserService" ref="IUserServiceImpl"></property>
+    </bean>
 
 </beans>
