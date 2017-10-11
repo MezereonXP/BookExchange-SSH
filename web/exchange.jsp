@@ -229,6 +229,21 @@
             </div>
         </div>
     </div>
+    <div class="center row">
+        <div class="center column" style="text-align: center">
+            <div class="ui pagination menu">
+
+                <a class="active item">
+                    1
+                </a>
+                <s:iterator value="pageNum">
+                    <a class="item" onclick="changePage('<s:property value="num"/>')">
+                        <s:property value="num"/>
+                    </a>
+                </s:iterator>
+            </div>
+        </div>
+    </div>
     <p></p>
     <p></p>
 </div>
@@ -281,6 +296,10 @@
 <script>
     function showUser(user) {
         //window.alert(user);
+    }
+    function changePage(num) {
+        window.alert(""+num);
+        self.location ="showExchange.action?page="+num;
     }
 </script>
 </body>
