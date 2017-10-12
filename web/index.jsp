@@ -184,13 +184,16 @@
       <a class="item">书籍交换</a>
       <a class="item">书评</a>
       <a class="item">讨论区</a>
-      <div class="right menu">
-
+      <div class="right menu" >
+<s:if test="getCookie('USERNAME')=='null'">
         <div class="item">
           <a class="ui button" id="login1">登陆</a>
         </div>
-        <div class="item">
+        <div class="item" >
           <a class="ui primary button" id="register1">注册</a>
+        </div>
+</s:if>
+        <div class="item" id="right2">
         </div>
       </div>
     </div>
@@ -219,15 +222,11 @@
           <a class="item" id="exchange">书籍交换</a>
           <a class="item">书评</a>
           <a class="item">讨论区</a>
-          <div class="right item">
+          <div class="right item" id="right">
             <s:if test="getCookie('USERNAME')=='null'">
               <a class="ui inverted button" id="login">登陆</a>
               <a class="ui inverted button" id ="register">注册</a>
             </s:if>
-            <s:else>
-              <img  id="userPic" class="ui avatar image"
-                    src="<s:if test="getCookie('USERNAME')!='null'">getCookie("SRC")</s:if>">
-            </s:else>
           </div>
         </div>
       </div>
@@ -327,6 +326,13 @@
       </div>
     </div>
   </div>
-
+  <script>
+      var path = getCookie("SRC");
+      if(path!="null") {
+          var html = "<img src=" + path.toString() + " class=\"image avatar ui\"/>";
+          $('#right').append(html);
+          $('#right2').append(html);
+      }
+  </script>
   </body>
 </html>
