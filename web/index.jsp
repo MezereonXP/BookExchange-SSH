@@ -165,6 +165,7 @@
   </script>
   <body >
   <script>
+
       function getCookie(name) {
           var arr, reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)");
           if (arr = document.cookie.match(reg))
@@ -172,27 +173,21 @@
           else
               return 'null';
       }
-      function test() {
-          window.alert(getCookie("USERNAME"));
-      }
-
   </script>
   <!-- Following Menu -->
-  <div class="ui large top fixed hidden menu">
+    <div class="ui large top fixed hidden menu">
     <div class="ui container">
       <a class="active item">主页</a>
       <a class="item">书籍交换</a>
       <a class="item">书评</a>
       <a class="item">讨论区</a>
       <div class="right menu" >
-<s:if test="getCookie('USERNAME')=='null'">
-        <div class="item">
-          <a class="ui button" id="login1">登陆</a>
+        <div class="item" id="login1">
+          <a class="ui button" >登陆</a>
         </div>
-        <div class="item" >
-          <a class="ui primary button" id="register1">注册</a>
+        <div class="item" id="register1">
+          <a class="ui primary button" >注册</a>
         </div>
-</s:if>
         <div class="item" id="right2">
         </div>
       </div>
@@ -223,10 +218,8 @@
           <a class="item">书评</a>
           <a class="item">讨论区</a>
           <div class="right item" id="right">
-            <s:if test="getCookie('USERNAME')=='null'">
               <a class="ui inverted button" id="login">登陆</a>
               <a class="ui inverted button" id ="register">注册</a>
-            </s:if>
           </div>
         </div>
       </div>
@@ -332,6 +325,13 @@
           var html = "<img src=" + path.toString() + " class=\"image avatar ui\"/>";
           $('#right').append(html);
           $('#right2').append(html);
+      }
+      if(getCookie("USERNAME")=='null'){
+      }else {
+          document.getElementById("login").style.display="none";
+          document.getElementById("register").style.display="none";
+          document.getElementById("login1").style.display="none";
+          document.getElementById("register1").style.display="none";
       }
   </script>
   </body>
