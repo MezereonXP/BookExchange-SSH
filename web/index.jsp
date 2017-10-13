@@ -209,7 +209,7 @@
     <div class="ui inverted vertical masthead center aligned segment">
 
       <div class="ui container">
-        <div class="ui large secondary inverted pointing menu">
+        <div class="ui large secondary inverted pointing menu" style="z-index: 1">
           <a class="toc item">
             <i class="sidebar icon"></i>
           </a>
@@ -220,6 +220,21 @@
           <div class="right item" id="right">
               <a class="ui inverted button" id="login">登陆</a>
               <a class="ui inverted button" id ="register">注册</a>
+            <div style="position: absolute; top: 50px;left: -95px; width: 260px;height: 300px;z-index: 9;padding-top: 0px">
+              <div id="userCard" class="ui card hidden transition" style="width: 260px;height: 300px;z-index: 10">
+                  <div class="row" style="padding-top: 10px">
+                      <div id="userNameInCard" class="column center" >
+
+                      </div>
+                      <div id="userSignInCard" class="column center">
+
+                      </div>
+                      <div class="column center">
+                        <div class="ui small primary button">个人中心 <i class="left floated user icon"></i></div>
+                      </div>
+                  </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -322,7 +337,7 @@
   <script>
       var path = getCookie("SRC");
       if(path!="null") {
-          var html = "<img src=" + path.toString() + " class=\"image avatar ui\"/>";
+          var html = "<img id=\"userPic\" onmouseover='showUserPic()' src=" + path.toString() + " class=\"image avatar ui\"/>";
           $('#right').append(html);
           $('#right2').append(html);
       }
@@ -332,6 +347,13 @@
           document.getElementById("register").style.display="none";
           document.getElementById("login1").style.display="none";
           document.getElementById("register1").style.display="none";
+          //window.alert(getCookie("USERNAME"));
+      }
+      function showUserPic() {
+          $('#userCard').transition("swing down");
+        var userNameInCard = document.getElementById("userNameInCard");
+        userNameInCard.innerHTML = "<h3 style='color: #0f0f10'>"+getCookie("USERNAME")+"</h3>";
+        userNameInCard.appendChild(user);
       }
   </script>
   </body>
