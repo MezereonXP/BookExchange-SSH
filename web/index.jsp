@@ -144,7 +144,13 @@
                     location.href = "/register.jsp";});
                 $("#exchange").click(function () {
                     location.href = "/showExchange.action?page=1";
-                })
+                });
+                $("#personal").click(function () {
+                    location.href = "/personalPage.jsp";
+                });
+                $("#personal2").click(function () {
+                    location.href = "/personalPage.jsp";
+                });
                   // fix menu when passed
                 $('.masthead')
                         .visibility({
@@ -322,9 +328,10 @@
   <script>
       var path = getCookie("SRC");
       if(path!="null") {
-          var html = "<img src=" + path.toString() + " class=\"image avatar ui\"/>";
+          var html = "<img src=" + path.toString() + " class=\"image avatar ui\" "+" id=\"personal\"/>";
+          var html2 = "<img src=" + path.toString() + " class=\"image avatar ui\" "+" id=\"personal2\"/>";
           $('#right').append(html);
-          $('#right2').append(html);
+          $('#right2').append(html2);
       }
       if(getCookie("USERNAME")=='null'){
       }else {

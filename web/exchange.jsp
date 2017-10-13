@@ -313,7 +313,7 @@
     if(getCookie("USERNAME")=='null'){
     }else {
         document.getElementById("login").style.display="none";
-        document.getElementById("register").style.display="none";
+    document.getElementById("register").style.display="none";
     }
 </script>
 </body>
