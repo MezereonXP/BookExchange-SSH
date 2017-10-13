@@ -343,8 +343,7 @@
   <script>
       var path = getCookie("SRC");
       if(path!="null") {
-          var html = "<img src=" + path.toString() + " class=\"image avatar ui\" "+" id=\"personal\"/>";
-          var html2 = "<img src=" + path.toString() + " class=\"image avatar ui\" "+" id=\"personal2\"/>";
+          var html2 = "<img id=\"userPic\" onmouseover='showUserPic()' src=" + path.toString() + " class=\"image avatar ui\" "+" id=\"personal2\"/>";
           var html = "<img id=\"userPic\" onmouseover='showUserPic()' src=" + path.toString() + " class=\"image avatar ui\"/>";
           $('#right').append(html);
           $('#right2').append(html2);
