@@ -144,7 +144,13 @@
                     location.href = "/register.jsp";});
                 $("#exchange").click(function () {
                     location.href = "/showExchange.action?page=1";
-                })
+                });
+                $("#personal").click(function () {
+                    location.href = "/personalPage.jsp";
+                });
+                $("#personal2").click(function () {
+                    location.href = "/personalPage.jsp";
+                });
                   // fix menu when passed
                 $('.masthead')
                         .visibility({
@@ -209,7 +215,7 @@
     <div class="ui inverted vertical masthead center aligned segment">
 
       <div class="ui container">
-        <div class="ui large secondary inverted pointing menu" style="z-index: 1">
+        <div class="ui large secondary inverted pointing menu">
           <a class="toc item">
             <i class="sidebar icon"></i>
           </a>
@@ -337,9 +343,11 @@
   <script>
       var path = getCookie("SRC");
       if(path!="null") {
+          var html = "<img src=" + path.toString() + " class=\"image avatar ui\" "+" id=\"personal\"/>";
+          var html2 = "<img src=" + path.toString() + " class=\"image avatar ui\" "+" id=\"personal2\"/>";
           var html = "<img id=\"userPic\" onmouseover='showUserPic()' src=" + path.toString() + " class=\"image avatar ui\"/>";
           $('#right').append(html);
-          $('#right2').append(html);
+          $('#right2').append(html2);
       }
       if(getCookie("USERNAME")=='null'){
       }else {
