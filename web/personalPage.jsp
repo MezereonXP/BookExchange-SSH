@@ -32,12 +32,14 @@
 <link rel="stylesheet" type="text/css" href="./pages/semantic/dist/components/list.css">
 <link rel="stylesheet" type="text/css" href="./pages/semantic/dist/components/icon.css">
 <link rel="stylesheet" type="text/css" href="./pages/semantic/dist/components/sidebar.css">
+<link rel="stylesheet" type="text/css" href="./pages/semantic/dist/components/dropdown.css>
 <link rel="stylesheet" type="text/css" href="./pages/semantic/dist/components/transition.css">
 
 <script src="./pages/semantic/dist/components/visibility.js"></script>
 <script src="./pages/semantic/dist/components/sidebar.js"></script>
 <script src="./pages/semantic/dist/components/transition.js"></script>
 <script src="./pages/semantic/dist/components/dimmer.js"></script>
+<script src="./pages/semantic/dist/components/dropdown.js"></script>
 <script src="./pages/semantic/dist/components/"></script>
 <script>
     $(document)
@@ -52,6 +54,11 @@
                         .siblings()
                         .removeClass('active')
                     ;
+                })
+            ;
+            $('.ui.dropdown')
+                .dropdown({
+                    on: 'click'
                 })
             ;
             $('#revise').click(function () {
@@ -110,7 +117,7 @@
         <strong  style="left: 195px;top: 165px;position:absolute;z-index: 999;font-size: x-large;" id="username">
         </strong>
         <p style="left: 195px;top: 195px;position:absolute;z-index: 999;font-size: small;color: #8a8a8a">暂无个性签名</p>
-        <button class="ui inverted pink button" style="right: 15px;top: 190px;position:absolute;z-index: 999" id="revise">发布书籍</button>
+        <button class="ui inverted pink button" style="right: 15px;top: 190px;position:absolute;z-index: 999" id="revise">编辑个人信息</button>
     </div>
     <div class="row" style="padding-top: 0">
         <div class="twelve wide column" style="height: 120px;background-color: #FFFFFF;border-radius:0 0 5px 5px ;" ></div>
@@ -125,11 +132,66 @@
                     已上传书籍
                 </a>
                 <a class="item" >
+                    上传书籍
+                </a>
+                <a class="item" >
                     交换信息
                 </a>
                 <a class="item" >
                     通知消息
                 </a>
+            </div>
+            <div class="ui centered grid">
+                <div class="three wide column">
+            <div class="ui special cards raised" style="width:160px;height:200px;margin-bottom: 100px">
+                <div class="card">
+                    <div class="blurring dimmable image" id="bookImg">
+                        <div class="ui dimmer">
+                            <div class="content">
+                                <div class="center">
+                                    <input type="file"style="display:none">
+                                    <div class="ui inverted button" onclick="F_Open_dia()">点击上传书籍图片</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                </div>
+                <div class="seven wide column">
+                    <div class="ui labeled input">
+                        <a class="ui blue label">
+                            书名
+                        </a>
+                        <input type="text" placeholder="请输入书籍的名称">
+                    </div>
+                    <br>
+                    <br>
+                    <div class="ui right labeled left icon input">
+                        <i class="tags icon"></i>
+                        <input placeholder="请添加书籍类型" type="text" id="labelInput">
+                        <a class="ui tag blue label" onclick="addLabel()">
+                            添加书籍类型
+                        </a>
+                    </div>
+                    <br>
+                    <br>
+                    <div id="labelC">
+                    </div>
+                    <br>
+                    <br>
+                    <div class="ui right labeled left icon input">
+                        <i class="tags icon"></i>
+                        <input placeholder="请添加书籍类型" type="text" id="labelInput2">
+                        <a class="ui tag blue label" onclick="addLabel2()">
+                            添加想要书籍类型
+                        </a>
+                    </div>
+                    <br>
+                    <br>
+                    <div id="labelB">
+                    </div>
+                </div>
             </div>
             <%--个人页面--%>
             <%--<div class="ui grid vertically divided">--%>
@@ -141,9 +203,6 @@
                 <%--</div>--%>
             <%--</div>--%>
             <%--上传书籍--%>
-            <div class="ui grid vertically divided">
-
-            </div>
         </div>
     </div>
 </div>
@@ -158,12 +217,32 @@
     function F_Open_dia() {
         $('#btn_file').click();
     }
+    function addLabel() {
+        var colors=new Array("red","orange","yellow","olive" ,"blue","brown","pink","black");
+        var content = $('#labelInput').val();
+        if(content!=""){
+            var index = Math.ceil((Math.random()*8))-1;
+            var html ="<a class=\"ui "+ colors[index]+" tag icon label\" style='margin-left: 20px;margin-top: 5px'>"+content+"<i class=\"delete icon\"></i></a>";
+        }
+        $('#labelC').append(html);
+    }
+    function addLabel2() {
+        var colors=new Array("red","orange","yellow","olive" ,"blue","brown","pink","black");
+        var content = $('#labelInput2').val();
+        if(content!=""){
+            var index = Math.ceil((Math.random()*8))-1;
+            var html ="<a class=\"ui "+ colors[index]+" tag icon label\" style='margin-left: 20px;margin-top: 5px'>"+content+"<i class=\"delete icon\"></i></a>";
+        }
+        $('#labelB').append(html);
+    }
     var path = getCookie("SRC");
     var html = "<img src=" + path.toString() + " class=\"image avatar ui\"/>";
     var html2 = "<img src=" + path.toString() + " style=\"width:160px;height:160px\"/>";
+    var html3 = "<img src=" + path.toString() + " style=\"width:160px;height:200px\"/>";
     $('#right').append(html);
     $('#username').append(getCookie("USERNAME"));
     $('#img').append(html2);
+    $('#bookImg').append(html3);
 </script>
 </body>
 </html>
