@@ -41,6 +41,10 @@
   <script src="./pages/semantic/dist/components/sidebar.js"></script>
   <script src="./pages/semantic/dist/components/transition.js"></script>
   <style type="text/css">
+    #userCard{
+      background-image:-webkit-linear-gradient(to top left, #4d4d4d, #1B1C1D);
+      background-image:linear-gradient(to top left,#4d4d4d, #1B1C1D);
+    }
     .hidden.menu {
       display: none;
     }
@@ -195,6 +199,21 @@
           <a class="ui primary button" >注册</a>
         </div>
         <div class="item" id="right2">
+          <div style="position: absolute; top: 50px;left: -95px; width: 260px;height: 300px;z-index: 9;padding-top: 0px">
+            <div id="userCard2" class="ui card hidden transition" style="width: 260px;height: 300px;z-index: 10">
+              <div class="row" style="padding-top: 10px;text-align: center">
+                <div id="userNameInCard2" class="column center" >
+
+                </div>
+                <div id="userSignInCard2" class="column center">
+
+                </div>
+                <div class="column center">
+                  <div class="ui small primary button">个人中心 <i class="left floated user icon"></i></div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -226,8 +245,8 @@
           <div class="right item" id="right">
               <a class="ui inverted button" id="login">登陆</a>
               <a class="ui inverted button" id ="register">注册</a>
-            <div style="position: absolute; top: 50px;left: -95px; width: 260px;height: 300px;z-index: 9;padding-top: 0px">
-              <div id="userCard" class="ui card hidden transition" style="width: 260px;height: 300px;z-index: 10">
+            <div onmouseleave="hideUserPic()" style="background:#00000000;position: absolute; top: 50px;left: -95px; width: 260px;height: 200px;z-index: 9;padding-top: 0px">
+              <div id="userCard" class="raised hidden transition" style="border: hidden;width: 260px;height: 200px;z-index: 10;">
                   <div class="row" style="padding-top: 10px">
                       <div id="userNameInCard" class="column center" >
 
@@ -235,9 +254,11 @@
                       <div id="userSignInCard" class="column center">
 
                       </div>
-                      <div class="column center">
-                        <div class="ui small primary button">个人中心 <i class="left floated user icon"></i></div>
+                      <div class="column center" style="margin: 10px">
+                        <div class="ui medium primary button"><i class="user icon"></i>个人中心 </div>
+                        <div class="ui medium negative button"><i class="power icon"></i>注销 </div>
                       </div>
+
                   </div>
               </div>
             </div>
@@ -343,7 +364,7 @@
   <script>
       var path = getCookie("SRC");
       if(path!="null") {
-          var html2 = "<img  onmouseover='showUserPic()' src=" + path.toString() + " class=\"image avatar ui\" "+" id=\"personal2\"/>";
+          var html2 = "<img  onmouseover='showUserPic2()' src=" + path.toString() + " class=\"image avatar ui\" "+" id=\"personal2\"/>";
           var html = "<img onmouseover='showUserPic()' src=" + path.toString() + " class=\"image avatar ui\" "+" id=\"personal\"/>";
           $('#right').append(html);
           $('#right2').append(html2);
@@ -357,10 +378,21 @@
           //window.alert(getCookie("USERNAME"));
       }
       function showUserPic() {
-          $('#userCard').transition("swing down");
+          $('#userCard').transition("browse");
         var userNameInCard = document.getElementById("userNameInCard");
-        userNameInCard.innerHTML = "<h3 style='color: #0f0f10'>"+getCookie("USERNAME")+"</h3>";
-        userNameInCard.appendChild(user);
+        userNameInCard.innerHTML = "<a class=\"ui teal image label\"> " +
+        "<img src="+getCookie("SRC")+">"+ getCookie("USERNAME")
+                +"<div class=\"detail\">普通用户</div></a>";
+      }
+      function showUserPic2() {
+        $('#userCard2').transition("browse");
+        var userNameInCard = document.getElementById("userNameInCard2");
+        userNameInCard.innerHTML = "<a class=\"ui teal image label\"> " +
+                "<img src="+getCookie("SRC")+">"+ getCookie("USERNAME")+
+        "<div class=\"detail\">普通用户</div></a>";
+      }
+      function hideUserPic() {
+        $('#userCard').transition("fly up");
       }
   </script>
   </body>
