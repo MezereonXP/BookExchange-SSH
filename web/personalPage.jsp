@@ -207,6 +207,8 @@
     </div>
 </div>
 <script>
+    var count = 1;
+    var array = new Array();//用来储存书籍类型的Tag的数组
     function getCookie(name) {
         var arr, reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)");
         if (arr = document.cookie.match(reg))
@@ -222,9 +224,28 @@
         var content = $('#labelInput').val();
         if(content!=""){
             var index = Math.ceil((Math.random()*8))-1;
-            var html ="<a class=\"ui "+ colors[index]+" tag icon label\" style='margin-left: 20px;margin-top: 5px'>"+content+"<i class=\"delete icon\"></i></a>";
+            var html ="<a id='labelOfSelf"+count+"' onclick='removeLabel("+count+")' class=\"ui "+ colors[index]
+                    +" transition tag icon label\" style='margin-left: 20px;margin-top: 5px'>"+content+"<i class=\"delete icon\"></i></a>";
+            array[count-1] = content;
+            count++;
+            $('#labelC').append(html);
         }
-        $('#labelC').append(html);
+    }
+    function removeLabel(c) {
+        $('#labelOfSelf'+c).transition("fade");
+        array[c-1] = "NULL";
+        window.alert(getResult(array));
+    }
+    function getResult(array) {
+        var result="";
+        for(var i=0;i<array.length;i++){
+            if(array[i]!="NULL"&&i!=(array.length-1))
+                result+=array[i]+";";
+            if(array[i]!="NULL"&&i==(array.length-1)){
+                result+=array[i];
+            }
+        }
+        return result;
     }
     function addLabel2() {
         var colors=new Array("red","orange","yellow","olive" ,"blue","brown","pink","black");
