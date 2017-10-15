@@ -47,7 +47,7 @@
         </action>
     </package>
     <package name="bookComment" namespace="/" extends="struts-default">
-        <action name="showBookComment" class="showBookCommentAction">
+        <action name="showBookComment" class="showBookCommentAction" method="list">
             <result name="success">bookcomment.jsp</result>
         </action>
     </package>

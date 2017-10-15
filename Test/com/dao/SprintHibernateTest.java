@@ -2,10 +2,10 @@ package com.dao;
 
 import entity.BeuserEntity;
 import entity.BookarticleEntity;
-import service.IBookArticleServiceImpl;
-import service.IUserServiceImpl;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import service.IBookArticleServiceImpl;
+import service.IUserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -35,6 +35,14 @@ public class SprintHibernateTest {
     }
 
     @Test
+    public void testNer() throws SQLException {
+        List<BookarticleEntity> bookarticleEntities = bookArticleService.getAllBookArticle();
+        for(BookarticleEntity entity:bookarticleEntities){
+            System.out.println(entity.getTitle());
+        }
+    }
+
+    @Test
     public void testAdd() throws SQLException {
         BeuserEntity beuserEntity=new BeuserEntity();
         beuserEntity.setUsername("caster");
@@ -50,9 +58,14 @@ public class SprintHibernateTest {
     @Test
     public void testLogin() throws SQLException {
         System.out.println(userService.isExists("saber"));
-//        List<BookarticleEntity> bookarticleEntities = bookArticleService.getAllBookArticle();
-//        for(BookarticleEntity entity:bookarticleEntities){
-//            System.out.println(entity.getTitle());
-//        }
+    }
+
+    @Test
+    public void testPrint() throws SQLException {
+        System.out.println("saber");
+        List<BookarticleEntity> bookarticleEntities = bookArticleService.getAllBookArticle();
+        for(BookarticleEntity entity:bookarticleEntities){
+            System.out.println(entity.getTitle());
+        }
     }
 }

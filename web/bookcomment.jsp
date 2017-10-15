@@ -230,7 +230,7 @@
                                 </span>
                             </div>
                             <div class="description">
-                                <p><s:property value="introduction"/></p>
+                                <p style="overflow: hidden;text-overflow: ellipsis;max-height: 135px"><s:property value="introduction" escape="false"/></p>
                             </div>
                             <div class="extra">
                                 <div class="ui right floated primary button">
@@ -317,7 +317,7 @@
     }
     function changePage(num) {
         //window.alert(""+num);
-        self.location ="showExchange.action?page="+num;
+        self.location ="showBookComment.action?page="+num;
     }
     var path = getCookie("SRC");
     if(path!="null") {
