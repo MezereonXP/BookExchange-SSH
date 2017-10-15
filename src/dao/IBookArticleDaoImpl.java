@@ -50,7 +50,7 @@ public class IBookArticleDaoImpl implements IBookArticleDao {
     @Override
     public boolean isExists(int id) throws SQLException {
         Query query = sessionFactory.openSession()
-                .createQuery("from BookArticle ba where ba.id = :id").setParameter("id", id);
+                .createQuery("from bookarticle ba where ba.id = :id").setParameter("id", id);
         System.out.println(query.list().size());
         return query.list().size()>0?true:false;
     }

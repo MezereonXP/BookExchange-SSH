@@ -1,6 +1,8 @@
 package com.dao;
 
 import entity.BeuserEntity;
+import entity.BookarticleEntity;
+import service.IBookArticleServiceImpl;
 import service.IUserServiceImpl;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -19,6 +21,9 @@ import java.util.List;
 public class SprintHibernateTest {
     @Autowired
     private IUserServiceImpl userService;
+
+    @Autowired
+    private IBookArticleServiceImpl bookArticleService;
 
     @Test
     public void test() {
@@ -43,7 +48,11 @@ public class SprintHibernateTest {
     }
 
     @Test
-    public void testLogin(){
+    public void testLogin() throws SQLException {
         System.out.println(userService.isExists("saber"));
+//        List<BookarticleEntity> bookarticleEntities = bookArticleService.getAllBookArticle();
+//        for(BookarticleEntity entity:bookarticleEntities){
+//            System.out.println(entity.getTitle());
+//        }
     }
 }

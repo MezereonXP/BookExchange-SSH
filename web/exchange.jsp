@@ -168,6 +168,22 @@
         <div class="right item" id="right">
             <a class="ui inverted button" id="login">登陆</a>
             <a class="ui inverted button" id ="register">注册</a>
+            <div style="position: absolute; top: 50px;left: -95px; width: 260px;height: 300px;z-index: 9;padding-top: 0px">
+                <div onmouseleave="hideUserPic()" id="userCard" class="ui card hidden transition" style="width: 260px;height: 100px;z-index: 10">
+                    <div class="row" style="padding-top: 10px;text-align: center">
+                        <div id="userNameInCard" class="column center" >
+
+                        </div>
+                        <div id="userSignInCard" class="column center">
+
+                        </div>
+                        <div class="column center" style="margin: 10px">
+                            <div id="personalCenter" class="ui medium primary button"><i class="user icon"></i>个人中心 </div>
+                            <div class="ui medium negative button"><i class="power icon"></i>注销 </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
     </div>
@@ -306,14 +322,24 @@
     }
     var path = getCookie("SRC");
     if(path!="null") {
-        var html = "<img src=" + path.toString() + " class=\"image avatar ui\"/>";
+        var html = "<img onmouseover='showUserPic()' src=" + path.toString() + " class=\"image avatar ui\" "+" id=\"personal\"/>";
         $('#right').append(html);
-        $('#right2').append(html);
     }
     if(getCookie("USERNAME")=='null'){
     }else {
         document.getElementById("login").style.display="none";
     document.getElementById("register").style.display="none";
+    }
+
+    function showUserPic() {
+        $('#userCard').transition("browse");
+        var userNameInCard = document.getElementById("userNameInCard");
+        userNameInCard.innerHTML = "<a class=\"ui teal image label\"> " +
+                "<img src="+getCookie("SRC")+">"+ getCookie("USERNAME")
+                +"<div class=\"detail\">普通用户</div></a>";
+    }
+    function hideUserPic() {
+        $('#userCard').transition("fly up");
     }
 </script>
 </body>

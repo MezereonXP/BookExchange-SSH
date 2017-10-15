@@ -149,6 +149,9 @@
                 $("#exchange").click(function () {
                     location.href = "/showExchange.action?page=1";
                 });
+                $("#bookComment").click(function () {
+                   location.href = "/showBookComment.action?page=1";
+                });
                 $("#personalCenter1").click(function () {
                     location.href = "/personalPage.jsp";
                 });
@@ -241,7 +244,7 @@
           </a>
           <a class="active item">主页</a>
           <a class="item" id="exchange">书籍交换</a>
-          <a class="item">书评</a>
+          <a class="item" id="bookComment">书评</a>
           <a class="item">讨论区</a>
           <div class="right item" id="right">
               <a class="ui inverted button" id="login">登陆</a>

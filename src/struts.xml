@@ -46,4 +46,9 @@
             <result name="success">exchange.jsp</result>
         </action>
     </package>
+    <package name="bookComment" namespace="/" extends="struts-default">
+        <action name="showBookComment" class="showBookCommentAction">
+            <result name="success">bookcomment.jsp</result>
+        </action>
+    </package>
 </struts>
