@@ -149,10 +149,10 @@
                 $("#exchange").click(function () {
                     location.href = "/showExchange.action?page=1";
                 });
-                $("#personal").click(function () {
+                $("#personalCenter1").click(function () {
                     location.href = "/personalPage.jsp";
                 });
-                $("#personal2").click(function () {
+                $("#personalCenter2").click(function () {
                     location.href = "/personalPage.jsp";
                 });
                   // fix menu when passed
@@ -200,7 +200,7 @@
         </div>
         <div class="item" id="right2">
           <div style="position: absolute; top: 50px;left: -95px; width: 260px;height: 300px;z-index: 9;padding-top: 0px">
-            <div id="userCard2" class="ui card hidden transition" style="width: 260px;height: 300px;z-index: 10">
+            <div onmouseleave="hideUserPic2()" id="userCard2" class="ui card hidden transition" style="width: 260px;height: 100px;z-index: 10">
               <div class="row" style="padding-top: 10px;text-align: center">
                 <div id="userNameInCard2" class="column center" >
 
@@ -208,8 +208,9 @@
                 <div id="userSignInCard2" class="column center">
 
                 </div>
-                <div class="column center">
-                  <div class="ui small primary button">个人中心 <i class="left floated user icon"></i></div>
+                <div class="column center" style="margin: 10px">
+                  <div id="personalCenter2" class="ui medium primary button"><i class="user icon"></i>个人中心 </div>
+                  <div class="ui medium negative button"><i class="power icon"></i>注销 </div>
                 </div>
               </div>
             </div>
@@ -245,8 +246,8 @@
           <div class="right item" id="right">
               <a class="ui inverted button" id="login">登陆</a>
               <a class="ui inverted button" id ="register">注册</a>
-            <div onmouseleave="hideUserPic()" style="background:#00000000;position: absolute; top: 50px;left: -95px; width: 260px;height: 200px;z-index: 9;padding-top: 0px">
-              <div id="userCard" class="raised hidden transition" style="border: hidden;width: 260px;height: 200px;z-index: 10;">
+            <div style="background:#00000000;position: absolute; top: 50px;left: -95px; width: 260px;height: 200px;z-index: 9;padding-top: 0px">
+              <div onmouseleave="hideUserPic()" id="userCard" class="raised hidden transition" style="border: hidden;width: 260px;height: 100px;z-index: 10;">
                   <div class="row" style="padding-top: 10px">
                       <div id="userNameInCard" class="column center" >
 
@@ -255,7 +256,7 @@
 
                       </div>
                       <div class="column center" style="margin: 10px">
-                        <div class="ui medium primary button"><i class="user icon"></i>个人中心 </div>
+                        <div id="personalCenter1" class="ui medium primary button"><i class="user icon"></i>个人中心 </div>
                         <div class="ui medium negative button"><i class="power icon"></i>注销 </div>
                       </div>
 
@@ -393,6 +394,9 @@
       }
       function hideUserPic() {
         $('#userCard').transition("fly up");
+      }
+      function hideUserPic2() {
+        $('#userCard2').transition("fly up");
       }
   </script>
   </body>
