@@ -41,7 +41,7 @@
 <script src="./pages/semantic/dist/components/transition.js"></script>
 <script>
     $(document)
-        .ready(function() {
+        .ready(function () {
 //            $('.ui.form')
 //                .form({
 //                    fields: {
@@ -97,7 +97,7 @@
                 on: 'hover'
             });
             $('.ui.menu a.item')
-                .on('click', function() {
+                .on('click', function () {
                     $(this)
                         .addClass('active')
                         .siblings()
@@ -111,7 +111,7 @@
                 })
             ;
             $('#revise').click(function () {
-                location.href="/personalRevise.jsp"
+                location.href = "/personalRevise.jsp"
             });
             $("#home").click(function () {
                 location.href = "/index.jsp";
@@ -126,11 +126,21 @@
     ;
 </script>
 <style>
-    body{
+    body {
         background-color: #F3F3F3;
+        width: 100%;
+        height: 100%;
+        margin: 0px;
+        padding: 0px;
     }
 </style>
 <body>
+<div class="ui segment" style="width: 100%;height: 100%;margin: 0px;padding: 0px;display: none" id="loader">
+    <div class="ui active dimmer">
+        <div class="ui text loader">Loading</div>
+    </div>
+    <p></p>
+</div>
 <div class="ui fixed inverted menu">
     <div class="ui container">
         <a href="#" class="header item">
@@ -147,11 +157,13 @@
     </div>
 </div>
 <br>
-<div class="ui centered grid sty" style="margin-top: 50px;">
-    <div class="twelve wide column" style="background-color:  #96A1A9;height: 150px;border-radius:5px 5px 0 0;position: relative" >
-        <div class="ui special cards raised" style="left: 15px;top: 60px;position:absolute;z-index: 2;width: 160px;height: 160px;">
+<div class="ui centered grid sty" style="margin-top: 50px;" id="main">
+    <div class="twelve wide column"
+         style="background-color:  #96A1A9;height: 150px;border-radius:5px 5px 0 0;position: relative">
+        <div class="ui special cards raised"
+             style="left: 15px;top: 60px;position:absolute;z-index: 2;width: 160px;height: 160px;">
             <div class="card">
-                <div class="blurring dimmable image"  id="img">
+                <div class="blurring dimmable image" id="img">
                     <div class="ui dimmer">
                         <div class="content">
                             <div class="center">
@@ -163,16 +175,19 @@
                 </div>
             </div>
         </div>
-        <strong  style="left: 195px;top: 165px;position:absolute;z-index: 999;font-size: x-large;" id="username">
+        <strong style="left: 195px;top: 165px;position:absolute;z-index: 999;font-size: x-large;" id="username">
         </strong>
         <p style="left: 195px;top: 195px;position:absolute;z-index: 999;font-size: small;color: #8a8a8a">暂无个性签名</p>
-        <button class="ui inverted pink button" style="right: 15px;top: 190px;position:absolute;z-index: 2" id="revise">编辑个人信息</button>
+        <button class="ui inverted pink button" style="right: 15px;top: 190px;position:absolute;z-index: 2" id="revise">
+            编辑个人信息
+        </button>
     </div>
     <div class="row" style="padding-top: 0">
-        <div class="twelve wide column" style="height: 120px;background-color: #FFFFFF;border-radius:0 0 5px 5px ;" ></div>
+        <div class="twelve wide column"
+             style="height: 120px;background-color: #FFFFFF;border-radius:0 0 5px 5px ;"></div>
     </div>
     <div class="row">
-        <div class="twelve wide column" style="background-color: #FFFFFF;border-radius:0 0 5px 5px ;" >
+        <div class="twelve wide column" style="background-color: #FFFFFF;border-radius:0 0 5px 5px ;">
             <div class="ui secondary pointing blue menu" id="mMenu">
                 <a class="item" onclick="changeType(1)">
                     个人主页
@@ -190,13 +205,14 @@
                     通知消息
                 </a>
             </div>
-            <div style="display: none" id="type"> <%= request.getParameter("type")%></div>
+            <div style="display: none" id="type"><%= request.getParameter("type")%>
+            </div>
             <% if (request.getParameter("type").equals("1")) { %>
             <p>个人页面界面</p>
-            <% } else if (request.getParameter("type").equals("2")){ %>
+            <% } else if (request.getParameter("type").equals("2")) { %>
             <p>上传书籍界面</p>
-            <% } else if (request.getParameter("type").equals("3")){ %>
-            <form class="ui form" action="index.jsp">
+            <% } else if (request.getParameter("type").equals("3")) { %>
+            <form class="ui form" id="form" action="addBook.action">
                 <div class="ui centered grid">
                     <div class="three wide column">
                         <div class="ui special cards raised" style="width:160px;height:200px;margin-bottom: 100px">
@@ -205,7 +221,8 @@
                                     <div class="ui dimmer">
                                         <div class="content">
                                             <div class="center">
-                                                <input type="file" id = "bookImgSrc" style="display: none"  onchange="fileSelected()" name="bookSRC">
+                                                <input type="file" id="bookImgSrc" style="display: none"
+                                                       onchange="fileSelected()">
                                                 <div class="ui inverted button" onclick="F_Open_dia2()">点击上传书籍图片</div>
                                             </div>
                                         </div>
@@ -233,9 +250,9 @@
                         </div>
                         <br>
                         <br>
-                        <div id="labelC" >
+                        <div id="labelC">
                         </div>
-                        <div id = "line" style="display: none">
+                        <div id="line" style="display: none">
                             <br>
                         </div>
                         <div class="ui right labeled left icon input">
@@ -249,7 +266,7 @@
                         <br>
                         <div id="labelB">
                         </div>
-                        <div id = "line2" style="display: none">
+                        <div id="line2" style="display: none">
                             <br>
                         </div>
                         <div class="ui labeled input">
@@ -267,27 +284,29 @@
                             <input type="text" name="introduction" placeholder="几句话描述这本书吧"/>
                         </div>
                     </div>
-                    <div class="row">
-                        <button  class="ui primary button" onclick="sub()">点击上传</button>
-                    </div>
                 </div>
-                <input type="text" name="wantKind"style="display: none"/>
+                <input type="text" name="wantKind" style="display: none"/>
                 <input type="text" name="kind" style="display: none"/>
+                <input type="text" name="bookSRC" style="display: none"/>
+                <input type="text" name="username" style="display: none"/>
+                <input type="text" name="date" style="display: none"/>
             </form>
-            <% } else if (request.getParameter("type").equals("4")){ %>
+            <div style="text-align: center">
+                <button class="ui primary button" onclick="sub()">点击上传</button>
+            </div>
+            <% } else if (request.getParameter("type").equals("4")) { %>
             <p>交换信息界面</p>
-            <% } else if (request.getParameter("type").equals("5")){ %>
+            <% } else if (request.getParameter("type").equals("5")) { %>
             <p>通知消息界面</p>
             <% } %>
-
             <%--个人页面--%>
             <%--<div class="ui grid vertically divided">--%>
-                <%--<div class="row">--%>
-                    <%--<p style="font-size: x-large;margin-left: 20px">我的书籍</p>--%>
-                <%--</div>--%>
-                <%--<div class="row" style="padding-bottom: 30px">--%>
-                    <%--<p style="font-size: x-large;margin-left: 20px">我的书评</p>--%>
-                <%--</div>--%>
+            <%--<div class="row">--%>
+            <%--<p style="font-size: x-large;margin-left: 20px">我的书籍</p>--%>
+            <%--</div>--%>
+            <%--<div class="row" style="padding-bottom: 30px">--%>
+            <%--<p style="font-size: x-large;margin-left: 20px">我的书评</p>--%>
+            <%--</div>--%>
             <%--</div>--%>
             <%--上传书籍--%>
         </div>
@@ -295,14 +314,47 @@
 </div>
 <script>
     //window.alert($('#type').text());
-    $('#mMenu a').eq($('#type').text()-1).addClass("active");
+    $('#mMenu a').eq($('#type').text() - 1).addClass("active");
     var count = 1;
     var count2 = 1;
     var array = new Array();
     var array2 = new Array();//用来储存书籍类型的Tag的数组
     function sub() {
-        window.alert("hello");
+        if ($(" input[ name='kind' ] ").val() == "" || $(" input[ name='wantKind' ] ").val() == "" || $(" input[ name='bookName' ] ").val() == "" || $(" input[ name='introduction' ] ").val() == "" || $(" input[ name='buyDate' ] ").val() == "" || $(" input[ id='bookImgSrc' ] ").val() == "") {
+            window.alert("请填完所有内容");
+        } else {
+            $("#main").css("display","none");
+            $("#loader").show();
+            var formData = new FormData();
+            formData.append("file", document.getElementById("bookImgSrc").files[0]);
+            $.ajax({
+                url: "http://mezereon.gotoip2.com/bookEx/addBookPic.php",
+                type: "POST",
+                data: formData,
+                /**
+                 *必须false才会自动加上正确的Content-Type
+                 */
+                contentType: false,
+                /**
+                 * 必须false才会避开jQuery对 formdata 的默认处理
+                 * XMLHttpRequest会对 formdata 进行正确的处理
+                 */
+                processData: false,
+                success: function (data) {
+                    console.log(data);
+                    alert(data);
+                    $(" input[ name='bookSRC' ] ").val(data);
+                    $(" input[ name='username' ] ").val(getCookie("USERNAME"));
+                    $(" input[ name='date' ] ").val(getNowFormatDate());
+                    $("#form").submit();
+                },
+                error: function () {
+                    alert("上传失败！");
+                }
+            })
+        }
     }
+
     function getCookie(name) {
         var arr, reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)");
         if (arr = document.cookie.match(reg))
@@ -310,12 +362,15 @@
         else
             return 'null';
     }
+
     function F_Open_dia() {
         $('#btn_file').click();
     }
+
     function F_Open_dia2() {
         $('#bookImgSrc').click();
     }
+
     function fileSelected2() {
         var $file = $('#btn_file');
         var fileObj = $file[0];
@@ -337,7 +392,7 @@
         }
         var formData = new FormData();
         formData.append("file", document.getElementById("btn_file").files[0]);
-        formData.append("username",getCookie("USERNAME"));
+        formData.append("username", getCookie("USERNAME"));
         $.ajax({
             url: "http://mezereon.gotoip2.com/bookEx/uploadpic.php",
             type: "POST",
@@ -355,20 +410,23 @@
                 console.log(data);
                 alert(data);
                 delCookie("SRC");
-                setCookie("SRC",data);
-                location.href="upaloadUserPic.action?src="+data+"&username="+getCookie("USERNAME");
+                setCookie("SRC", data);
+                location.href = "upaloadUserPic.action?src=" + data + "&username=" + getCookie("USERNAME");
+
             },
             error: function () {
                 alert("上传失败！");
             }
         })
     }
+
     function setCookie(name, value) {
         var Days = 30;
         var exp = new Date();
         exp.setTime(exp.getTime() + Days * 24 * 60 * 60 * 1000);
         document.cookie = name + "=" + escape(value) + ";expires=" + exp.toGMTString();
     }
+
     function delCookie(name) {
         var exp = new Date();
         exp.setTime(exp.getTime() - 1);
@@ -376,6 +434,7 @@
         if (cval != null)
             document.cookie = name + "=" + cval + ";expires=" + exp.toGMTString();
     }
+
     function fileSelected() {
         var $file = $('#bookImgSrc');
         var fileObj = $file[0];
@@ -396,80 +455,104 @@
             imgObj.filters.item("DXImageTransform.Microsoft.AlphaImageLoader").src = dataURL;
         }
     }
-    function changeType(num){
-        self.location ="personalPage.jsp?type="+num;
+
+    function changeType(num) {
+        self.location = "personalPage.jsp?type=" + num;
     }
+
     function addLabel() {
-        var colors=new Array("red","orange","yellow","olive" ,"blue","brown","pink","black");
+        var colors = new Array("red", "orange", "yellow", "olive", "blue", "brown", "pink", "black");
         var content = $('#labelInput').val();
-        if(content!=""){
-            $('#line').css('display','block');
-            var index = Math.ceil((Math.random()*8))-1;
-            var html ="<a id='labelOfSelf"+count+"' onclick='removeLabel("+count+")' class=\"ui "+ colors[index]
-                    +" transition tag icon label\" style='margin-left: 20px;margin-top: 5px'>"+content+"<i class=\"delete icon\"></i></a>";
-            array[count-1] = content;
+        if (content != "") {
+            $('#line').css('display', 'block');
+            var index = Math.ceil((Math.random() * 8)) - 1;
+            var html = "<a id='labelOfSelf" + count + "' onclick='removeLabel(" + count + ")' class=\"ui " + colors[index]
+                + " transition tag icon label\" style='margin-left: 20px;margin-top: 5px'>" + content + "<i class=\"delete icon\"></i></a>";
+            array[count - 1] = content;
             count++;
             $('#labelC').append(html);
             $('#labelInput').val("");
             getResult(array);
         }
     }
+
     function removeLabel(c) {
-        $('#labelOfSelf'+c).transition("fade");
-        array[c-1] = "NULL";
+        $('#labelOfSelf' + c).transition("fade");
+        array[c - 1] = "NULL";
         getResult(array);
     }
+
     function removeLabelB(c) {
-        $('#labelOfSelfB'+c).transition("fade");
-        array2[c-1] = "NULL";
+        $('#labelOfSelfB' + c).transition("fade");
+        array2[c - 1] = "NULL";
         getResult2(array2);
     }
+
     function getResult2(array2) {
-        var result="";
-        for(var i=0;i<array2.length;i++){
-            if(array2[i]!="NULL"&&i!=(array2.length-1))
-                result+=array2[i]+";";
-            if(array2[i]!="NULL"&&i==(array2.length-1)){
-                result+=array2[i];
+        var result = "";
+        for (var i = 0; i < array2.length; i++) {
+            if (array2[i] != "NULL" && i != (array2.length - 1))
+                result += array2[i] + ";";
+            if (array2[i] != "NULL" && i == (array2.length - 1)) {
+                result += array2[i];
             }
         }
-        if(result==""){
-            $('#line2').css('display','none');
+        if (result == "") {
+            $('#line2').css('display', 'none');
         }
         $("input[name='wantKind']").val(result);
         return result;
 
     }
+    function getNowFormatDate() {
+        var date = new Date();
+        var seperator1 = "-";
+        var seperator2 = ":";
+        var month = date.getMonth() + 1;
+        var strDate = date.getDate();
+        if (month >= 1 && month <= 9) {
+            month = "0" + month;
+        }
+        if (strDate >= 0 && strDate <= 9) {
+            strDate = "0" + strDate;
+        }
+        var currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate
+            + " " + date.getHours() + seperator2 + date.getMinutes()
+            + seperator2 + date.getSeconds();
+        return currentdate;
+    }
     function getResult(array) {
-        var result="";
-        for(var i=0;i<array.length;i++){
-            if(array[i]!="NULL"&&i!=(array.length-1))
-                result+=array[i]+";";
-            if(array[i]!="NULL"&&i==(array.length-1)){
-                result+=array[i];
+        var result = "";
+        for (var i = 0; i < array.length; i++) {
+            if (array[i] != "NULL" && i != (array.length - 1))
+                result += array[i] + ";";
+            if (array[i] != "NULL" && i == (array.length - 1)) {
+                result += array[i];
             }
         }
-        if(result==""){
-            $('#line').css('display','none');
+        if (result == "") {
+            $('#line').css('display', 'none');
         }
         $("input[name='kind']").val(result);
         return result;
     }
+
     function addLabel2() {
-        var colors=new Array("red","orange","yellow","olive" ,"blue","brown","pink","black");
+        var colors = new Array("red", "orange", "yellow", "olive", "blue", "brown", "pink", "black");
         var content = $('#labelInput2').val();
-        if(content!=""){
-            $('#line2').css('display','block');
-            var index = Math.ceil((Math.random()*8))-1;
-            var html ="<a id='labelOfSelfB"+count2+"' onclick='removeLabelB("+count2+")' class=\"ui "+ colors[index]
-                +" transition tag icon label\" style='margin-left: 20px;margin-top: 5px'>"+content+"<i class=\"delete icon\"></i></a>";
-            array2[count2-1] = content;
+        if (content != "") {
+            $('#line2').css('display', 'block');
+            var index = Math.ceil((Math.random() * 8)) - 1;
+            var html = "<a id='labelOfSelfB" + count2 + "' onclick='removeLabelB(" + count2 + ")' class=\"ui " + colors[index]
+                + " transition tag icon label\" style='margin-left: 20px;margin-top: 5px'>" + content + "<i class=\"delete icon\"></i></a>";
+            array2[count2 - 1] = content;
             count2++;
             $('#labelB').append(html);
             $('#labelInput2').val("");
             getResult2(array2);
         }
     }
+
     var path = getCookie("SRC");
     var html = "<img src=" + path.toString() + " class=\"image avatar ui\"/>";
     var html2 = "<img src=" + path.toString() + " style=\"width:160px;height:160px\"id='personSRC'/>";
@@ -479,4 +562,3 @@
 </script>
 </body>
 </html>
-addbookPic
