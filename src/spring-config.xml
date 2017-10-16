@@ -162,4 +162,7 @@
         <property name="forumService" ref="iForumService"></property>
         <property name="userService" ref="IUserServiceImpl"></property>
     </bean>
+    <bean class="action.addBookAction" id="addBookAction" scope="prototype">
+        <property name="userBookService" ref="iUserBookService"></property>
+    </bean>
 </beans>

@@ -59,4 +59,9 @@
             <result name="success">personalPage.jsp?type=1</result>
         </action>
     </package>
+    <package name="addBook" namespace="/" extends="struts-default">
+        <action name="addBook" class="addBookAction">
+            <result name="success">personalPage.jsp?type=1</result>
+        </action>
+    </package>
 </struts>
