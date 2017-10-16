@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -16,6 +17,16 @@ public class IForumServiceImpl implements IForumService {
 
     @Autowired
     private IForumDaoImpl iForumDao;
+
+    public List<ForumEntity> getAllForumByName(String name){
+        List<ForumEntity> forumEntities = new ArrayList<>();
+        for(ForumEntity forumEntity:iForumDao.getAllForum()){
+            if(forumEntity.getUsername().equals(name)){
+                forumEntities.add(forumEntity);
+            }
+        }
+        return forumEntities;
+    }
 
     @Override
     public List<ForumEntity> getAllForum() throws SQLException {

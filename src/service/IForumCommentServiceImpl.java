@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -17,6 +18,16 @@ public class IForumCommentServiceImpl implements IForumCommentService{
 
     @Autowired
     private IForumCommentDaoImpl iForumCommentDaoImpl;
+
+    public List<ForumcommentEntity> getAllForumCommentByName(String name){
+        List<ForumcommentEntity> forumcommentEntities = new ArrayList<>();
+        for(ForumcommentEntity forumcommentEntity:iForumCommentDaoImpl.getAllForumComment()){
+            if(forumcommentEntity.getUsername().equals(name)){
+                forumcommentEntities.add(forumcommentEntity);
+            }
+        }
+        return forumcommentEntities;
+    }
 
     @Override
     public List<ForumcommentEntity> getAllForumComment() throws SQLException {

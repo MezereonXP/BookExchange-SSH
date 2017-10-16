@@ -15,6 +15,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -26,6 +27,16 @@ public class IArticleCommentServiceImpl implements IArticleCommentService {
 
     @Autowired
     private IArticleCommentDaoImpl iArticleCommentDao;
+
+    public List<ArticlecommentEntity> getAllArticleCommentByName(String name){
+        List<ArticlecommentEntity> bookarticleEntities = new ArrayList<>();
+        for(ArticlecommentEntity articlecommentEntity:iArticleCommentDao.getAllArticleComment()){
+            if(articlecommentEntity.getUsername().equals(name)){
+                bookarticleEntities.add(articlecommentEntity);
+            }
+        }
+        return bookarticleEntities;
+    }
 
     @Override
     public List<ArticlecommentEntity> getAllArticleComment() throws SQLException {
