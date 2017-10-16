@@ -153,10 +153,10 @@
                    location.href = "/showBookComment.action?page=1";
                 });
                 $("#personalCenter1").click(function () {
-                    location.href = "/personalPage.jsp";
+                    location.href = "/personalPage.jsp?type=1";
                 });
                 $("#personalCenter2").click(function () {
-                    location.href = "/personalPage.jsp";
+                    location.href = "/personalPage.jsp?type=1";
                 });
                   // fix menu when passed
                 $('.masthead')
