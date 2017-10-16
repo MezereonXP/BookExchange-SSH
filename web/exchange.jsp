@@ -135,6 +135,9 @@
                 $("#home").click(function () {
                     location.href = "/index.jsp";
                 });
+                $("#personalCenter").click(function () {
+                    location.href = "/personalPage.jsp?type=1";
+                });
                 $("#bookComment").click(function () {
                     location.href = "/showBookComment.action?page=1";
                 });

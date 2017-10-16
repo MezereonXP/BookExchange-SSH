@@ -38,6 +38,16 @@ public class IArticleCommentServiceImpl implements IArticleCommentService {
         return bookarticleEntities;
     }
 
+    public List<ArticlecommentEntity> getAllArticleCommentById(int id){
+        List<ArticlecommentEntity> bookarticleEntities = new ArrayList<>();
+        for(ArticlecommentEntity articlecommentEntity:iArticleCommentDao.getAllArticleComment()){
+            if(articlecommentEntity.getArticleid()==id){
+                bookarticleEntities.add(articlecommentEntity);
+            }
+        }
+        return bookarticleEntities;
+    }
+
     @Override
     public List<ArticlecommentEntity> getAllArticleComment() throws SQLException {
         return iArticleCommentDao.getAllArticleComment();

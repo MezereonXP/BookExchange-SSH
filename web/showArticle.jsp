@@ -200,6 +200,39 @@
         发布于<s:property value="bookarticleEntity.getTime()"/>
     </p>
     <p><s:property value="articlecontentEntity.getContent()" escape="false"/></p>
+    <p></p>
+    <p></p>
+
+    <div class="ui comments">
+        <h3 class="ui dividing header">Comments</h3>
+        <s:iterator value="articlecommentEntities" var="obj">
+        <div class="comment">
+            <a class="avatar" style="height: 35px">
+                <img src="<s:property value="src"/>">
+            </a>
+            <div class="content">
+                <a class="author"><s:property value="username"/></a>
+                <div class="metadata">
+                    <span class="date"><s:property value="time"/></span>
+                </div>
+                <div class="text">
+                    <p><s:property value="comment"/></p>
+                </div>
+                <div class="actions">
+                    <a class="reply">Reply</a>
+                </div>
+            </div>
+        </div>
+        </s:iterator>
+        <form class="ui reply form">
+            <div class="field">
+                <textarea></textarea>
+            </div>
+            <div class="ui blue labeled submit icon button">
+                <i class="icon edit"></i> Add Reply
+            </div>
+        </form>
+    </div>
 </div>
 
 <div class="ui inverted vertical footer segment">
