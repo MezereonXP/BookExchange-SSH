@@ -236,7 +236,7 @@
                                 </span>
                             </div>
                             <div class="description">
-                                <p style="overflow: hidden;text-overflow: ellipsis;max-height: 135px"><s:property value="introduction" escape="false"/></p>
+                                <p style="display: -webkit-box;-webkit-box-orient: vertical;-webkit-line-clamp: 6;overflow: hidden;"><s:property value="introduction" escape="false"/></p>
                             </div>
                             <div class="extra">
                                 <div class="ui right floated primary button">

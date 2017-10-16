@@ -171,4 +171,7 @@
     <bean class="action.addBookAction" id="addBookAction" scope="prototype">
         <property name="userBookService" ref="iUserBookService"></property>
     </bean>
+    <bean class="action.ShowDiscussAction" id="showDiscussAction" scope="prototype">
+        <property name="forumService" ref="iForumService"></property>
+    </bean>
 </beans>
