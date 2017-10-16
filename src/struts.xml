@@ -51,4 +51,9 @@
             <result name="success">bookcomment.jsp</result>
         </action>
     </package>
+    <package name="upaloadUserPic" namespace="/" extends="struts-default">
+        <action name="upaloadUserPic" class="uploadUserPicAction">
+            <result name="success">personalPage.jsp?type=1</result>
+        </action>
+    </package>
 </struts>

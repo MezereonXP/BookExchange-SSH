@@ -151,4 +151,11 @@
     <bean class="action.ShowBookCommentAction" id="showBookCommentAction" scope="prototype">
         <property name="iBookArticleService" ref="iBookArticleService"></property>
     </bean>
+    <bean class="action.uploadUserPicAction" id="uploadUserPicAction" scope="prototype">
+        <property name="bookArticleService" ref="iBookArticleService"></property>
+        <property name="articleCommentService" ref="IArticleCommentServiceImpl"></property>
+        <property name="forumCommentService" ref="iForumCommentService"></property>
+        <property name="forumService" ref="iForumService"></property>
+        <property name="userService" ref="IUserServiceImpl"></property>
+    </bean>
 </beans>
