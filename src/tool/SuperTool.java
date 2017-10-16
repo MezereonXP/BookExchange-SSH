@@ -9,6 +9,8 @@ import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -26,5 +28,11 @@ public class SuperTool {
         TypedQuery<Object> typedQuery = entityManager.createQuery(criteriaQuery);
         List<Object> list = typedQuery.getResultList();
         return list;
+    }
+    public static String getTime(){
+        Date now = new Date();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//可以方便地修改日期格式
+        String time = dateFormat.format(now);
+        return time;
     }
 }

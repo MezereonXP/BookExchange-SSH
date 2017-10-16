@@ -226,9 +226,9 @@
         </s:iterator>
         <form class="ui reply form">
             <div class="field">
-                <textarea></textarea>
+                <textarea id="comment"></textarea>
             </div>
-            <div class="ui blue labeled submit icon button">
+            <div class="ui blue labeled submit icon button" onclick="sendComment(<s:property value="articleID"/>)">
                 <i class="icon edit"></i> Add Reply
             </div>
         </form>
@@ -314,6 +314,14 @@
     }
     function hideUserPic() {
         $('#userCard').transition("fly up");
+    }
+    function sendComment(id){
+        if($('#comment').val()!=""){
+            self.location="sendComment.action?articleID="+<s:property value="articleID"/>
+                        +"&comment="+$('#comment').val()+"&username="+getCookie("USERNAME");
+        }else{
+            window.alert("请输入有效评论");
+        }
     }
 </script>
 </body>
