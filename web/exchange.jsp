@@ -134,7 +134,10 @@
                     location.href = "/register.jsp";});
                 $("#home").click(function () {
                     location.href = "/index.jsp";
-                })
+                });
+                $("#bookComment").click(function () {
+                    location.href = "/showBookComment.action?page=1";
+                });
                 // fix menu when passed
                 $('.masthead')
                         .visibility({
@@ -163,7 +166,7 @@
 
         <a class="item" id="home">主页</a>
         <a class="active item" id="exchange">书籍交换</a>
-        <a class="item">书评</a>
+        <a class="item" id="bookComment">书评</a>
         <a class="item">讨论区</a>
         <div class="right item" id="right">
             <a class="ui inverted button" id="login">登陆</a>
