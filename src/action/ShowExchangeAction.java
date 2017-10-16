@@ -9,6 +9,7 @@ import service.IUserBookServiceImpl;
 import service.IUserServiceImpl;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -34,11 +35,15 @@ public class ShowExchangeAction extends ActionSupport {
     public String execute() throws Exception {
         userbookEntities = iUserBookService.getAllUserBook();
         userBooksWithUserpics = new ArrayList<UserBooksWithUserpic>();
+        List<UserbookEntity> list = new ArrayList<>();
         int count = 1;
         if(!(page!= 1&&page!=1)){
            page = 1;
         }
-        for(UserbookEntity entity:userbookEntities){
+        for(int i=userbookEntities.size()-1;i>=0;i--){
+            list.add(userbookEntities.get(i));
+        }
+        for(UserbookEntity entity:list){
             count++;
             if(count<=5*page&&count>5*(page-1)){
                 UserBooksWithUserpic userBooksWithUserpic = new UserBooksWithUserpic();

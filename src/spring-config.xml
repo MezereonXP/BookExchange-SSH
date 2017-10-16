@@ -151,4 +151,8 @@
     <bean class="action.ShowBookCommentAction" id="showBookCommentAction" scope="prototype">
         <property name="iBookArticleService" ref="iBookArticleService"></property>
     </bean>
+    <bean class="action.ShowArticleAction" id="showArticleAction" scope="prototype">
+        <property name="articleContentService" ref="iArticleContentService"></property>
+        <property name="bookArticleService" ref="iBookArticleService"></property>
+    </bean>
 </beans>

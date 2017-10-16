@@ -10,6 +10,7 @@ import service.IBookArticleServiceImpl;
 import service.IUserBookServiceImpl;
 import service.IUserServiceImpl;
 
+import java.awt.print.Book;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,14 +29,13 @@ public class ShowBookCommentAction extends ActionSupport {
 
     private int page;
 
-    @Override
-    public String execute() throws Exception {
+    public String list() throws Exception {
         bookarticleEntities = iBookArticleService.getAllBookArticle();
+        bookarticleEntities2 = new ArrayList<BookarticleEntity>();
         int count = 1;
         if(!(page!= 1&&page!=1)){
             page = 1;
         }
-        bookarticleEntities2 = new ArrayList<>();
         for(BookarticleEntity entity:bookarticleEntities){
             count++;
             if(count<=5*page&&count>5*(page-1)){
@@ -43,7 +43,7 @@ public class ShowBookCommentAction extends ActionSupport {
             }
         }
         pageNum = new ArrayList<Page>();
-        for(int i=1;i<(int) (bookarticleEntities2.size()/5.1+1);i++){
+        for(int i=1;i<=(int) (bookarticleEntities.size()/5.1+1);i++){
             Page page = new Page();
             page.setNum(i+"");
             pageNum.add(page);
@@ -81,5 +81,13 @@ public class ShowBookCommentAction extends ActionSupport {
 
     public void setPageNum(List<Page> pageNum) {
         this.pageNum = pageNum;
+    }
+
+    public int getPage() {
+        return page;
+    }
+
+    public void setPage(int page) {
+        this.page = page;
     }
 }
