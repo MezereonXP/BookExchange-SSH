@@ -53,6 +53,9 @@
         <action name="showArticle" class="action.ShowArticleAction" method="execute">
             <result name="success">showArticle.jsp</result>
         </action>
+        <action name="sendComment" class="action.SendCommentAction">
+            <result name="success">showArticle.jsp</result>
+        </action>
     </package>
     <package name="upaloadUserPic" namespace="/" extends="struts-default">
         <action name="upaloadUserPic" class="uploadUserPicAction">

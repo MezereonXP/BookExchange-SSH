@@ -162,4 +162,10 @@
         <property name="forumService" ref="iForumService"></property>
         <property name="userService" ref="IUserServiceImpl"></property>
     </bean>
+    <bean class="action.SendCommentAction" id="sendCommentAction">
+        <property name="articleCommentService" ref="IArticleCommentServiceImpl"></property>
+        <property name="articleContentService" ref="iArticleContentService"></property>
+        <property name="bookArticleService" ref="iBookArticleService"></property>
+        <property name="userService" ref="IUserServiceImpl"></property>
+    </bean>
 </beans>
