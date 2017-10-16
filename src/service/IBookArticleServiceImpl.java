@@ -5,7 +5,9 @@ import entity.BookarticleEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.awt.print.Book;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -15,6 +17,16 @@ import java.util.List;
 public class IBookArticleServiceImpl implements IBookArticleService {
     @Autowired
     private IBookArticleDaoImpl iBookArticleDao;
+
+    public List<BookarticleEntity> getAllBookArticleByName(String name){
+        List<BookarticleEntity> bookarticleEntities = new ArrayList<>();
+        for(BookarticleEntity bookarticleEntity:iBookArticleDao.getAllBookArticle()){
+            if(bookarticleEntity.getUsername().equals(name)){
+                bookarticleEntities.add(bookarticleEntity);
+            }
+        }
+        return bookarticleEntities;
+    }
 
     @Override
     public List<BookarticleEntity> getAllBookArticle() throws SQLException {
