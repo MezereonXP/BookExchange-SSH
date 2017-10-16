@@ -243,7 +243,11 @@
                                     查看详情
                                     <i class="right chevron icon"></i>
                                 </div>
-                                <div class="ui label"><s:property value="kind"/></div>
+                                <s:generator  val="kind" separator=";">
+                                    <s:iterator>
+                                        <div class="ui label"><s:property /></div>
+                                    </s:iterator>
+                                </s:generator>
                             </div>
                         </div>
                     </div>
