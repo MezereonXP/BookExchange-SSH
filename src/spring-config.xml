@@ -162,7 +162,7 @@
         <property name="forumService" ref="iForumService"></property>
         <property name="userService" ref="IUserServiceImpl"></property>
     </bean>
-    <bean class="action.SendCommentAction" id="sendCommentAction">
+    <bean class="action.SendCommentAction" id="sendCommentAction" scope="prototype">
         <property name="articleCommentService" ref="IArticleCommentServiceImpl"></property>
         <property name="articleContentService" ref="iArticleContentService"></property>
         <property name="bookArticleService" ref="iBookArticleService"></property>
@@ -183,7 +183,12 @@
         <property name="forumService" ref="iForumService"></property>
         <property name="userService" ref="IUserServiceImpl"></property>
     </bean>
-    <bean class="action.ShowBookAction" name="showBookAction">
+    <bean class="action.ShowBookAction" name="showBookAction" scope="prototype">
+        <property name="userBookService" ref="iUserBookService"></property>
+        <property name="userService" ref="IUserServiceImpl"></property>
+    </bean>
+    <bean class="action.SendExchangeAction" name="sendExchangeAction" scope="prototype">
+        <property name="exchangeService" ref="iExchangeService"></property>
         <property name="userBookService" ref="iUserBookService"></property>
         <property name="userService" ref="IUserServiceImpl"></property>
     </bean>

@@ -252,12 +252,12 @@
                         <select class="ui search dropdown" id="drop">
                             <option value="">请选择您的书籍</option>
                             <s:iterator value="userbookEntityList">
-                                <option  value="<s:property value="bookname"/>">
+                                <option  value="<s:property value="id"/>">
                                     <s:property value="bookname"/>
                                 </option>
                             </s:iterator>
                         </select>
-                        <div class="ui medium primary button">发起交换!</div>
+                        <div class="ui medium primary button" onclick="changeBook()">发起交换!</div>
                     </div>
                 </div>
             </div>
@@ -354,6 +354,13 @@
         }else{
             window.alert("请输入有效评论");
         }
+    }
+    function changeBook() {
+        var url="sendExchange.action?usernameForSelf="
+                +getCookie("USERNAME")+"&usernameForExchange=<s:property value="beuserEntity.getUsername()"/>"
+                +"&bookIDA="+$("#drop").val()
+                +"&bookIDB=<s:property value="userbookEntity.getId()"/>";
+        self.location = url;
     }
 </script>
 </body>
