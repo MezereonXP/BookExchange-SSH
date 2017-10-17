@@ -234,7 +234,10 @@
                                             </div>
                                             <div class="header" style="margin-top: 3px"><s:property value="title"/></div>
                                             <div class="description">
-                                                <p style="width:650px;display: -webkit-box;-webkit-box-orient: vertical;-webkit-line-clamp: 2;overflow: hidden;"><s:property value="introduction" escape="false"/></p>
+                                                <p style="width:650px;display: -webkit-box;-webkit-box-orient:
+                                                vertical;-webkit-line-clamp: 3;overflow: hidden;">
+                                                    <s:property value="introduction"/>
+                                                </p>
                                             </div>
                                         </div>
                                         <div class="ui small image">
