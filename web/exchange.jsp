@@ -355,7 +355,7 @@
         $('#userCard').transition("fly up");
     }
     function showBook(id) {
-        self.location = "showBook.action?bookID="+id;
+        self.location = "showBook.action?bookID="+id+"&username="+getCookie("USERNAME");
     }
 </script>
 </body>

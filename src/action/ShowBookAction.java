@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import service.IUserBookServiceImpl;
 import service.IUserServiceImpl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -22,17 +23,21 @@ public class ShowBookAction extends ActionSupport{
     private int bookID;
     private String username;
     private UserbookEntity userbookEntity;
+    private List<UserbookEntity> userbookEntityList;
     private BeuserEntity beuserEntity;
 
     @Override
     public String execute() throws Exception {
+        userbookEntityList = new ArrayList<>();
         for(UserbookEntity ube: userBookService.getAllUserBook()){
             if(ube.getId()==bookID){
                 userbookEntity = ube;
-                break;
+            }
+            if(ube.getUsername().equals(username)&&ube.getState()==0){
+                userbookEntityList.add(ube);
             }
         }
-        beuserEntity = userService.getUserByName(userbookEntity.getSrc());
+        beuserEntity = userService.getUserByName(userbookEntity.getUsername());
         return SUCCESS;
     }
 
@@ -82,5 +87,13 @@ public class ShowBookAction extends ActionSupport{
 
     public void setBeuserEntity(BeuserEntity beuserEntity) {
         this.beuserEntity = beuserEntity;
+    }
+
+    public List<UserbookEntity> getUserbookEntityList() {
+        return userbookEntityList;
+    }
+
+    public void setUserbookEntityList(List<UserbookEntity> userbookEntityList) {
+        this.userbookEntityList = userbookEntityList;
     }
 }

@@ -35,6 +35,8 @@
 <link rel="stylesheet" type="text/css" href="./pages/semantic/dist/components/sidebar.css">
 <link rel="stylesheet" type="text/css" href="./pages/semantic/dist/components/transition.css">
 
+
+<script src="./pages/semantic/dist/components/dropdown.js"></script>
 <script src="./pages/semantic/dist/components/visibility.js"></script>
 <script src="./pages/semantic/dist/components/sidebar.js"></script>
 <script src="./pages/semantic/dist/components/transition.js"></script>
@@ -124,6 +126,9 @@
 <script>
     $(document)
             .ready(function() {
+                $('#drop').dropdown({
+                    on: 'click'
+                });
                 $("#login").click(function(){
                     location.href = "/login.jsp";});
                 $("#login1").click(function(){
@@ -174,9 +179,9 @@
         </a>
 
         <a class="item" id="home">主页</a>
-        <a class="item" id="exchange">书籍交换</a>
+        <a class="active item" id="exchange">书籍交换</a>
         <a class="item" id="bookComment">书评</a>
-        <a class="active item" id="discuss">讨论区</a>
+        <a class="item" id="discuss">讨论区</a>
         <div class="right item" id="right">
             <a class="ui inverted button" id="login">登陆</a>
             <a class="ui inverted button" id ="register">注册</a>
@@ -201,74 +206,65 @@
     </div>
 </div>
 
-<div class="ui container" style="margin-top: 70px">
+<div class="ui container" style="margin-top: 140px">
     <div class="center aligned row">
         <div class="center aligned column">
-            <div class="item">
-                <div class="image">
-                    <a class="ui left corner label">
-                        <i class="heart icon"></i>
-                    </a>
-                    <img src="<s:property value="userbookEntity.getSrc()"/>">
-                </div>
-                <div class="content">
-                    <a class="header"><s:property value="userbookEntity.getBookname()"/></a>
-                    <div class="meta">
+            <div class="ui items">
+                <div class="item" style="margin-left: 250px">
+                    <div class="image">
+                        <a class="ui left corner label">
+                            <i class="heart icon"></i>
+                        </a>
+                        <img src="<s:property value="userbookEntity.getSrc()"/>">
+                    </div>
+                    <div class="content">
+                        <div class="header"><s:property value="userbookEntity.getBookname()"/></div>
+                        <div class="meta">
                         <span class="cinema">
                             <img class="ui avatar image" src="<s:property value="beuserEntity.getSrc()"/>">
-                            <a onmouseover="showUser('<s:property value="userbookEntity.getUsername()"/>')">
-                                <s:property value="getUsername()"/>
+                            <a onmouseover="showUser('<s:property value="beuserEntity.getUsername()"/>')">
+                                <s:property value="beuserEntity.getUsername()"/>
                             </a>
                         </span>
                         <span class="cinema">
                             发布于:<s:property value="userbookEntity.getDate()"/>
                         </span>
-                    </div>
-                    <div class="description">
-                        <p><s:property value="userbookEntity.getIntroduction()"/></p>
-                    </div>
-                    <div class="extra">
-                        <s:generator  val="userbookEntity.getKind()" separator=";">
-                            <s:iterator>
-                                <div class="ui label"><s:property /></div>
+                        </div>
+                        <div class="description">
+                            <p style="word-break: break-all;width: 450px"><s:property value="userbookEntity.getIntroduction()"/></p>
+                        </div>
+                        <div class="extra">
+                            此本书籍的类型:&nbsp;&nbsp;
+                            <s:generator  val="userbookEntity.getKind()" separator=";">
+                                <s:iterator>
+                                    <div class="ui label"><s:property /></div>
+                                </s:iterator>
+                            </s:generator>
+                            <br>
+                            想要交换的类型:&nbsp;&nbsp;
+                            <s:generator  val="userbookEntity.getWantkind()" separator=";">
+                                <s:iterator>
+                                    <div class="ui label blue"><s:property /></div>
+                                </s:iterator>
+                            </s:generator>
+                            <br>
+                        </div>
+                        <select class="ui search dropdown" id="drop">
+                            <option value="">请选择您的书籍</option>
+                            <s:iterator value="userbookEntityList">
+                                <option  value="<s:property value="bookname"/>">
+                                    <s:property value="bookname"/>
+                                </option>
                             </s:iterator>
-                        </s:generator>
+                        </select>
+                        <div class="ui medium primary button">发起交换!</div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
-    <%--<div class="ui comments">--%>
-        <%--<h3 class="ui dividing header">Comments</h3>--%>
-        <%--<s:iterator value="forumcommentEntities" var="obj">--%>
-            <%--<div class="comment">--%>
-                <%--<a class="avatar" style="height: 35px">--%>
-                    <%--<img src="<s:property value="src"/>">--%>
-                <%--</a>--%>
-                <%--<div class="content">--%>
-                    <%--<a class="author"><s:property value="username"/></a>--%>
-                    <%--<div class="metadata">--%>
-                        <%--<span class="date"><s:property value="time"/></span>--%>
-                    <%--</div>--%>
-                    <%--<div class="text">--%>
-                        <%--<p><s:property value="comment"/></p>--%>
-                    <%--</div>--%>
-                    <%--<div class="actions">--%>
-                        <%--<a class="reply">Reply</a>--%>
-                    <%--</div>--%>
-                <%--</div>--%>
-            <%--</div>--%>
-        <%--</s:iterator>--%>
-        <%--<form class="ui reply form">--%>
-            <%--<div class="field">--%>
-                <%--<textarea id="comment"></textarea>--%>
-            <%--</div>--%>
-            <%--<div class="ui blue labeled submit icon button" onclick="sendComment(<s:property value="articleID"/>)">--%>
-                <%--<i class="icon edit"></i> Add Reply--%>
-            <%--</div>--%>
-        <%--</form>--%>
-    <%--</div>--%>
+    <p style="margin-top: 120px"></p>
+    <p></p>
 </div>
 
 <div class="ui inverted vertical footer segment">
