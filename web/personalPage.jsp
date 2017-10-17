@@ -196,7 +196,7 @@
                                                     已交换
                                                 </s:if>
 
-                                                <img src="<s:property value="src"/>">
+                                                <img src="<s:property value="src"/>" style="height: 145px;width: 115px">
                                             </div>
                                             <div class="content">
                                                 <a class="header"
@@ -217,7 +217,15 @@
                     </div>
                     <div class="row" style="padding-bottom: 30px">
                         <div class="ui grid vertical divided">
-                            <div class="row" style="margin-left: 12px"><p style="font-size: x-large;margin-left: 20px">我的书评</p></div>
+                            <div class="row" style="margin-left: 12px">
+                                <div class="sixteen column">
+                                    <p style="font-size: x-large;margin-left: 20px;display: inline">我的书评</p>
+                                    <button class="ui right labeled icon button" style="float: right" >
+                                        <i class="Angle Right icon"></i>
+                                        更多
+                                    </button>
+                                </div>
+                            </div>
                             <div class="row">
                                 <div class="ui items">
                                     <s:iterator value="bookarticleEntityList">
