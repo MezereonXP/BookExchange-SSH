@@ -38,6 +38,12 @@
 <script src="./pages/semantic/dist/components/visibility.js"></script>
 <script src="./pages/semantic/dist/components/sidebar.js"></script>
 <script src="./pages/semantic/dist/components/transition.js"></script>
+<script src='https://cloud.tinymce.com/stable/tinymce.min.js'></script>
+<script>
+    tinymce.init({
+        selector: '#mytextarea'
+    });
+</script>
 <style type="text/css">
     .masthead.segment {
         min-height: 700px;
@@ -198,75 +204,17 @@
     </div>
 </div>
 
-<div class="ui main text container">
-    <h1 class="ui header">Semantic UI Fixed Template</h1>
-
+<div class="ui main text container" style="margin-top: 70px">
+    <h1 class="ui header">发布书评</h1>
+    <div style="text-align: center">
+        <form method="post">
+            <textarea id="mytextarea" name="content" style="height: 400px;width: 800px"></textarea>
+        </form>
+    </div>
     <div class="ui equal width stackable internally celled grid">
-        <div class="center aligned row">
-            <div class="center aligned column">
-                <div class="ui search">
-                    <div class="ui icon input">
-                        <input class="prompt" type="text" placeholder="请输入查询关键字">
-                        <i class="search icon"></i>
-                    </div>
-                    <div class="results"></div>
-                </div>
-            </div>
-        </div>
+
         <div class="row center aligned">
-            <div class="column center aligned">
-                <a style="display: inline" class="ui blue large button" onclick="sendBookComment()">发布书评</a>
-            </div>
-        </div>
-    </div>
-    <p></p>
-    <p></p>
-    <div class="center aligned row">
-        <div class="center aligned column">
-            <div class="ui divided items">
-                <s:iterator value="bookarticleEntities2" var="obj">
-                    <div class="item">
-                        <div class="image">
-                            <a class="ui left corner label">
-                                <i class="heart icon"></i>
-                            </a>
-                            <img src="<s:property value="src"/>">
-                        </div>
-                        <div class="content">
-                            <a class="header" onclick="showArticle(<s:property value="id"/>)"><s:property value="title"/></a>
-                            <div class="meta">
-                                <span class="cinema">
-                                    <img class="ui avatar image" src="<s:property value="authorpic"/>">
-                                    <a onmouseover="showUser('<s:property value="username"/>')"><s:property value="username"/></a>
-                                </span>
-                                <span class="cinema">
-                                    发布于:<s:property value="time"/>
-                                </span>
-                            </div>
-                            <div class="description">
-                                <p style="display: -webkit-box;-webkit-box-orient: vertical;-webkit-line-clamp: 6;overflow: hidden;"><s:property value="introduction" escape="false"/></p>
-                            </div>
-                            <div class="extra">
-                                <div class="ui right floated primary button">
-                                    查看详情
-                                    <i class="right chevron icon"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </s:iterator>
-            </div>
-        </div>
-    </div>
-    <div class="center row">
-        <div class="center column" style="text-align: center">
-            <div class="ui pagination menu">
-                <s:iterator value="pageNum">
-                    <a class="item <s:if test="num==page">active</s:if>" onclick="changePage('<s:property value="num"/>')">
-                        <s:property value="num"/>
-                    </a>
-                </s:iterator>
-            </div>
+            <a style="display: inline" class="ui blue large button" onclick="sendBookComment()">发布书评</a>
         </div>
     </div>
     <p></p>
@@ -357,7 +305,7 @@
         self.location = "showArticle.action?articleID="+id;
     }
     function sendBookComment() {
-        self.location = "sendBookComment.jsp";
+        window.alert(tinymce.get('mytextarea').getContent());
     }
 </script>
 </body>
