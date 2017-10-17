@@ -2,6 +2,7 @@ package service;
 
 import dao.IForumCommentDao;
 import dao.IForumCommentDaoImpl;
+import entity.ArticlecommentEntity;
 import entity.ForumcommentEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,6 +24,16 @@ public class IForumCommentServiceImpl implements IForumCommentService{
         List<ForumcommentEntity> forumcommentEntities = new ArrayList<>();
         for(ForumcommentEntity forumcommentEntity:iForumCommentDaoImpl.getAllForumComment()){
             if(forumcommentEntity.getUsername().equals(name)){
+                forumcommentEntities.add(forumcommentEntity);
+            }
+        }
+        return forumcommentEntities;
+    }
+
+    public List<ForumcommentEntity> getAllForumCommentById(int id){
+        List<ForumcommentEntity> forumcommentEntities = new ArrayList<>();
+        for(ForumcommentEntity forumcommentEntity:iForumCommentDaoImpl.getAllForumComment()){
+            if(forumcommentEntity.getArticleid()==id){
                 forumcommentEntities.add(forumcommentEntity);
             }
         }

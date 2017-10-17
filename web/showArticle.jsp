@@ -138,6 +138,15 @@
                 $("#exchange").click(function () {
                     location.href = "/showExchange.action?page=1";
                 });
+                $("#bookComment").click(function () {
+                    location.href = "/showBookComment.action?page=1";
+                });
+                $("#personalCenter").click(function () {
+                    location.href = "/personalPage.jsp?type=1";
+                });
+                $("#discuss").click(function () {
+                    location.href = "/showDiscuss.action?page=1";
+                });
                 // fix menu when passed
                 $('.masthead')
                         .visibility({

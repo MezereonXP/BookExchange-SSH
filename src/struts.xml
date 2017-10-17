@@ -45,6 +45,9 @@
         <action name="showExchange" class="showExchangeAction">
             <result name="success">exchange.jsp</result>
         </action>
+        <action name="showBook" class="action.ShowBookAction">
+            <result name="success">showBook.jsp</result>
+        </action>
     </package>
     <package name="bookComment" namespace="/" extends="struts-default">
         <action name="showBookComment" class="showBookCommentAction" method="list">
@@ -55,6 +58,17 @@
         </action>
         <action name="sendComment" class="action.SendCommentAction">
             <result name="success">showArticle.jsp</result>
+        </action>
+    </package>
+    <package name="discuss" namespace="/" extends="struts-default">
+        <action name="showDiscuss" class="action.ShowDiscussAction">
+            <result name="success">discuss.jsp</result>
+        </action>
+        <action name="showOneDiscuss" class="action.ShowOneDiscussAction">
+            <result name="success">showDiscuss.jsp</result>
+        </action>
+        <action name="sendForumComment" class="action.SendForumCommentAction">
+            <result name="success">showDiscuss.jsp</result>
         </action>
     </package>
     <package name="upaloadUserPic" namespace="/" extends="struts-default">

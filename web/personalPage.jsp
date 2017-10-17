@@ -42,57 +42,15 @@
 <script>
     $(document)
         .ready(function () {
-//            $('.ui.form')
-//                .form({
-//                    fields: {
-//                        bookName: {
-//                            identifier  : 'bookName',
-//                            rules: [
-//                                {
-//                                    type   : 'empty',
-//                                    prompt : '请输入书名'
-//                                },
-//                            ]
-//                        },
-//                        kind: {
-//                            identifier  : 'kind',
-//                            rules: [
-//                                {
-//                                    type   : 'empty',
-//                                    prompt : '请至少添加一项书类型的标签'
-//                                }
-//                            ]
-//                        },
-//                        wantKind: {
-//                            identifier  : 'wantKind',
-//                            rules: [
-//                                {
-//                                    type   : 'empty',
-//                                    prompt : '请至少添加一项你想要书类型的标签'
-//                                },
-//                            ]
-//                        },
-//                        buyDate: {
-//                            identifier  : 'buyDate',
-//                            rules: [
-//                                {
-//                                    type   : 'empty',
-//                                    prompt : '请按照格式填上购买日期'
-//                                }
-//                            ]
-//                        },
-//                        introduction:{
-//                            identifier  : 'introduction',
-//                            rules: [
-//                                {
-//                                    type   : 'empty',
-//                                    prompt : 'll'
-//                                }
-//                            ]
-//                        }
-//                    }
-//                })
-//            ;
+            $("#exchange").click(function () {
+                location.href = "/showExchange.action?page=1";
+            });
+            $("#bookComment").click(function () {
+                location.href = "/showBookComment.action?page=1";
+            });
+            $("#discuss").click(function () {
+                location.href = "/showDiscuss.action?page=1";
+            });
             $('.special.cards .image').dimmer({
                 on: 'hover'
             });

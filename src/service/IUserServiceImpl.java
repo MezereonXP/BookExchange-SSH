@@ -67,6 +67,15 @@ public class IUserServiceImpl implements IUserService {
         }
     }
 
+    public BeuserEntity getUserByName(String username){
+        if(isExists(username)){
+            BeuserEntity beuserEntity = iBeuserEntityDaoImpl.getUserByName(username);
+            return beuserEntity;
+        }else{
+            return null;
+        }
+    }
+
     public IBeuserEntityDaoImpl getiBeuserEntityDaoImpl() {
         return iBeuserEntityDaoImpl;
     }

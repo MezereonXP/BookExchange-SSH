@@ -135,11 +135,14 @@
                 $("#home").click(function () {
                     location.href = "/index.jsp";
                 });
-                $("#personalCenter").click(function () {
-                    location.href = "/personalPage.jsp?type=1";
+                $("#exchange").click(function () {
+                    location.href = "/showExchange.action?page=1";
                 });
                 $("#bookComment").click(function () {
                     location.href = "/showBookComment.action?page=1";
+                });
+                $("#personalCenter").click(function () {
+                    location.href = "/personalPage.jsp?type=1";
                 });
                 $("#discuss").click(function () {
                     location.href = "/showDiscuss.action?page=1";
@@ -171,9 +174,9 @@
         </a>
 
         <a class="item" id="home">主页</a>
-        <a class="active item" id="exchange">书籍交换</a>
+        <a class="item" id="exchange">书籍交换</a>
         <a class="item" id="bookComment">书评</a>
-        <a class="item" id="discuss">讨论区</a>
+        <a class="active item" id="discuss">讨论区</a>
         <div class="right item" id="right">
             <a class="ui inverted button" id="login">登陆</a>
             <a class="ui inverted button" id ="register">注册</a>
@@ -198,79 +201,47 @@
     </div>
 </div>
 
-<div class="ui main text container">
-    <h1 class="ui header">Semantic UI Fixed Template</h1>
+<div class="ui main text container" style="margin-top: 70px">
+    <h1 class="ui header"><s:property value="forumEntity.getTitle()"/></h1>
+    <p><img class="ui avatar image" src="<s:property value="forumEntity.getSrc()"/>"/>
+        <s:property value="forumEntity.getUsername()"/>
+        &nbsp;&nbsp;
+        发布于<s:property value="forumEntity.getTime()"/>
+    </p>
+    <p><s:property value="forumEntity.getIntroduction()" escape="false"/></p>
+    <p></p>
+    <p></p>
 
-    <div class="ui equal width stackable internally celled grid">
-        <div class="center aligned row">
-            <div class="center aligned column">
-                <div class="ui search">
-                    <div class="ui icon input">
-                        <input class="prompt" type="text" placeholder="请输入查询关键字">
-                        <i class="search icon"></i>
+    <div class="ui comments">
+        <h3 class="ui dividing header">Comments</h3>
+        <s:iterator value="forumcommentEntities" var="obj">
+            <div class="comment">
+                <a class="avatar" style="height: 35px">
+                    <img src="<s:property value="src"/>">
+                </a>
+                <div class="content">
+                    <a class="author"><s:property value="username"/></a>
+                    <div class="metadata">
+                        <span class="date"><s:property value="time"/></span>
                     </div>
-                    <div class="results"></div>
+                    <div class="text">
+                        <p><s:property value="comment"/></p>
+                    </div>
+                    <div class="actions">
+                        <a class="reply">Reply</a>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
-    <p></p>
-    <p></p>
-    <div class="center aligned row">
-        <div class="center aligned column">
-            <div class="ui divided items">
-                <s:iterator value="userBooksWithUserpics" var="obj">
-                    <div class="item">
-                        <div class="image">
-                            <a class="ui left corner label">
-                                <i class="heart icon"></i>
-                            </a>
-                            <img src="<s:property value="src"/>">
-                        </div>
-                        <div class="content">
-                            <a class="header" onclick="showBook(<s:property value="id"/>)"><s:property value="bookname"/></a>
-                            <div class="meta">
-                                <span class="cinema">
-                                    <img class="ui avatar image" src="<s:property value="userSrc"/>">
-                                    <a onmouseover="showUser('<s:property value="username"/>')"><s:property value="username"/></a>
-                                </span>
-                                <span class="cinema">
-                                    发布于:<s:property value="date"/>
-                                </span>
-                            </div>
-                            <div class="description">
-                                <p><s:property value="introduction"/></p>
-                            </div>
-                            <div class="extra">
-                                <div class="ui right floated primary button">
-                                    查看详情
-                                    <i class="right chevron icon"></i>
-                                </div>
-                                <s:generator  val="kind" separator=";">
-                                    <s:iterator>
-                                        <div class="ui label"><s:property /></div>
-                                    </s:iterator>
-                                </s:generator>
-                            </div>
-                        </div>
-                    </div>
-                </s:iterator>
+        </s:iterator>
+        <form class="ui reply form">
+            <div class="field">
+                <textarea id="comment"></textarea>
             </div>
-        </div>
-    </div>
-    <div class="center row">
-        <div class="center column" style="text-align: center">
-            <div class="ui pagination menu">
-                <s:iterator value="pageNum">
-                    <a class="item <s:if test="num==page">active</s:if>" onclick="changePage('<s:property value="num"/>')">
-                        <s:property value="num"/>
-                    </a>
-                </s:iterator>
+            <div class="ui blue labeled submit icon button" onclick="sendComment(<s:property value="articleID"/>)">
+                <i class="icon edit"></i> Add Reply
             </div>
-        </div>
+        </form>
     </div>
-    <p></p>
-    <p></p>
 </div>
 
 <div class="ui inverted vertical footer segment">
@@ -331,7 +302,7 @@
     }
     function changePage(num) {
         //window.alert(""+num);
-        self.location ="showExchange.action?page="+num;
+        self.location ="showBookComment.action?page="+num;
     }
     var path = getCookie("SRC");
     if(path!="null") {
@@ -341,9 +312,8 @@
     if(getCookie("USERNAME")=='null'){
     }else {
         document.getElementById("login").style.display="none";
-    document.getElementById("register").style.display="none";
+        document.getElementById("register").style.display="none";
     }
-
     function showUserPic() {
         $('#userCard').transition("browse");
         var userNameInCard = document.getElementById("userNameInCard");
@@ -354,8 +324,13 @@
     function hideUserPic() {
         $('#userCard').transition("fly up");
     }
-    function showBook(id) {
-        self.location = "showBook.action?bookID="+id;
+    function sendComment(id){
+        if($('#comment').val()!=""){
+            self.location="sendForumComment.action?forumID="+<s:property value="forumEntity.getId()"/>
+                    +"&comment="+$('#comment').val()+"&username="+getCookie("USERNAME");
+        }else{
+            window.alert("请输入有效评论");
+        }
     }
 </script>
 </body>
