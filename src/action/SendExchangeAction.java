@@ -3,14 +3,21 @@ package action;
 import com.opensymphony.xwork2.ActionSupport;
 import entity.ExchangeEntity;
 import entity.UserbookEntity;
+import org.apache.struts2.ServletActionContext;
+import org.apache.struts2.interceptor.ServletRequestAware;
+import org.apache.struts2.interceptor.ServletResponseAware;
 import org.springframework.beans.factory.annotation.Autowired;
 import service.*;
 import tool.SuperTool;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 /**
  * Created by Mezereon on 2017/10/17.
  */
-public class SendExchangeAction extends ActionSupport{
+public class SendExchangeAction extends ActionSupport implements ServletRequestAware,
+        ServletResponseAware {
 
     @Autowired
     private IExchangeServiceImpl exchangeService;
@@ -24,6 +31,8 @@ public class SendExchangeAction extends ActionSupport{
     private String usernameForSelf;
     private String usernameForExchange;
     private int bookIDA,bookIDB;
+    private HttpServletResponse response;
+    private HttpServletRequest request;
 
     private UserbookEntity selfBook;
     private UserbookEntity herBook;
@@ -117,5 +126,31 @@ public class SendExchangeAction extends ActionSupport{
 
     public void setHerBook(UserbookEntity herBook) {
         this.herBook = herBook;
+    }
+
+    @Override
+    public void setServletResponse(HttpServletResponse httpServletResponse) {
+        response = httpServletResponse;
+    }
+
+    @Override
+    public void setServletRequest(HttpServletRequest httpServletRequest) {
+        request = httpServletRequest;
+    }
+
+    public HttpServletResponse getResponse() {
+        return response;
+    }
+
+    public void setResponse(HttpServletResponse response) {
+        this.response = response;
+    }
+
+    public HttpServletRequest getRequest() {
+        return request;
+    }
+
+    public void setRequest(HttpServletRequest request) {
+        this.request = request;
     }
 }
