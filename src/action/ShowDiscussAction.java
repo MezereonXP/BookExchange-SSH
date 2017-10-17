@@ -1,13 +1,12 @@
 package action;
 
 import com.opensymphony.xwork2.ActionSupport;
-import entity.ForumEntity;
-import entity.Page;
-import entity.UserBooksWithUserpic;
-import entity.UserbookEntity;
+import entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import service.IForumCommentServiceImpl;
 import service.IForumService;
 import service.IForumServiceImpl;
+import service.IForumViewServiceImpl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,13 +19,21 @@ public class ShowDiscussAction extends ActionSupport {
     @Autowired
     private IForumServiceImpl forumService;
 
+    @Autowired
+    private IForumCommentServiceImpl forumCommentService;
+
+    @Autowired
+    private IForumViewServiceImpl forumViewService;
+
     private List<ForumEntity> forumEntities;
     private List<Page> pageNum;
+    private List<SuperForum> forumList;
 
     private int page;
 
     @Override
     public String execute() throws Exception {
+        forumList = new ArrayList<>();
         forumEntities = forumService.getAllForum();
         List<ForumEntity> list = new ArrayList<>();
         List<ForumEntity> list2 = new ArrayList<>();
@@ -40,7 +47,11 @@ public class ShowDiscussAction extends ActionSupport {
         for(ForumEntity entity:list){
             count++;
             if(count<=5*page&&count>5*(page-1)){
-                list2.add(entity);
+                SuperForum superForum = new SuperForum();
+                superForum.setEntity(entity);
+                superForum.setNumOfComments(forumCommentService.getAllForumCommentById(entity.getId()).size());
+                superForum.setForumviewEntity(forumViewService.getForumViewById(entity.getId()));
+                forumList.add(superForum);
             }
         }
         pageNum = new ArrayList<Page>();
@@ -49,7 +60,6 @@ public class ShowDiscussAction extends ActionSupport {
             page.setNum(i+"");
             pageNum.add(page);
         }
-        forumEntities = list2;
         return SUCCESS;
     }
 
@@ -83,5 +93,29 @@ public class ShowDiscussAction extends ActionSupport {
 
     public void setForumEntities(List<ForumEntity> forumEntities) {
         this.forumEntities = forumEntities;
+    }
+
+    public IForumCommentServiceImpl getForumCommentService() {
+        return forumCommentService;
+    }
+
+    public void setForumCommentService(IForumCommentServiceImpl forumCommentService) {
+        this.forumCommentService = forumCommentService;
+    }
+
+    public List<SuperForum> getForumList() {
+        return forumList;
+    }
+
+    public void setForumList(List<SuperForum> forumList) {
+        this.forumList = forumList;
+    }
+
+    public IForumViewServiceImpl getForumViewService() {
+        return forumViewService;
+    }
+
+    public void setForumViewService(IForumViewServiceImpl forumViewService) {
+        this.forumViewService = forumViewService;
     }
 }

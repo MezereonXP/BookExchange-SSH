@@ -18,12 +18,18 @@ public class ShowOneDiscussAction extends ActionSupport {
     @Autowired
     private IForumCommentServiceImpl forumCommentService;
 
+    @Autowired
+    private IForumViewServiceImpl forumViewService;
+
     private int forumID;
     private ForumEntity forumEntity;
     private List<ForumcommentEntity> forumcommentEntities;
 
     @Override
     public String execute() throws Exception {
+        ForumviewEntity forumviewEntity = forumViewService.getForumViewById(forumID);
+        forumviewEntity.setViewTiimes(forumviewEntity.getViewTiimes()+1);
+        forumViewService.updateForumView(forumviewEntity);
         for(ForumEntity entity:forumService.getAllForum()){
             if(entity.getId()==forumID){
                 forumEntity = entity;
@@ -69,5 +75,13 @@ public class ShowOneDiscussAction extends ActionSupport {
 
     public void setForumCommentService(IForumCommentServiceImpl forumCommentService) {
         this.forumCommentService = forumCommentService;
+    }
+
+    public IForumViewServiceImpl getForumViewService() {
+        return forumViewService;
+    }
+
+    public void setForumViewService(IForumViewServiceImpl forumViewService) {
+        this.forumViewService = forumViewService;
     }
 }

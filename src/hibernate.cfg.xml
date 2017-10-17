@@ -5,10 +5,8 @@
 <hibernate-configuration>
     <session-factory>
         <property name="dialect">org.hibernate.dialect.MySQLDialect</property>
-        <property name="connection.url"><![CDATA[jdbc:mysql://sql.l35.vhostgo.com:3306/daycode?useUnicode=true&characterEncoding=utf8&useSSL=false]]></property>
+        <property name="connection.url"><![CDATA[jdbc:mysql://sql.l35.vhostgo.com:3306/mezereon]]></property>
         <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
-        <property name="connection.username">mezereon</property>
-        <property name="connection.password">xplovesaber</property>
         <mapping class="entity.BeuserEntity"/>
         <mapping class="entity.ArticlecommentEntity"/>
         <mapping class="entity.ArticlecontentEntity"/>
@@ -18,6 +16,7 @@
         <mapping class="entity.ForumcommentEntity"/>
         <mapping class="entity.MessageEntity"/>
         <mapping class="entity.UserbookEntity"/>
+        <mapping class="entity.ForumviewEntity"/>
         <!-- DB schema will be updated if needed -->
         <!-- <property name="hbm2ddl.auto">update</property> -->
     </session-factory>

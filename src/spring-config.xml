@@ -105,6 +105,9 @@
     <bean class="dao.IUserbookDaoImpl" id="iUserbookDaoImpl">
         <property name="sessionFactory" ref="sessionFactory"></property>
     </bean>
+    <bean class="dao.IForumViewDaoImpl" id="iForumViewDao">
+        <property name="sessionFactory" ref="sessionFactory"></property>
+    </bean>
 
 
     <bean id="IUserServiceImpl" class="service.IUserServiceImpl">
@@ -133,6 +136,9 @@
     </bean>
     <bean class="service.IForumServiceImpl" name="iForumService">
         <property ref="iForumDaoImpl" name="iForumDao"></property>
+    </bean>
+    <bean class="service.IForumViewServiceImpl" name="iForumViewService">
+        <property ref="iForumViewDao" name="iForumViewDao"></property>
     </bean>
 
     <bean class="action.Action" id="loginAction" scope="prototype">
@@ -173,10 +179,12 @@
     </bean>
     <bean class="action.ShowDiscussAction" id="showDiscussAction" scope="prototype">
         <property name="forumService" ref="iForumService"></property>
+        <property name="forumCommentService" ref="iForumCommentService"></property>
     </bean>
     <bean class="action.ShowOneDiscussAction" id="showOneDiscussAction" scope="prototype">
         <property name="forumCommentService" ref="iForumCommentService"></property>
         <property name="forumService" ref="iForumService"></property>
+        <property name="forumViewService" ref="iForumViewService"></property>
     </bean>
     <bean class="action.SendForumCommentAction" id="sendForumCommentAction" scope="prototype">
         <property name="forumCommentService" ref="iForumCommentService"></property>

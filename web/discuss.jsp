@@ -219,7 +219,7 @@
     <div class="center aligned row">
         <div class="center aligned column">
             <div class="ui divided items">
-                <s:iterator value="forumEntities" var="obj">
+                <s:iterator value="forumList" var="obj">
                     <div class="ui items">
                     <div class="item">
                         <div class="content">
@@ -238,13 +238,13 @@
                             </div>
                             <div class="extra">
                                 <a class="like">
-                                    <i class="like icon"></i> 4 Likes
+                                    <i class="like icon"></i> <s:property value="forumviewEntity.getLikeNum()"/> Likes
                                 </a>
                                 <a class="comments">
-                                    <i class="comments icon"></i>12 Comments
+                                    <i class="comments icon"></i><s:property value="numOfComments"/> Comments
                                 </a>
                                 <a>
-                                    <i class="unhide icon"></i>12 Views
+                                    <i class="unhide icon"></i><s:property value="forumviewEntity.getViewTiimes()"/> Views
                                 </a>
                                 <s:property value="time"/>
                             </div>
