@@ -1,5 +1,6 @@
 package dao;
 
+import com.googlecode.s2hibernate.struts2.plugin.util.HibernateSessionFactory;
 import entity.ArticlecommentEntity;
 import entity.BeuserEntity;
 import org.hibernate.Session;
@@ -21,24 +22,28 @@ import java.util.List;
  */
 public class IArticleCommentDaoImpl implements IArticleCommenntDao{
 
-    @Autowired
+
     private SessionFactory sessionFactory;
 
+    @Autowired
     private HibernateTemplate hibernateTemplate;
 
     @Override
     public void saveArticleComment(ArticlecommentEntity articleCommentEntity) throws SQLException {
         hibernateTemplate.save(articleCommentEntity);
+        hibernateTemplate.getSessionFactory().getCurrentSession().clear();
     }
 
     @Override
     public void delArticleComment(ArticlecommentEntity articleCommentEntity) throws SQLException {
         hibernateTemplate.delete(articleCommentEntity);
+        hibernateTemplate.getSessionFactory().getCurrentSession().clear();
     }
 
     @Override
     public void editArticleComment(ArticlecommentEntity articleCommentEntity) throws SQLException {
         hibernateTemplate.update(articleCommentEntity);
+        hibernateTemplate.getSessionFactory().getCurrentSession().clear();
     }
 
     @Override
@@ -48,7 +53,7 @@ public class IArticleCommentDaoImpl implements IArticleCommenntDao{
 
     @Override
     public boolean isExists(int id) throws SQLException {
-        Query query = sessionFactory.openSession()
+        Query query = hibernateTemplate.getSessionFactory().getCurrentSession()
                 .createQuery("from ArticleComment ac where ac.id = :id").setParameter("id", id);
         System.out.println(query.list().size());
         return query.list().size()>0?true:false;
@@ -60,7 +65,7 @@ public class IArticleCommentDaoImpl implements IArticleCommenntDao{
     }
 
     public List<ArticlecommentEntity> getAllArticleComment() {
-        Session session = sessionFactory.getCurrentSession();
+        Session session = hibernateTemplate.getSessionFactory().getCurrentSession();
         EntityManager entityManager = session.getEntityManagerFactory().createEntityManager();
         CriteriaBuilder cb = entityManager.getCriteriaBuilder();
         CriteriaQuery criteriaQuery = cb.createQuery(ArticlecommentEntity.class);
@@ -68,6 +73,19 @@ public class IArticleCommentDaoImpl implements IArticleCommenntDao{
         criteriaQuery.select(root);
         TypedQuery<ArticlecommentEntity> typedQuery = entityManager.createQuery(criteriaQuery);
         List<ArticlecommentEntity> list = typedQuery.getResultList();
+        hibernateTemplate.getSessionFactory().getCurrentSession().clear();
         return list;
+    }
+
+    public HibernateTemplate getHibernateTemplate() {
+        return hibernateTemplate;
+    }
+
+    public void setHibernateTemplate(HibernateTemplate hibernateTemplate) {
+        this.hibernateTemplate = hibernateTemplate;
+    }
+
+    public SessionFactory getSessionFactory() {
+        return sessionFactory;
     }
 }

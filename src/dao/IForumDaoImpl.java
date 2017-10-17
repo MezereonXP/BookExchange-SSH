@@ -19,24 +19,28 @@ import java.util.List;
  * Created by Administrator on 2017/10/8/008.
  */
 public class IForumDaoImpl implements IForumDao {
-    @Autowired
+
     private SessionFactory sessionFactory;
 
+    @Autowired
     private HibernateTemplate hibernateTemplate;
 
     @Override
     public void saveForum(ForumEntity forumEntity) throws SQLException {
         hibernateTemplate.save(forumEntity);
+        hibernateTemplate.getSessionFactory().getCurrentSession().clear();
     }
 
     @Override
     public void delForum(ForumEntity forumEntity) throws SQLException {
         hibernateTemplate.delete(forumEntity);
+        hibernateTemplate.getSessionFactory().getCurrentSession().clear();
     }
 
     @Override
     public void editForum(ForumEntity forumEntity) throws SQLException {
         hibernateTemplate.update(forumEntity);
+        hibernateTemplate.getSessionFactory().getCurrentSession().clear();
     }
 
     @Override
@@ -46,7 +50,7 @@ public class IForumDaoImpl implements IForumDao {
 
     @Override
     public boolean isExists(int id) throws SQLException {
-        Query query = sessionFactory.openSession()
+        Query query = hibernateTemplate.getSessionFactory().getCurrentSession()
                 .createQuery("from forum f where f.id = :id").setParameter("id", id);
         System.out.println(query.list().size());
         return query.list().size()>0?true:false;
@@ -58,7 +62,7 @@ public class IForumDaoImpl implements IForumDao {
     }
 
     public List<ForumEntity> getAllForum() {
-        Session session = sessionFactory.getCurrentSession();
+        Session session = hibernateTemplate.getSessionFactory().getCurrentSession();
         EntityManager entityManager = session.getEntityManagerFactory().createEntityManager();
         CriteriaBuilder cb = entityManager.getCriteriaBuilder();
         CriteriaQuery criteriaQuery = cb.createQuery(ForumEntity.class);
@@ -66,6 +70,19 @@ public class IForumDaoImpl implements IForumDao {
         criteriaQuery.select(root);
         TypedQuery<ForumEntity> typedQuery = entityManager.createQuery(criteriaQuery);
         List<ForumEntity> list = typedQuery.getResultList();
+        hibernateTemplate.getSessionFactory().getCurrentSession().clear();
         return list;
+    }
+
+    public SessionFactory getSessionFactory() {
+        return sessionFactory;
+    }
+
+    public HibernateTemplate getHibernateTemplate() {
+        return hibernateTemplate;
+    }
+
+    public void setHibernateTemplate(HibernateTemplate hibernateTemplate) {
+        this.hibernateTemplate = hibernateTemplate;
     }
 }

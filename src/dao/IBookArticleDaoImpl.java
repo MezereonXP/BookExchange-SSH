@@ -22,24 +22,28 @@ import java.util.List;
  */
 public class IBookArticleDaoImpl implements IBookArticleDao {
 
-    @Autowired
+
     private SessionFactory sessionFactory;
 
+    @Autowired
     private HibernateTemplate hibernateTemplate;
 
     @Override
     public void saveArticle(BookarticleEntity bookarticleEntity) throws SQLException {
         hibernateTemplate.save(bookarticleEntity);
+        hibernateTemplate.getSessionFactory().getCurrentSession().clear();
     }
 
     @Override
     public void delArticle(BookarticleEntity bookarticleEntity) throws SQLException {
         hibernateTemplate.delete(bookarticleEntity);
+        hibernateTemplate.getSessionFactory().getCurrentSession().clear();
     }
 
     @Override
     public void editArticle(BookarticleEntity bookarticleEntity) throws SQLException {
         hibernateTemplate.update(bookarticleEntity);
+        hibernateTemplate.getSessionFactory().getCurrentSession().clear();
     }
 
     @Override
@@ -49,7 +53,7 @@ public class IBookArticleDaoImpl implements IBookArticleDao {
 
     @Override
     public boolean isExists(int id) throws SQLException {
-        Query query = sessionFactory.openSession()
+        Query query = hibernateTemplate.getSessionFactory().getCurrentSession()
                 .createQuery("from bookarticle ba where ba.id = :id").setParameter("id", id);
         System.out.println(query.list().size());
         return query.list().size()>0?true:false;
@@ -61,7 +65,7 @@ public class IBookArticleDaoImpl implements IBookArticleDao {
     }
 
     public List<BookarticleEntity> getAllBookArticle() {
-        Session session = sessionFactory.getCurrentSession();
+        Session session = hibernateTemplate.getSessionFactory().getCurrentSession();
         EntityManager entityManager = session.getEntityManagerFactory().createEntityManager();
         CriteriaBuilder cb = entityManager.getCriteriaBuilder();
         CriteriaQuery criteriaQuery = cb.createQuery(BookarticleEntity.class);
@@ -69,6 +73,19 @@ public class IBookArticleDaoImpl implements IBookArticleDao {
         criteriaQuery.select(root);
         TypedQuery<BookarticleEntity> typedQuery = entityManager.createQuery(criteriaQuery);
         List<BookarticleEntity> list = typedQuery.getResultList();
+        hibernateTemplate.getSessionFactory().getCurrentSession().clear();
         return list;
+    }
+
+    public SessionFactory getSessionFactory() {
+        return sessionFactory;
+    }
+
+    public HibernateTemplate getHibernateTemplate() {
+        return hibernateTemplate;
+    }
+
+    public void setHibernateTemplate(HibernateTemplate hibernateTemplate) {
+        this.hibernateTemplate = hibernateTemplate;
     }
 }

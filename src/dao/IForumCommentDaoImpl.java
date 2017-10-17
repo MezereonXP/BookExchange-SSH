@@ -19,24 +19,28 @@ import java.util.List;
  * Created by Administrator on 2017/10/8/008.
  */
 public class IForumCommentDaoImpl implements IForumCommentDao{
-    @Autowired
+
     private SessionFactory sessionFactory;
 
+    @Autowired
     private HibernateTemplate hibernateTemplate;
 
     @Override
     public void saveForumComment(ForumcommentEntity forumcommentEntity) throws SQLException {
         hibernateTemplate.save(forumcommentEntity);
+        hibernateTemplate.getSessionFactory().getCurrentSession().clear();
     }
 
     @Override
     public void delForumComment(ForumcommentEntity forumcommentEntity) throws SQLException {
         hibernateTemplate.delete(forumcommentEntity);
+        hibernateTemplate.getSessionFactory().getCurrentSession().clear();
     }
 
     @Override
     public void editForumComment(ForumcommentEntity forumcommentEntity) throws SQLException {
         hibernateTemplate.update(forumcommentEntity);
+        hibernateTemplate.getSessionFactory().getCurrentSession().clear();
     }
 
     @Override
@@ -46,7 +50,7 @@ public class IForumCommentDaoImpl implements IForumCommentDao{
 
     @Override
     public boolean isExists(int id) throws SQLException {
-        Query query = sessionFactory.openSession()
+        Query query = hibernateTemplate.getSessionFactory().getCurrentSession()
                 .createQuery("from forumcomment ac where ac.id = :id").setParameter("id", id);
         System.out.println(query.list().size());
         return query.list().size()>0?true:false;
@@ -58,7 +62,7 @@ public class IForumCommentDaoImpl implements IForumCommentDao{
     }
 
     public List<ForumcommentEntity> getAllForumComment() {
-        Session session = sessionFactory.getCurrentSession();
+        Session session = hibernateTemplate.getSessionFactory().getCurrentSession();
         EntityManager entityManager = session.getEntityManagerFactory().createEntityManager();
         CriteriaBuilder cb = entityManager.getCriteriaBuilder();
         CriteriaQuery criteriaQuery = cb.createQuery(ForumcommentEntity.class);
@@ -66,6 +70,19 @@ public class IForumCommentDaoImpl implements IForumCommentDao{
         criteriaQuery.select(root);
         TypedQuery<ForumcommentEntity> typedQuery = entityManager.createQuery(criteriaQuery);
         List<ForumcommentEntity> list = typedQuery.getResultList();
+        hibernateTemplate.getSessionFactory().getCurrentSession().clear();
         return list;
+    }
+
+    public SessionFactory getSessionFactory() {
+        return sessionFactory;
+    }
+
+    public HibernateTemplate getHibernateTemplate() {
+        return hibernateTemplate;
+    }
+
+    public void setHibernateTemplate(HibernateTemplate hibernateTemplate) {
+        this.hibernateTemplate = hibernateTemplate;
     }
 }

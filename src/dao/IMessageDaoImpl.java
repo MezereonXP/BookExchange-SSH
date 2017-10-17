@@ -19,24 +19,28 @@ import java.util.List;
  * Created by Administrator on 2017/10/8/008.
  */
 public class IMessageDaoImpl implements IMessageDao{
-    @Autowired
+
     private SessionFactory sessionFactory;
 
+    @Autowired
     private HibernateTemplate hibernateTemplate;
 
     @Override
     public void saveMessage(MessageEntity messageEntity) throws SQLException {
         hibernateTemplate.save(messageEntity);
+        hibernateTemplate.getSessionFactory().getCurrentSession().clear();
     }
 
     @Override
     public void delMessage(MessageEntity messageEntity) throws SQLException {
         hibernateTemplate.delete(messageEntity);
+        hibernateTemplate.getSessionFactory().getCurrentSession().clear();
     }
 
     @Override
     public void editMessage(MessageEntity messageEntity) throws SQLException {
         hibernateTemplate.update(messageEntity);
+        hibernateTemplate.getSessionFactory().getCurrentSession().clear();
     }
 
     @Override
@@ -46,7 +50,7 @@ public class IMessageDaoImpl implements IMessageDao{
 
     @Override
     public boolean isExists(int id) throws SQLException {
-        Query query = sessionFactory.openSession()
+        Query query = hibernateTemplate.getSessionFactory().getCurrentSession()
                 .createQuery("from message ac where ac.id = :id").setParameter("id", id);
         System.out.println(query.list().size());
         return query.list().size()>0?true:false;
@@ -58,7 +62,7 @@ public class IMessageDaoImpl implements IMessageDao{
     }
 
     public List<MessageEntity> getAllForum() {
-        Session session = sessionFactory.getCurrentSession();
+        Session session = hibernateTemplate.getSessionFactory().getCurrentSession();
         EntityManager entityManager = session.getEntityManagerFactory().createEntityManager();
         CriteriaBuilder cb = entityManager.getCriteriaBuilder();
         CriteriaQuery criteriaQuery = cb.createQuery(MessageEntity.class);
@@ -66,6 +70,19 @@ public class IMessageDaoImpl implements IMessageDao{
         criteriaQuery.select(root);
         TypedQuery<MessageEntity> typedQuery = entityManager.createQuery(criteriaQuery);
         List<MessageEntity> list = typedQuery.getResultList();
+        hibernateTemplate.getSessionFactory().getCurrentSession().clear();
         return list;
+    }
+
+    public SessionFactory getSessionFactory() {
+        return sessionFactory;
+    }
+
+    public HibernateTemplate getHibernateTemplate() {
+        return hibernateTemplate;
+    }
+
+    public void setHibernateTemplate(HibernateTemplate hibernateTemplate) {
+        this.hibernateTemplate = hibernateTemplate;
     }
 }

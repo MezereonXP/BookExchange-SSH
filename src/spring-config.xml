@@ -46,9 +46,10 @@
           p:testConnectionOnCheckout="${jdbc.c3p0.testConnectionOnCheckout}"
           p:testConnectionOnCheckin="false"
           p:idleConnectionTestPeriod="${jdbc.c3p0.idleConnectionTestPeriod}"
-          p:acquireIncrement="50"
+          p:acquireIncrement="60"
           p:maxStatements="100"
           p:numHelperThreads="100"
+          p:maxStatementsPerConnection="15"
           p:initialPoolSize="${jdbc.c3p0.initialPoolSize}" p:minPoolSize="${jdbc.c3p0.minPoolSize}"
           p:maxPoolSize="${jdbc.c3p0.maxPoolSize}" p:maxIdleTime="${jdbc.c3p0.maxIdleTime}" />
     <!-- 配置Hibernate事务管理器 -->
@@ -86,35 +87,41 @@
             <tx:method name="*" propagation="REQUIRED" read-only="true"/>
         </tx:attributes>
     </tx:advice>
+
+    <!-- hibernate模板 -->
+    <bean id="hibernateTemplate" class="org.springframework.orm.hibernate5.HibernateTemplate">
+        <property name="sessionFactory" ref="sessionFactory" />
+    </bean>
+
     <bean id="iBeuserEntityDaoImpl" class="dao.IBeuserEntityDaoImpl">
-        <property name="sessionFactory" ref="sessionFactory"></property>
+        <property name="hibernateTemplate" ref="hibernateTemplate"></property>
     </bean>
     <bean id="iBookArticleDaoImpl" class="dao.IBookArticleDaoImpl">
-        <property name="sessionFactory" ref="sessionFactory"></property>
+        <property name="hibernateTemplate" ref="hibernateTemplate"></property>
     </bean>
     <bean id="iArticleContentDaoImpl" class="dao.IArticleContentDaoImpl">
-        <property name="sessionFactory" ref="sessionFactory"></property>
+        <property name="hibernateTemplate" ref="hibernateTemplate"></property>
     </bean>
     <bean class="dao.IArticleCommentDaoImpl" id="iArticleCommentDaoImpl">
-        <property name="sessionFactory" ref="sessionFactory"></property>
+        <property name="hibernateTemplate" ref="hibernateTemplate"></property>
     </bean>
     <bean class="dao.IExchangeDaoImpl" id="iExchangeDaoImpl">
-        <property name="sessionFactory" ref="sessionFactory"></property>
+        <property name="hibernateTemplate" ref="hibernateTemplate"></property>
     </bean>
     <bean class="dao.IForumDaoImpl" id="iForumDaoImpl">
-        <property name="sessionFactory" ref="sessionFactory"></property>
+        <property name="hibernateTemplate" ref="hibernateTemplate"></property>
     </bean>
     <bean class="dao.IForumCommentDaoImpl" id="iForumCommentDaoImpl">
-        <property name="sessionFactory" ref="sessionFactory"></property>
+        <property name="hibernateTemplate" ref="hibernateTemplate"></property>
     </bean>
     <bean class="dao.IMessageDaoImpl" id="iMessageDaoImpl">
-        <property name="sessionFactory" ref="sessionFactory"></property>
+        <property name="hibernateTemplate" ref="hibernateTemplate"></property>
     </bean>
     <bean class="dao.IUserbookDaoImpl" id="iUserbookDaoImpl">
-        <property name="sessionFactory" ref="sessionFactory"></property>
+        <property name="hibernateTemplate" ref="hibernateTemplate"></property>
     </bean>
     <bean class="dao.IForumViewDaoImpl" id="iForumViewDao">
-        <property name="sessionFactory" ref="sessionFactory"></property>
+        <property name="hibernateTemplate" ref="hibernateTemplate"></property>
     </bean>
 
 
