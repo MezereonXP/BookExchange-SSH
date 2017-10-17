@@ -206,6 +206,20 @@
 
 <div class="ui main text container" style="margin-top: 70px">
     <h1 class="ui header">发布书评</h1>
+    <div class="ui labeled input">
+        <a class="ui blue label">
+            书名
+        </a>
+        <input type="text" placeholder="请输入书名" name="bookName">
+    </div>
+    <p>
+    <div class="ui labeled input">
+        <a class="ui blue label">
+            标题
+        </a>
+        <input type="text" placeholder="请输入标题" name="title">
+    </div>
+    <p>
     <div style="text-align: center">
         <form method="post">
             <textarea id="mytextarea" name="content" style="height: 400px;width: 800px"></textarea>
