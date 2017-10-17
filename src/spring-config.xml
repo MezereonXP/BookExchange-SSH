@@ -202,5 +202,9 @@
     </bean>
     <bean class="action.PersonalMainPageAction" name="showPersonalMainPage">
         <property name="userBookService" ref="iUserBookService"></property>
+        <property name="userService" ref="IUserServiceImpl"></property>
+    </bean>
+    <bean class="action.UpdateUserAction" name="updateUserAction">
+        <property name="userService" ref="IUserServiceImpl"></property>
     </bean>
 </beans>

@@ -34,54 +34,57 @@
 <link rel="stylesheet" type="text/css" href="./pages/semantic/dist/components/icon.css">
 <link rel="stylesheet" type="text/css" href="./pages/semantic/dist/components/sidebar.css">
 <link rel="stylesheet" type="text/css" href="./pages/semantic/dist/components/transition.css">
-
+<link rel="stylesheet" type="text/css" href="./pages/semantic/dist/components/modal.css">
 <script src="./pages/semantic/dist/components/visibility.js"></script>
 <script src="./pages/semantic/dist/components/sidebar.js"></script>
 <script src="./pages/semantic/dist/components/dimmer.js"></script>
 <script src="./pages/semantic/dist/components/dropdown.js"></script>
 <script src="./pages/semantic/dist/components/transition.js"></script>
+<script src="./pages/semantic/dist/components/modal.js"></script>
 <script>
     $(document)
-            .ready(function () {
-                $("#exchange").click(function () {
-                    location.href = "/showExchange.action?page=1";
-                });
-                $("#bookComment").click(function () {
-                    location.href = "/showBookComment.action?page=1";
-                });
-                $("#discuss").click(function () {
-                    location.href = "/showDiscuss.action?page=1";
-                });
-                $('.special.cards .image').dimmer({
-                    on: 'hover'
-                });
-                $('.ui.menu a.item')
-                        .on('click', function () {
-                            $(this)
-                                    .addClass('active')
-                                    .siblings()
-                                    .removeClass('active')
-                            ;
-                        })
+        .ready(function () {
+            $("#exchange").click(function () {
+                location.href = "/showExchange.action?page=1";
+            });
+            $("#bookComment").click(function () {
+                location.href = "/showBookComment.action?page=1";
+            });
+            $("#discuss").click(function () {
+                location.href = "/showDiscuss.action?page=1";
+            });
+            $('.special.cards .image').dimmer({
+                on: 'hover'
+            });
+            $('.ui.menu a.item')
+                .on('click', function () {
+                    $(this)
+                        .addClass('active')
+                        .siblings()
+                        .removeClass('active')
+                    ;
+                })
+            ;
+            $('.ui.dropdown')
+                .dropdown({
+                    on: 'click'
+                })
+            ;
+            $('#revise').click(function () {
+                $('.ui.small.modal')
+                    .modal('show')
                 ;
-                $('.ui.dropdown')
-                        .dropdown({
-                            on: 'click'
-                        })
-                ;
-                $('#revise').click(function () {
-                    location.href = "/personalRevise.jsp"
-                });
-                $("#home").click(function () {
-                    location.href = "/index.jsp";
-                });
-                $("#exchange").click(function () {
-                    location.href = "/exchange.jsp";
-                });
-                $("#uploadImage").click(function () {
+            });
+            $("#home").click(function () {
+                location.href = "/index.jsp";
+            });
+            $("#exchange").click(function () {
+                location.href = "/exchange.jsp";
+            });
+            $("#uploadImage").click(function () {
 
-                });
-            })
+            });
+        })
     ;
 </script>
 <style>
@@ -116,6 +119,84 @@
     </div>
 </div>
 <br>
+<div class="ui small modal transition">
+    <i class="close icon"></i>
+    <div class="header">
+        编辑个人信息
+    </div>
+        <div class="content">
+            <p style="font-size: x-large;margin-left: 15px"><s:property value="username"></s:property></p>
+            <div class="ui grid vertically divided">
+                <div class="row" style="margin-left: 30px;padding-top: 30px;padding-bottom: 30px" onmouseenter="show(1)"
+                     onmouseleave="hide(1)">
+                    <div style="margin-top: 8px">手机号码:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                    <div style="margin-top: 8px" id="phoneSign" class="ui transition">
+                        <div id="phoneEle" style="display: inline"><s:property value="beuserEntity.getPhone()"/>
+                        </div>&nbsp;&nbsp;&nbsp;<a href="#" class="ui transition hidden" id="phone"
+                                                   onclick="showInput(1)"><i class="icon pencil "></i>修改</a></div>
+                    <div id="phoneInput" class="transition hidden">
+                        <div class="ui input">
+                            <input type="text" placeholder="请输入手机号码" id="phoneIn" name="phone">
+                        </div>
+                        <button class="ui primary button" id="phoneSave" onclick="save(1)">
+                            保存
+                        </button>
+                        <button class="ui button" id="phoneCancel" onclick="showInput(1)">
+                            取消
+                        </button>
+                    </div>
+                </div>
+                <div class="row" style="margin-left: 30px;padding-top: 30px;padding-bottom: 30px" onmouseenter="show(2)"
+                     onmouseleave="hide(2)">
+                    <div style="margin-top: 8px">电子邮箱:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                    <div style="margin-top: 8px" id="emailSign" class="ui transition">
+                        <div id="emailEle" style="display: inline"><s:property value="beuserEntity.getEmail()"/>
+                        </div>&nbsp;&nbsp;&nbsp;<a href="#" class="transition hidden" id="email" onclick="showInput(2)"><i
+                            class="icon pencil"></i>修改</a></div>
+                    <div id="emailInput" class="transition hidden">
+                        <div class="ui input">
+                            <input type="text" placeholder="请输入电子邮箱" id="emailIn" name="email">
+                        </div>
+                        <button class="ui primary button" id="emailSave" onclick="save(2)">
+                            保存
+                        </button>
+                        <button class="ui button" id="emailCancel" onclick="showInput(2)">
+                            取消
+                        </button>
+                    </div>
+                </div>
+                <div class="row" style="margin-left: 30px;padding-top: 30px;padding-bottom: 30px" onmouseenter="show(3)"
+                     onmouseleave="hide(3)">
+                    <div style="margin-top: 8px">个性签名:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                    <div style="margin-top: 8px" id="signSign" class="ui transition">
+                        <div id="signEle" style="display: inline"><s:property value="beuserEntity.getSignatrue()"/>
+                        </div>&nbsp;&nbsp;&nbsp;<a href="#" class="transition hidden" id="sign"
+                                                   onclick="showInput(3)"><i class="icon pencil"></i>修改</a></div>
+                    <div id="signInput" class="transition hidden">
+                        <div class="ui input">
+                            <input type="text" placeholder="请输入个性签名" id="signIn" name="sign">
+                        </div>
+                        <button class="ui primary button" id="signSave" onclick="save(3)">
+                            保存
+                        </button>
+                        <button class="ui button" id="signCancel" onclick="showInput(3)">
+                            取消
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <div class="actions">
+        <div class="ui red basic cancel inverted button">
+            <i class="remove icon"></i>
+            取消
+        </div>
+        <div class="ui green ok inverted button" onclick="personSubmit()">
+            <i class="checkmark icon"></i>
+            保存
+        </div>
+    </div>
+</div>
 <div class="ui centered grid sty" style="margin-top: 50px;" id="main">
     <div class="twelve wide column"
          style="background-color:  #96A1A9;height: 150px;border-radius:5px 5px 0 0;position: relative">
@@ -136,7 +217,7 @@
         </div>
         <strong style="left: 195px;top: 165px;position:absolute;z-index: 999;font-size: x-large;" id="username">
         </strong>
-        <p style="left: 195px;top: 195px;position:absolute;z-index: 999;font-size: small;color: #8a8a8a">暂无个性签名</p>
+        <p style="left: 195px;top: 195px;position:absolute;z-index: 999;font-size: small;color: #8a8a8a"><s:property value="beuserEntity.getSignatrue()"/></p>
         <button class="ui inverted pink button" style="right: 15px;top: 190px;position:absolute;z-index: 2" id="revise">
             编辑个人信息
         </button>
@@ -195,7 +276,6 @@
                                                 <s:if test="state==2">
                                                     已交换
                                                 </s:if>
-
                                                 <img src="<s:property value="src"/>" style="height: 145px;width: 115px">
                                             </div>
                                             <div class="content">
@@ -206,7 +286,8 @@
                                                     <span></span>
                                                 </div>
                                                 <div class="description">
-                                                    <p style="display: -webkit-box;-webkit-box-orient: vertical;-webkit-line-clamp: 5;overflow: hidden;"><s:property value="introduction"/></p>
+                                                    <p style="display: -webkit-box;-webkit-box-orient: vertical;-webkit-line-clamp: 5;overflow: hidden;">
+                                                        <s:property value="introduction"/></p>
                                                 </div>
                                             </div>
                                         </div>
@@ -220,7 +301,7 @@
                             <div class="row" style="margin-left: 12px">
                                 <div class="sixteen column">
                                     <p style="font-size: x-large;margin-left: 20px;display: inline">我的书评</p>
-                                    <button class="ui right labeled icon button" style="float: right" >
+                                    <button class="ui right labeled icon button" style="float: right">
                                         <i class="Angle Right icon"></i>
                                         更多
                                     </button>
@@ -229,29 +310,30 @@
                             <div class="row">
                                 <div class="ui items">
                                     <s:iterator value="bookarticleEntityList">
-                                    <div class="item" style="margin-left: 30px;">
-                                        <div class="content">
-                                            <div class="meta">
+                                        <div class="item" style="margin-left: 30px;">
+                                            <div class="content">
+                                                <div class="meta">
                                                 <span class="cinema">
                                                     <img class="ui avatar image" src="<s:property value="authorpic"/>">
                                                     <a><s:property value="username"/></a>
                                                 </span>
-                                                <span class="cinema">
+                                                    <span class="cinema">
                                                     发布于:<s:property value="time"/>
                                                 </span>
-                                            </div>
-                                            <div class="header" style="margin-top: 3px"><s:property value="title"/></div>
-                                            <div class="description">
-                                                <p style="width:650px;display: -webkit-box;-webkit-box-orient:
+                                                </div>
+                                                <div class="header" style="margin-top: 3px"><s:property
+                                                        value="title"/></div>
+                                                <div class="description">
+                                                    <p style="width:650px;display: -webkit-box;-webkit-box-orient:
                                                 vertical;-webkit-line-clamp: 3;overflow: hidden;">
-                                                    <s:property value="introduction"/>
-                                                </p>
+                                                        <s:property value="introduction"/>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <div class="ui small image">
+                                                <img src="<s:property value="src"/>">
                                             </div>
                                         </div>
-                                        <div class="ui small image">
-                                            <img src="<s:property value="src"/>">
-                                        </div>
-                                    </div>
                                     </s:iterator>
                                 </div>
                             </div>
@@ -502,9 +584,11 @@
         }
 
     }
+
     function more() {
         self.location = "showPersonalMainPage.action?type=1&username=" + getCookie("USERNAME") + "&more=1";
     }
+
     function addLabel() {
         var colors = new Array("red", "orange", "yellow", "olive", "blue", "brown", "pink", "black");
         var content = $('#labelInput').val();
@@ -512,7 +596,7 @@
             $('#line').css('display', 'block');
             var index = Math.ceil((Math.random() * 8)) - 1;
             var html = "<a id='labelOfSelf" + count + "' onclick='removeLabel(" + count + ")' class=\"ui " + colors[index]
-                    + " transition tag icon label\" style='margin-left: 20px;margin-top: 5px'>" + content + "<i class=\"delete icon\"></i></a>";
+                + " transition tag icon label\" style='margin-left: 20px;margin-top: 5px'>" + content + "<i class=\"delete icon\"></i></a>";
             array[count - 1] = content;
             count++;
             $('#labelC').append(html);
@@ -549,6 +633,7 @@
         return result;
 
     }
+
     function getNowFormatDate() {
         var date = new Date();
         var seperator1 = "-";
@@ -562,10 +647,11 @@
             strDate = "0" + strDate;
         }
         var currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate
-                + " " + date.getHours() + seperator2 + date.getMinutes()
-                + seperator2 + date.getSeconds();
+            + " " + date.getHours() + seperator2 + date.getMinutes()
+            + seperator2 + date.getSeconds();
         return currentdate;
     }
+
     function getResult(array) {
         var result = "";
         for (var i = 0; i < array.length; i++) {
@@ -589,7 +675,7 @@
             $('#line2').css('display', 'block');
             var index = Math.ceil((Math.random() * 8)) - 1;
             var html = "<a id='labelOfSelfB" + count2 + "' onclick='removeLabelB(" + count2 + ")' class=\"ui " + colors[index]
-                    + " transition tag icon label\" style='margin-left: 20px;margin-top: 5px'>" + content + "<i class=\"delete icon\"></i></a>";
+                + " transition tag icon label\" style='margin-left: 20px;margin-top: 5px'>" + content + "<i class=\"delete icon\"></i></a>";
             array2[count2 - 1] = content;
             count2++;
             $('#labelB').append(html);
@@ -598,6 +684,79 @@
         }
     }
 
+    function show(type) {
+        switch (type) {
+            case 1:
+                $("#phone").transition("fade");
+                break;
+            case 2:
+                $("#email").transition("fade");
+                break;
+            case 3:
+                $("#sign").transition("fade");
+                break;
+        }
+    }
+
+    function hide(type) {
+        switch (type) {
+            case 1:
+                $("#phone").transition("fade");
+                break;
+            case 2:
+                $("#email").transition("fade");
+                break;
+            case 3:
+                $("#sign").transition("fade");
+                break;
+        }
+    }
+
+    function showInput(type) {
+        switch (type) {
+            case 1:
+                $("#phoneInput").transition("fade");
+                $("#phoneSign").transition("fade");
+                break;
+            case 2:
+                $("#emailInput").transition("fade");
+                $("#emailSign").transition("fade");
+                break;
+            case 3:
+                $("#signInput").transition("fade");
+                $("#signSign").transition("fade");
+                break;
+        }
+    }
+
+    function save(type) {
+        switch (type) {
+            case 1:
+                if ($("#phoneIn").val() != "") {
+                    $("#phoneEle").html($("#phoneIn").val());
+                }
+                $("#phoneInput").transition("fade");
+                $("#phoneSign").transition("fade");
+                break;
+            case 2:
+                if ($("#emailIn").val() != "") {
+                    $("#emailEle").html($("#emailIn").val());
+                }
+                $("#emailInput").transition("fade");
+                $("#emailSign").transition("fade");
+                break;
+            case 3:
+                if ($("#signIn").val() != "") {
+                    $("#signEle").html($("#signIn").val());
+                }
+                $("#signInput").transition("fade");
+                $("#signSign").transition("fade");
+                break;
+        }
+    }
+    function personSubmit() {
+        location.href = "updateUser.action?sign="+$("#signEle").text()+"&phone="+$("#phoneEle").text()+"&email="+$("#emailEle").text();
+    }
     var path = getCookie("SRC");
     var html = "<img src=" + path.toString() + " class=\"image avatar ui\"/>";
     var html2 = "<img src=" + path.toString() + " style=\"width:160px;height:160px\"id='personSRC'/>";

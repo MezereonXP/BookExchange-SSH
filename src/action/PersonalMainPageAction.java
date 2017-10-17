@@ -3,12 +3,14 @@ package action;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.util.ValueStack;
+import entity.BeuserEntity;
 import entity.BookarticleEntity;
 import entity.UserbookEntity;
 import org.apache.struts2.ServletActionContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import service.IBookArticleServiceImpl;
 import service.IUserBookServiceImpl;
+import service.IUserServiceImpl;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -25,6 +27,9 @@ public class PersonalMainPageAction extends ActionSupport {
     private HttpServletRequest request;
     private List<UserbookEntity> userbookEntityList;
     private List<BookarticleEntity> bookarticleEntityList;
+    private BeuserEntity beuserEntity;
+    @Autowired
+    private IUserServiceImpl userService;
     @Autowired
     private IUserBookServiceImpl userBookService;
 
@@ -61,6 +66,7 @@ public class PersonalMainPageAction extends ActionSupport {
                 }
             }
             bookarticleEntityList = bookArticleService.getAllBookArticleByName(username);
+            beuserEntity = userService.getUserByName(username);
         }
         return "success";
     }
@@ -118,5 +124,21 @@ public class PersonalMainPageAction extends ActionSupport {
 
     public void setBookArticleService(IBookArticleServiceImpl bookArticleService) {
         this.bookArticleService = bookArticleService;
+    }
+
+    public IUserServiceImpl getUserService() {
+        return userService;
+    }
+
+    public void setUserService(IUserServiceImpl userService) {
+        this.userService = userService;
+    }
+
+    public BeuserEntity getBeuserEntity() {
+        return beuserEntity;
+    }
+
+    public void setBeuserEntity(BeuserEntity beuserEntity) {
+        this.beuserEntity = beuserEntity;
     }
 }
