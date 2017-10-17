@@ -42,46 +42,46 @@
 <script src="./pages/semantic/dist/components/transition.js"></script>
 <script>
     $(document)
-        .ready(function () {
-            $("#exchange").click(function () {
-                location.href = "/showExchange.action?page=1";
-            });
-            $("#bookComment").click(function () {
-                location.href = "/showBookComment.action?page=1";
-            });
-            $("#discuss").click(function () {
-                location.href = "/showDiscuss.action?page=1";
-            });
-            $('.special.cards .image').dimmer({
-                on: 'hover'
-            });
-            $('.ui.menu a.item')
-                .on('click', function () {
-                    $(this)
-                        .addClass('active')
-                        .siblings()
-                        .removeClass('active')
-                    ;
-                })
-            ;
-            $('.ui.dropdown')
-                .dropdown({
-                    on: 'click'
-                })
-            ;
-            $('#revise').click(function () {
-                location.href = "/personalRevise.jsp"
-            });
-            $("#home").click(function () {
-                location.href = "/index.jsp";
-            });
-            $("#exchange").click(function () {
-                location.href = "/exchange.jsp";
-            });
-            $("#uploadImage").click(function () {
+            .ready(function () {
+                $("#exchange").click(function () {
+                    location.href = "/showExchange.action?page=1";
+                });
+                $("#bookComment").click(function () {
+                    location.href = "/showBookComment.action?page=1";
+                });
+                $("#discuss").click(function () {
+                    location.href = "/showDiscuss.action?page=1";
+                });
+                $('.special.cards .image').dimmer({
+                    on: 'hover'
+                });
+                $('.ui.menu a.item')
+                        .on('click', function () {
+                            $(this)
+                                    .addClass('active')
+                                    .siblings()
+                                    .removeClass('active')
+                            ;
+                        })
+                ;
+                $('.ui.dropdown')
+                        .dropdown({
+                            on: 'click'
+                        })
+                ;
+                $('#revise').click(function () {
+                    location.href = "/personalRevise.jsp"
+                });
+                $("#home").click(function () {
+                    location.href = "/index.jsp";
+                });
+                $("#exchange").click(function () {
+                    location.href = "/exchange.jsp";
+                });
+                $("#uploadImage").click(function () {
 
-            });
-        })
+                });
+            })
     ;
 </script>
 <style>
@@ -164,143 +164,175 @@
                     通知消息
                 </a>
             </div>
-            <div  id="type" style="display: none"><s:property value="type"></s:property>
+            <div id="type" style="display: none"><s:property value="type"></s:property>
             </div>
             <s:if test="type ==1">
-            <div class="ui grid vertically divided">
-                <div class="row">
-                    <div class="ui grid">
-                        <div class="sixteen column">
-                            <p style="font-size: x-large;margin-left: 20px;width:110px;display: inline">我的书籍</p>
-                            <button class="ui white right labeled icon button" style="float: right" onclick="more()">
-                                <i class="Angle Right icon"></i>
-                                更多
-                            </button>
-                            <div class="ui items" style="padding-left: 10px">
-                                <s:iterator value="userbookEntityList" var="obj">
-                                <div class="item" style="float:left;width:320px;margin:10px">
-                                    <div class="ui fluid image" style="height: 145px;width: 115px">
+                <div class="ui grid vertically divided">
+                    <div class="row">
+                        <div class="ui grid">
+                            <div class="sixteen column">
+                                <p style="font-size: x-large;margin-left: 20px;width:110px;display: inline">我的书籍</p>
+                                <button class="ui white right labeled icon button" style="float: right"
+                                        onclick="more()">
+                                    <i class="Angle Right icon"></i>
+                                    更多
+                                </button>
+                                <div class="ui items" style="padding-left: 10px">
+                                    <s:iterator value="userbookEntityList" var="obj">
+                                        <div class="item" style="float:left;width:320px;margin:10px">
+                                            <div class="ui fluid image" style="height: 145px;width: 115px">
 
-                                            <s:if test="state==0">
-                                                <div class="ui white ribbon label">
-                                                未交换
-                                                </div>
-                                            </s:if>
-                                            <s:if test="state==1">
-                                                <div class="ui blue ribbon label">
-                                                    交换中
-                                                </div>
-                                            </s:if>
-                                            <s:if test="state==2">
-                                                已交换
-                                            </s:if>
+                                                <s:if test="state==0">
+                                                    <div class="ui white ribbon label">
+                                                        未交换
+                                                    </div>
+                                                </s:if>
+                                                <s:if test="state==1">
+                                                    <div class="ui blue ribbon label">
+                                                        交换中
+                                                    </div>
+                                                </s:if>
+                                                <s:if test="state==2">
+                                                    已交换
+                                                </s:if>
 
-                                        <img src="<s:property value="src"/>" >
-                                    </div>
-                                    <div class="content">
-                                        <a class="header" style="display: -webkit-box;-webkit-box-orient: vertical;-webkit-line-clamp: 1;overflow: hidden;"><s:property value="bookname"/></a>
-                                        <div class="meta">
-                                            <span></span>
+                                                <img src="<s:property value="src"/>">
+                                            </div>
+                                            <div class="content">
+                                                <a class="header"
+                                                   style="display: -webkit-box;-webkit-box-orient: vertical;-webkit-line-clamp: 1;overflow: hidden;"><s:property
+                                                        value="bookname"/></a>
+                                                <div class="meta">
+                                                    <span></span>
+                                                </div>
+                                                <div class="description">
+                                                    <p><s:property value="introduction"/></p>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div class="description">
-                                            <p><s:property value="introduction"/></p>
-                                        </div>
-                                    </div>
+                                    </s:iterator>
                                 </div>
-                                </s:iterator>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" style="padding-bottom: 30px">
+                        <div class="ui grid vertical divided">
+                            <div class="row" style="margin-left: 12px"><p style="font-size: x-large;margin-left: 20px">我的书评</p></div>
+                            <div class="row">
+                                <div class="ui items">
+                                    <s:iterator value="bookarticleEntityList">
+                                    <div class="item" style="margin-left: 30px;">
+                                        <div class="content">
+                                            <div class="meta">
+                                                <span class="cinema">
+                                                    <img class="ui avatar image" src="<s:property value="authorpic"/>">
+                                                    <a><s:property value="username"/></a>
+                                                </span>
+                                                <span class="cinema">
+                                                    发布于:<s:property value="time"/>
+                                                </span>
+                                            </div>
+                                            <div class="header" style="margin-top: 3px"><s:property value="title"/></div>
+                                            <div class="description">
+                                                <p style="width:650px;display: -webkit-box;-webkit-box-orient: vertical;-webkit-line-clamp: 2;overflow: hidden;"><s:property value="introduction" escape="false"/></p>
+                                            </div>
+                                        </div>
+                                        <div class="ui small image">
+                                            <img src="<s:property value="src"/>">
+                                        </div>
+                                    </div>
+                                    </s:iterator>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="row" style="padding-bottom: 30px">
-                    <p style="font-size: x-large;margin-left: 20px">我的书评</p>
-                </div>
-            </div>
             </s:if>
             <s:if test="type == 2"><p>上传书籍界面</p></s:if>
             <s:if test="type == 3">
-            <form class="ui form" id="form" action="addBook.action">
-                <div class="ui centered grid">
-                    <div class="three wide column">
-                        <div class="ui special cards raised" style="width:160px;height:200px;margin-bottom: 100px">
-                            <div class="card">
-                                <div class="blurring dimmable image" id="imgAdd">
-                                    <div class="ui dimmer">
-                                        <div class="content">
-                                            <div class="center">
-                                                <input type="file" id="bookImgSrc" style="display: none"
-                                                       onchange="fileSelected()">
-                                                <div class="ui inverted button" onclick="F_Open_dia2()">点击上传书籍图片</div>
+                <form class="ui form" id="form" action="addBook.action">
+                    <div class="ui centered grid">
+                        <div class="three wide column">
+                            <div class="ui special cards raised" style="width:160px;height:200px;margin-bottom: 100px">
+                                <div class="card">
+                                    <div class="blurring dimmable image" id="imgAdd">
+                                        <div class="ui dimmer">
+                                            <div class="content">
+                                                <div class="center">
+                                                    <input type="file" id="bookImgSrc" style="display: none"
+                                                           onchange="fileSelected()">
+                                                    <div class="ui inverted button" onclick="F_Open_dia2()">点击上传书籍图片
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
+                                        <img src="../assets/book.jpg" style="width: 160px;height: 200px" id="bookImg">
                                     </div>
-                                    <img src="../assets/book.jpg" style="width: 160px;height: 200px" id="bookImg">
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="seven wide column">
-                        <div class="ui labeled input">
-                            <a class="ui blue label">
-                                书名
-                            </a>
-                            <input type="text" placeholder="请输入书籍的名称" name="bookName">
-                        </div>
-                        <br>
-                        <br>
-                        <div class="ui right labeled left icon input">
-                            <i class="tags icon"></i>
-                            <input placeholder="请添加书籍类型" type="text" id="labelInput">
-                            <a class="ui tag blue label" onclick="addLabel()">
-                                添加书籍类型
-                            </a>
-                        </div>
-                        <br>
-                        <br>
-                        <div id="labelC">
-                        </div>
-                        <div id="line" style="display: none">
+                        <div class="seven wide column">
+                            <div class="ui labeled input">
+                                <a class="ui blue label">
+                                    书名
+                                </a>
+                                <input type="text" placeholder="请输入书籍的名称" name="bookName">
+                            </div>
                             <br>
-                        </div>
-                        <div class="ui right labeled left icon input">
-                            <i class="tags icon"></i>
-                            <input placeholder="请添加想要书籍类型" type="text" id="labelInput2">
-                            <a class="ui tag blue label" onclick="addLabel2()">
-                                添加想要书籍类型
-                            </a>
-                        </div>
-                        <br>
-                        <br>
-                        <div id="labelB">
-                        </div>
-                        <div id="line2" style="display: none">
                             <br>
-                        </div>
-                        <div class="ui labeled input">
-                            <a class="ui blue label">
-                                购买日期
-                            </a>
-                            <input type="text" name="buyDate" placeholder="请输入书籍的购买日期"/>
-                        </div>
-                        <br>
-                        <br>
-                        <div class="ui labeled input">
-                            <a class="ui blue label">
-                                书籍简介
-                            </a>
-                            <input type="text" name="introduction" placeholder="几句话描述这本书吧"/>
+                            <div class="ui right labeled left icon input">
+                                <i class="tags icon"></i>
+                                <input placeholder="请添加书籍类型" type="text" id="labelInput">
+                                <a class="ui tag blue label" onclick="addLabel()">
+                                    添加书籍类型
+                                </a>
+                            </div>
+                            <br>
+                            <br>
+                            <div id="labelC">
+                            </div>
+                            <div id="line" style="display: none">
+                                <br>
+                            </div>
+                            <div class="ui right labeled left icon input">
+                                <i class="tags icon"></i>
+                                <input placeholder="请添加想要书籍类型" type="text" id="labelInput2">
+                                <a class="ui tag blue label" onclick="addLabel2()">
+                                    添加想要书籍类型
+                                </a>
+                            </div>
+                            <br>
+                            <br>
+                            <div id="labelB">
+                            </div>
+                            <div id="line2" style="display: none">
+                                <br>
+                            </div>
+                            <div class="ui labeled input">
+                                <a class="ui blue label">
+                                    购买日期
+                                </a>
+                                <input type="text" name="buyDate" placeholder="请输入书籍的购买日期"/>
+                            </div>
+                            <br>
+                            <br>
+                            <div class="ui labeled input">
+                                <a class="ui blue label">
+                                    书籍简介
+                                </a>
+                                <input type="text" name="introduction" placeholder="几句话描述这本书吧"/>
+                            </div>
                         </div>
                     </div>
+                    <input type="text" name="wantKind" style="display: none"/>
+                    <input type="text" name="kind" style="display: none"/>
+                    <input type="text" name="bookSRC" style="display: none"/>
+                    <input type="text" name="username" style="display: none"/>
+                    <input type="text" name="date" style="display: none"/>
+                </form>
+                <div style="text-align: center">
+                    <button class="ui primary button" onclick="sub()">点击上传</button>
                 </div>
-                <input type="text" name="wantKind" style="display: none"/>
-                <input type="text" name="kind" style="display: none"/>
-                <input type="text" name="bookSRC" style="display: none"/>
-                <input type="text" name="username" style="display: none"/>
-                <input type="text" name="date" style="display: none"/>
-            </form>
-            <div style="text-align: center">
-                <button class="ui primary button" onclick="sub()">点击上传</button>
-            </div>
             </s:if>
             <s:if test="type == 4"><p>交换信息界面</p></s:if>
             <s:if test="type == 5"><p>通知消息界面</p></s:if>
@@ -319,7 +351,7 @@
         if ($(" input[ name='kind' ] ").val() == "" || $(" input[ name='wantKind' ] ").val() == "" || $(" input[ name='bookName' ] ").val() == "" || $(" input[ name='introduction' ] ").val() == "" || $(" input[ name='buyDate' ] ").val() == "" || $(" input[ id='bookImgSrc' ] ").val() == "") {
             window.alert("请填完所有内容");
         } else {
-            $("#main").css("display","none");
+            $("#main").css("display", "none");
             $("#loader").show();
             var formData = new FormData();
             formData.append("file", document.getElementById("bookImgSrc").files[0]);
@@ -453,15 +485,15 @@
     }
 
     function changeType(num) {
-        if(num==1){
-            self.location = "showPersonalMainPage.action?type=" + num+"&username="+getCookie("USERNAME")+"&more=0";
-        }else if(num==3){
+        if (num == 1) {
+            self.location = "showPersonalMainPage.action?type=" + num + "&username=" + getCookie("USERNAME") + "&more=0";
+        } else if (num == 3) {
             self.location = "showPersonalMainPage.action?type=" + num;
         }
 
     }
     function more() {
-        self.location = "showPersonalMainPage.action?type=1&username="+getCookie("USERNAME")+"&more=1";
+        self.location = "showPersonalMainPage.action?type=1&username=" + getCookie("USERNAME") + "&more=1";
     }
     function addLabel() {
         var colors = new Array("red", "orange", "yellow", "olive", "blue", "brown", "pink", "black");
@@ -470,7 +502,7 @@
             $('#line').css('display', 'block');
             var index = Math.ceil((Math.random() * 8)) - 1;
             var html = "<a id='labelOfSelf" + count + "' onclick='removeLabel(" + count + ")' class=\"ui " + colors[index]
-                + " transition tag icon label\" style='margin-left: 20px;margin-top: 5px'>" + content + "<i class=\"delete icon\"></i></a>";
+                    + " transition tag icon label\" style='margin-left: 20px;margin-top: 5px'>" + content + "<i class=\"delete icon\"></i></a>";
             array[count - 1] = content;
             count++;
             $('#labelC').append(html);
@@ -520,8 +552,8 @@
             strDate = "0" + strDate;
         }
         var currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate
-            + " " + date.getHours() + seperator2 + date.getMinutes()
-            + seperator2 + date.getSeconds();
+                + " " + date.getHours() + seperator2 + date.getMinutes()
+                + seperator2 + date.getSeconds();
         return currentdate;
     }
     function getResult(array) {
@@ -547,7 +579,7 @@
             $('#line2').css('display', 'block');
             var index = Math.ceil((Math.random() * 8)) - 1;
             var html = "<a id='labelOfSelfB" + count2 + "' onclick='removeLabelB(" + count2 + ")' class=\"ui " + colors[index]
-                + " transition tag icon label\" style='margin-left: 20px;margin-top: 5px'>" + content + "<i class=\"delete icon\"></i></a>";
+                    + " transition tag icon label\" style='margin-left: 20px;margin-top: 5px'>" + content + "<i class=\"delete icon\"></i></a>";
             array2[count2 - 1] = content;
             count2++;
             $('#labelB').append(html);

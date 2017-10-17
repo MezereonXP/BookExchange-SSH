@@ -1,8 +1,10 @@
 package action;
 
 import com.opensymphony.xwork2.ActionSupport;
+import entity.BookarticleEntity;
 import entity.UserbookEntity;
 import org.springframework.beans.factory.annotation.Autowired;
+import service.IBookArticleServiceImpl;
 import service.IUserBookServiceImpl;
 
 import java.sql.SQLException;
@@ -14,8 +16,13 @@ public class PersonalMainPageAction extends ActionSupport {
     private int type;
     private int more;
     private List<UserbookEntity> userbookEntityList;
+    private List<BookarticleEntity> bookarticleEntityList;
     @Autowired
     private IUserBookServiceImpl userBookService;
+
+    @Autowired
+    private IBookArticleServiceImpl bookArticleService;
+
     public String execute() throws SQLException {
         if(type==1){
             int count=0;
@@ -33,6 +40,7 @@ public class PersonalMainPageAction extends ActionSupport {
                     }
                 }
             }
+            bookarticleEntityList = bookArticleService.getAllBookArticleByName(username);
         }
         return "success";
     }
@@ -74,5 +82,21 @@ public class PersonalMainPageAction extends ActionSupport {
 
     public void setMore(int more) {
         this.more = more;
+    }
+
+    public List<BookarticleEntity> getBookarticleEntityList() {
+        return bookarticleEntityList;
+    }
+
+    public void setBookarticleEntityList(List<BookarticleEntity> bookarticleEntityList) {
+        this.bookarticleEntityList = bookarticleEntityList;
+    }
+
+    public IBookArticleServiceImpl getBookArticleService() {
+        return bookArticleService;
+    }
+
+    public void setBookArticleService(IBookArticleServiceImpl bookArticleService) {
+        this.bookArticleService = bookArticleService;
     }
 }

@@ -30,7 +30,7 @@ public class ShowDiscussAction extends ActionSupport {
         forumEntities = forumService.getAllForum();
         List<ForumEntity> list = new ArrayList<>();
         List<ForumEntity> list2 = new ArrayList<>();
-        int count = 1;
+        int count = 0;
         if(!(page!= 1&&page!=1)){
             page = 1;
         }

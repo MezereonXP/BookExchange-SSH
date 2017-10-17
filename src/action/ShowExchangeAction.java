@@ -36,7 +36,7 @@ public class ShowExchangeAction extends ActionSupport {
         userbookEntities = iUserBookService.getAllUserBook();
         userBooksWithUserpics = new ArrayList<UserBooksWithUserpic>();
         List<UserbookEntity> list = new ArrayList<>();
-        int count = 1;
+        int count = 0;
         if(!(page!= 1&&page!=1)){
            page = 1;
         }
