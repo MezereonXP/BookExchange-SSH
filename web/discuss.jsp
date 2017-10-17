@@ -141,6 +141,9 @@
                 $("#personalCenter").click(function () {
                     location.href = "/personalPage.jsp?type=1";
                 });
+                $("#bookComment").click(function () {
+                    location.href = "/showBookComment.action?page=1";
+                });
                 // fix menu when passed
                 $('.masthead')
                         .visibility({
@@ -169,7 +172,7 @@
 
         <a class="item" id="home">主页</a>
         <a class="item" id="exchange">书籍交换</a>
-        <a class="item">书评</a>
+        <a class="item" id="bookComment">书评</a>
         <a class="active item">讨论区</a>
         <div class="right item" id="right">
             <a class="ui inverted button" id="login">登陆</a>
@@ -218,24 +221,34 @@
             <div class="ui divided items">
                 <s:iterator value="forumEntities" var="obj">
                     <div class="ui items">
-                    <div class="dividing item">
-                        <a class="ui tiny image">
-                            <img src="<s:property value="src"/>">
-                        </a>
+                    <div class="item">
                         <div class="content">
-                            <a class="header"><s:property value="title"/></a>
+                            <a class="header" onclick="showDiscuss(<s:property value="id"/>)"><s:property value="title"/></a>
                             <div class="description">
-                                <a class="ui teal image label">
-                                    <div class="detail">普通用户</div>
-                                </a>
+                                <div class="ui grid">
+                                    <div class="four wide column">
+                                        <a class="ui teal label image">
+                                            <img src="<s:property value="src"/>">
+                                            <s:property value="username"/>
+                                            <div class="detail">普通用户</div>
+                                        </a>
+                                    </div>
+                                </div>
                                 <p style="display: -webkit-box;-webkit-box-orient: vertical;-webkit-line-clamp: 2;overflow: hidden;"><s:property value="introduction" escape="false"/></p>
                             </div>
-                            <div class="extra" style="margin:0px">
-                                <div class="ui two column grid" style="margin-top: -20px">
-                                    <div class="column aligned left"><a class="like"><i class="like icon"></i> 4 Likes</a></div>
-                                    <div class="column aligned right "><s:property value="time"/></div>
-                                </div>
+                            <div class="extra">
+                                <a class="like">
+                                    <i class="like icon"></i> 4 Likes
+                                </a>
+                                <a class="comments">
+                                    <i class="comments icon"></i>12 Comments
+                                </a>
+                                <a>
+                                    <i class="unhide icon"></i>12 Views
+                                </a>
+                                <s:property value="time"/>
                             </div>
+                            <div class="ui divider"></div>
                         </div>
                     </div>
                     </div>
@@ -340,8 +353,8 @@
     function hideUserPic() {
         $('#userCard').transition("fly up");
     }
-    function showArticle(id) {
-        self.location = "showArticle.action?articleID="+id;
+    function showDiscuss(id) {
+        self.location = "showOneDiscuss.action?forumID="+id;
     }
 </script>
 </body>

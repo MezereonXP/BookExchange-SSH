@@ -174,4 +174,13 @@
     <bean class="action.ShowDiscussAction" id="showDiscussAction" scope="prototype">
         <property name="forumService" ref="iForumService"></property>
     </bean>
+    <bean class="action.ShowOneDiscussAction" id="showOneDiscussAction" scope="prototype">
+        <property name="forumCommentService" ref="iForumCommentService"></property>
+        <property name="forumService" ref="iForumService"></property>
+    </bean>
+    <bean class="action.SendForumCommentAction" id="sendForumCommentAction" scope="prototype">
+        <property name="forumCommentService" ref="iForumCommentService"></property>
+        <property name="forumService" ref="iForumService"></property>
+        <property name="userService" ref="IUserServiceImpl"></property>
+    </bean>
 </beans>
