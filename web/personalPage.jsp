@@ -208,7 +208,14 @@
             <div style="display: none" id="type"><%= request.getParameter("type")%>
             </div>
             <% if (request.getParameter("type").equals("1")) { %>
-            <p>个人页面界面</p>
+            <div class="ui grid vertically divided">
+                <div class="row">
+                    <p style="font-size: x-large;margin-left: 20px">我的书籍</p>
+                </div>
+                <div class="row" style="padding-bottom: 30px">
+                    <p style="font-size: x-large;margin-left: 20px">我的书评</p>
+                </div>
+            </div>
             <% } else if (request.getParameter("type").equals("2")) { %>
             <p>上传书籍界面</p>
             <% } else if (request.getParameter("type").equals("3")) { %>
@@ -299,15 +306,6 @@
             <% } else if (request.getParameter("type").equals("5")) { %>
             <p>通知消息界面</p>
             <% } %>
-            <%--个人页面--%>
-            <%--<div class="ui grid vertically divided">--%>
-            <%--<div class="row">--%>
-            <%--<p style="font-size: x-large;margin-left: 20px">我的书籍</p>--%>
-            <%--</div>--%>
-            <%--<div class="row" style="padding-bottom: 30px">--%>
-            <%--<p style="font-size: x-large;margin-left: 20px">我的书评</p>--%>
-            <%--</div>--%>
-            <%--</div>--%>
             <%--上传书籍--%>
         </div>
     </div>
