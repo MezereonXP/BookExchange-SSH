@@ -5,6 +5,7 @@
   Time: 1:50
   To change this template use File | Settings | File Templates.
 --%>
+<%@ taglib prefix="s" uri="/struts-tags" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="java.io.*,java.util.*" %>
 <html>
@@ -163,20 +164,61 @@
                     通知消息
                 </a>
             </div>
-            <div style="display: none" id="type"><%= request.getParameter("type")%>
+            <div  id="type" style="display: none"><s:property value="type"></s:property>
             </div>
-            <% if (request.getParameter("type").equals("1")) { %>
+            <s:if test="type ==1">
             <div class="ui grid vertically divided">
                 <div class="row">
-                    <p style="font-size: x-large;margin-left: 20px">我的书籍</p>
+                    <div class="ui grid">
+                        <div class="sixteen column">
+                            <p style="font-size: x-large;margin-left: 20px;width:110px;display: inline">我的书籍</p>
+                            <button class="ui white right labeled icon button" style="float: right" onclick="more()">
+                                <i class="Angle Right icon"></i>
+                                更多
+                            </button>
+                            <div class="ui items" style="padding-left: 10px">
+                                <s:iterator value="userbookEntityList" var="obj">
+                                <div class="item" style="float:left;width:320px;margin:10px">
+                                    <div class="ui fluid image" style="height: 145px;width: 115px">
+
+                                            <s:if test="state==0">
+                                                <div class="ui white ribbon label">
+                                                未交换
+                                                </div>
+                                            </s:if>
+                                            <s:if test="state==1">
+                                                <div class="ui blue ribbon label">
+                                                    交换中
+                                                </div>
+                                            </s:if>
+                                            <s:if test="state==2">
+                                                已交换
+                                            </s:if>
+
+                                        <img src="<s:property value="src"/>" >
+                                    </div>
+                                    <div class="content">
+                                        <a class="header" style="display: -webkit-box;-webkit-box-orient: vertical;-webkit-line-clamp: 1;overflow: hidden;"><s:property value="bookname"/></a>
+                                        <div class="meta">
+                                            <span></span>
+                                        </div>
+                                        <div class="description">
+                                            <p><s:property value="introduction"/></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                </s:iterator>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="row" style="padding-bottom: 30px">
                     <p style="font-size: x-large;margin-left: 20px">我的书评</p>
                 </div>
             </div>
-            <% } else if (request.getParameter("type").equals("2")) { %>
-            <p>上传书籍界面</p>
-            <% } else if (request.getParameter("type").equals("3")) { %>
+            </s:if>
+            <s:if test="type == 2"><p>上传书籍界面</p></s:if>
+            <s:if test="type == 3">
             <form class="ui form" id="form" action="addBook.action">
                 <div class="ui centered grid">
                     <div class="three wide column">
@@ -259,11 +301,9 @@
             <div style="text-align: center">
                 <button class="ui primary button" onclick="sub()">点击上传</button>
             </div>
-            <% } else if (request.getParameter("type").equals("4")) { %>
-            <p>交换信息界面</p>
-            <% } else if (request.getParameter("type").equals("5")) { %>
-            <p>通知消息界面</p>
-            <% } %>
+            </s:if>
+            <s:if test="type == 4"><p>交换信息界面</p></s:if>
+            <s:if test="type == 5"><p>通知消息界面</p></s:if>
             <%--上传书籍--%>
         </div>
     </div>
@@ -413,9 +453,16 @@
     }
 
     function changeType(num) {
-        self.location = "personalPage.jsp?type=" + num;
-    }
+        if(num==1){
+            self.location = "showPersonalMainPage.action?type=" + num+"&username="+getCookie("USERNAME")+"&more=0";
+        }else if(num==3){
+            self.location = "showPersonalMainPage.action?type=" + num;
+        }
 
+    }
+    function more() {
+        self.location = "showPersonalMainPage.action?type=1&username="+getCookie("USERNAME")+"&more=1";
+    }
     function addLabel() {
         var colors = new Array("red", "orange", "yellow", "olive", "blue", "brown", "pink", "black");
         var content = $('#labelInput').val();

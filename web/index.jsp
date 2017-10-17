@@ -153,10 +153,10 @@
                    location.href = "/showBookComment.action?page=1";
                 });
                 $("#personalCenter1").click(function () {
-                    location.href = "/personalPage.jsp?type=1";
+                    location.href = "/showPersonalMainPage.action?type=1&more=0&username="+getCookie("USERNAME");
                 });
                 $("#personalCenter2").click(function () {
-                    location.href = "/personalPage.jsp?type=1";
+                    location.href = "/showPersonalMainPage.action?type=1&more=0&username="+getCookie("USERNAME");
                 });
                 $("#discuss").click(function () {
                     location.href = "/showDiscuss.action?page=1";
