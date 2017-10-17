@@ -1,17 +1,27 @@
 package action;
 
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
+import com.opensymphony.xwork2.util.ValueStack;
 import entity.*;
+import org.apache.struts2.ServletActionContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import service.*;
 
+import javax.servlet.ServletContext;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import java.lang.management.MemoryManagerMXBean;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class uploadUserPicAction extends ActionSupport{
-    private int type;
+    private int type,more;
     private String src;
     private String username;
+    private HttpServletRequest request;
     @Autowired
     private IUserServiceImpl userService;
     @Autowired
@@ -23,10 +33,26 @@ public class uploadUserPicAction extends ActionSupport{
     @Autowired
     private IArticleCommentServiceImpl articleCommentService;
     public String execute() throws SQLException {
-        List<BookarticleEntity> bookarticleEntityList =  bookArticleService.getAllBookArticleByName(username);
-        List<ArticlecommentEntity> articlecommentEntityList =  articleCommentService.getAllArticleCommentByName(username);
-        List<ForumcommentEntity> forumcommentEntityList =forumCommentService.getAllForumCommentByName(username);
-        List<ForumEntity> forumEntityList = forumService.getAllForumByName(username);
+        boolean isLogin = false;
+        String name="";
+        request =  ServletActionContext.getRequest();
+        for(Cookie cookie:request.getCookies()){
+            if(cookie.getName().equals("USERNAME")){
+                name = cookie.getValue();
+                System.out.println("hello "+name);
+                isLogin = true;
+                type = 1;
+                more = 0;
+                break;
+            }
+        }
+        if(!isLogin){
+            return "error";
+        }
+        List<BookarticleEntity> bookarticleEntityList =  bookArticleService.getAllBookArticleByName(name);
+        List<ArticlecommentEntity> articlecommentEntityList =  articleCommentService.getAllArticleCommentByName(name);
+        List<ForumcommentEntity> forumcommentEntityList =forumCommentService.getAllForumCommentByName(name);
+        List<ForumEntity> forumEntityList = forumService.getAllForumByName(name);
         List<BeuserEntity> beuserEntityList = userService.getAllUser();
         for(BookarticleEntity bookarticleEntity:bookarticleEntityList){
             bookarticleEntity.setAuthorpic(src);
@@ -45,7 +71,7 @@ public class uploadUserPicAction extends ActionSupport{
             forumService.updateForum(forumEntity);
         }
         for(BeuserEntity beuserEntity:beuserEntityList){
-            if(beuserEntity.getUsername().equals(username)){
+            if(beuserEntity.getUsername().equals(name)){
                 beuserEntity.setSrc(src);
                 userService.updateUser(beuserEntity);
             }
@@ -114,5 +140,13 @@ public class uploadUserPicAction extends ActionSupport{
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public int getMore() {
+        return more;
+    }
+
+    public void setMore(int more) {
+        this.more = more;
     }
 }

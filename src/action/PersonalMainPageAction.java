@@ -1,20 +1,28 @@
 package action;
 
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
+import com.opensymphony.xwork2.util.ValueStack;
 import entity.BookarticleEntity;
 import entity.UserbookEntity;
+import org.apache.struts2.ServletActionContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import service.IBookArticleServiceImpl;
 import service.IUserBookServiceImpl;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class PersonalMainPageAction extends ActionSupport {
     private String username;
     private int type;
     private int more;
+    private HttpServletRequest request;
     private List<UserbookEntity> userbookEntityList;
     private List<BookarticleEntity> bookarticleEntityList;
     @Autowired
@@ -25,6 +33,18 @@ public class PersonalMainPageAction extends ActionSupport {
 
     public String execute() throws SQLException {
         if(type==1){
+            boolean isLogin = false;
+            request =  ServletActionContext.getRequest();
+            for(Cookie cookie:request.getCookies()){
+                if(cookie.getName().equals("USERNAME")){
+                    username = cookie.getValue();
+                    isLogin = true;
+                    break;
+                }
+            }
+            if(!isLogin){
+                return "error";
+            }
             int count=0;
             System.out.println(more);
             userbookEntityList = new ArrayList<UserbookEntity>();

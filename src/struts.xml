@@ -76,7 +76,8 @@
     </package>
     <package name="upaloadUserPic" namespace="/" extends="struts-default">
         <action name="upaloadUserPic" class="uploadUserPicAction">
-            <result name="success">personalPage.jsp?type=1</result>
+            <result name="success" type="redirect"><![CDATA[showPersonalMainPage.action?type=1&more=0]]></result>
+            <result name="error">login.jsp</result>
         </action>
     </package>
     <package name="addBook" namespace="/" extends="struts-default">

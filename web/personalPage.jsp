@@ -206,7 +206,7 @@
                                                     <span></span>
                                                 </div>
                                                 <div class="description">
-                                                    <p><s:property value="introduction"/></p>
+                                                    <p style="display: -webkit-box;-webkit-box-orient: vertical;-webkit-line-clamp: 5;overflow: hidden;"><s:property value="introduction"/></p>
                                                 </div>
                                             </div>
                                         </div>
@@ -442,8 +442,7 @@
                 alert(data);
                 delCookie("SRC");
                 setCookie("SRC", data);
-                location.href = "upaloadUserPic.action?src=" + data + "&username=" + getCookie("USERNAME");
-
+                location.href = "upaloadUserPic.action?src=" + data;
             },
             error: function () {
                 alert("上传失败！");
@@ -489,7 +488,7 @@
 
     function changeType(num) {
         if (num == 1) {
-            self.location = "showPersonalMainPage.action?type=" + num + "&username=" + getCookie("USERNAME") + "&more=0";
+            self.location = "showPersonalMainPage.action?type=" + num + "&more=0";
         } else if (num == 3) {
             self.location = "showPersonalMainPage.action?type=" + num;
         }
