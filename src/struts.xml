@@ -81,4 +81,9 @@
             <result name="success">personalPage.jsp?type=1</result>
         </action>
     </package>
+    <package name="showPersonalMainPage" namespace="/" extends="struts-default">
+        <action name="showPersonalMainPage" class="showPersonalMainPage">
+            <result name="success">personalPage.jsp</result>
+        </action>
+    </package>
 </struts>
