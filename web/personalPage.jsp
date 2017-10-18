@@ -692,7 +692,6 @@
                 processData: false,
                 success: function (data) {
                     console.log(data);
-                    alert(data);
                     $(" input[ name='bookSRC' ] ").val(data);
                     $(" input[ name='username' ] ").val(getCookie("USERNAME"));
                     $(" input[ name='date' ] ").val(getNowFormatDate());
@@ -758,7 +757,6 @@
             processData: false,
             success: function (data) {
                 console.log(data);
-                alert(data);
                 delCookie("SRC");
                 setCookie("SRC", data);
                 location.href = "upaloadUserPic.action?src=" + data;

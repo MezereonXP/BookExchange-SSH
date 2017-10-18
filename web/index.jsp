@@ -307,7 +307,7 @@
             <p>在讨论区里你可以遇见广大书友，阅读完后就你的感受与他们辩驳一番吧！</p>
           </div>
           <div class="six wide right floated column">
-            <img src="assets/images/wireframe/white-image.png" class="ui large bordered rounded image">
+            <img src="../assets/discuss.png" class="ui large bordered rounded image">
           </div>
         </div>
         <div class="row">
