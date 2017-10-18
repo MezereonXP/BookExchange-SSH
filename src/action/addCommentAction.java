@@ -3,11 +3,13 @@ package action;
 import com.opensymphony.xwork2.ActionSupport;
 import dao.IBookArticleDaoImpl;
 import entity.ArticlecontentEntity;
+import entity.BookarticleEntity;
 import org.apache.struts2.ServletActionContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import service.IArticleContentService;
 import service.IBookArticleService;
 import service.IBookArticleServiceImpl;
+import tool.SuperTool;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -25,13 +27,17 @@ public class addCommentAction extends ActionSupport {
     private IBookArticleServiceImpl bookArticleService;
     public String execute() throws SQLException {
         String username="";
+        String src="";
         boolean isLogin = false;
         request = ServletActionContext.getRequest();
         for (Cookie cookie : request.getCookies()) {
             if (cookie.getName().equals("USERNAME")) {
                 username = cookie.getValue();
                 isLogin = true;
-                break;
+            }
+            if (cookie.getName().equals("SRC")) {
+                src = cookie.getValue();
+                isLogin = true;
             }
         }
         if(!isLogin){
@@ -39,7 +45,16 @@ public class addCommentAction extends ActionSupport {
         }
         ArticlecontentEntity articlecontentEntity = new ArticlecontentEntity();
         articlecontentEntity.setContent(content);
-        articleContentService.updateArticleContent(articlecontentEntity);
+        articleContentService.addArticleContent(articlecontentEntity);
+        BookarticleEntity bookarticleEntity = new BookarticleEntity();
+        bookarticleEntity.setAuthorpic(src);
+        bookarticleEntity.setBookname(bookName);
+        bookarticleEntity.setSrc(bookImgSrc);
+        bookarticleEntity.setIntroduction(SuperTool.getRawString(content).substring(0,50));
+        bookarticleEntity.setTime(SuperTool.getTime());
+        bookarticleEntity.setTitle(title);
+        bookarticleEntity.setUsername(username);
+        bookArticleService.addBookArticle(bookarticleEntity);
         return SUCCESS;
     }
     public String getBookName() {

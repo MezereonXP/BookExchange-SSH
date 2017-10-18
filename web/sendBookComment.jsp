@@ -213,7 +213,7 @@
 
     </div>
 </div>
-<form id="form">
+<form id="form" action="addComment.action" method="post">
     <div class="ui main text container" style="margin-top: 70px;position:relative;" id="main">
         <h1 class="ui header">发布书评</h1>
         <div class="ui labeled input">
@@ -339,9 +339,7 @@
                 processData: false,
                 success: function (data) {
                     console.log(data);
-                    alert(data);
                     $(" input[ name='bookImgSrc' ] ").val(data);
-                    //$(" input[ name='content' ] ").val(tinymce.get('mytextarea').getContent());
                     $("#form").submit();
                 },
                 error: function () {
@@ -409,9 +407,6 @@
     }
     function showArticle(id) {
         self.location = "showArticle.action?articleID="+id;
-    }
-    function sendBookComment() {
-        window.alert(tinymce.get('mytextarea').getContent());
     }
 </script>
 </body>
