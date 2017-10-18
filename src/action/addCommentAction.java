@@ -40,6 +40,7 @@ public class addCommentAction extends ActionSupport {
         ArticlecontentEntity articlecontentEntity = new ArticlecontentEntity();
         articlecontentEntity.setContent(content);
         articleContentService.updateArticleContent(articlecontentEntity);
+        return SUCCESS;
     }
     public String getBookName() {
         return bookName;

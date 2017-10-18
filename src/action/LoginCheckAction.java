@@ -32,19 +32,19 @@ public class LoginCheckAction extends ActionSupport implements ServletRequestAwa
         state="success";
         request = ServletActionContext.getRequest();
         response = ServletActionContext.getResponse();
-      boolean right = getUserService().login(username,password);
-      if(right){
-          Cookie cookie = new Cookie("USERNAME",username);
-          cookie.setMaxAge(60 * 60 * 24 );
-          Cookie cookie2 = new Cookie("SRC",userService.getUserPic(username));
-          cookie2.setMaxAge(60 * 60 * 24 );
-          response.addCookie(cookie);
-          response.addCookie(cookie2);
-          return "success";
-      }else{
-          state = "error";
-          return  "error";
-      }
+        boolean right = getUserService().login(username,password);
+        if(right){
+              Cookie cookie = new Cookie("USERNAME",username);
+              cookie.setMaxAge(60 * 60 * 24 );
+              Cookie cookie2 = new Cookie("SRC",userService.getUserPic(username));
+              cookie2.setMaxAge(60 * 60 * 24 );
+              response.addCookie(cookie);
+              response.addCookie(cookie2);
+              return "success";
+        }else{
+              state = "error";
+              return  "error";
+        }
 
     }
 

@@ -35,4 +35,7 @@ public class SuperTool {
         String time = dateFormat.format(now);
         return time;
     }
+    public static String getRawString(String s){
+        return s.replaceAll("</?[^>]+>", "");
+    }
 }
