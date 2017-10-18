@@ -51,10 +51,10 @@
         <action name="sendExchange" class="action.SendExchangeAction">
             <result name="success">index.jsp</result>
         </action>
-        <action name="agree" class="action.Agree">
+        <action name="agree" class="action.AgreeAction">
             <result name="success">index.jsp</result>
         </action>
-        <action name="refuse" class="action.Refuse">
+        <action name="refuse" class="action.RefuseAction">
             <result name="success">index.jsp</result>
         </action>
         <action name="uploadNum" class="action.UploadNumAction">

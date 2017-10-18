@@ -10,7 +10,7 @@ import service.IUserBookServiceImpl;
 /**
  * Created by Mezereon on 2017/10/18.
  */
-public class Agree extends ActionSupport{
+public class AgreeAction extends ActionSupport{
     @Autowired
     private IExchangeServiceImpl exchangeService;
 

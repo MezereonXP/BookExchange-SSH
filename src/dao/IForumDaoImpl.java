@@ -25,6 +25,10 @@ public class IForumDaoImpl implements IForumDao {
     @Autowired
     private HibernateTemplate hibernateTemplate;
 
+    public List<ForumEntity> searchForumByTitle(String s){
+        return (List<ForumEntity>) hibernateTemplate.find("from ForumEntity u where u.title like ?", "%s%");
+    }
+
     @Override
     public void saveForum(ForumEntity forumEntity) throws SQLException {
         hibernateTemplate.save(forumEntity);

@@ -223,11 +223,11 @@
     <bean class="action.UpdateUserAction" name="updateUserAction" scope="prototype">
         <property name="userService" ref="IUserServiceImpl"></property>
     </bean>
-    <bean class="action.Agree" name="agreeAction" scope="prototype">
+    <bean class="action.AgreeAction" name="agreeAction" scope="prototype">
         <property name="exchangeService" ref="iExchangeService"></property>
         <property name="userBookService" ref="iUserBookService"></property>
     </bean>
-    <bean class="action.Refuse" name="refuseAction" scope="prototype">
+    <bean class="action.RefuseAction" name="refuseAction" scope="prototype">
         <property name="exchangeService" ref="iExchangeService"></property>
     </bean>
     <bean class="action.UploadNumAction" name="uploadNumAction" scope="prototype">

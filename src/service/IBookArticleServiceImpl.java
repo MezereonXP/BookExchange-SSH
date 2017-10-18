@@ -28,6 +28,10 @@ public class IBookArticleServiceImpl implements IBookArticleService {
         return bookarticleEntities;
     }
 
+    public List<BookarticleEntity> searchByTitle(String title){
+        return iBookArticleDao.searchBookArticleEntity(title);
+    }
+
     @Override
     public List<BookarticleEntity> getAllBookArticle() throws SQLException {
         return iBookArticleDao.getAllBookArticle();
