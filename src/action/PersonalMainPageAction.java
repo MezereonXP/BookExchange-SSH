@@ -5,10 +5,12 @@ import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.util.ValueStack;
 import entity.BeuserEntity;
 import entity.BookarticleEntity;
+import entity.ExchangeEntity;
 import entity.UserbookEntity;
 import org.apache.struts2.ServletActionContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import service.IBookArticleServiceImpl;
+import service.IExchangeServiceImpl;
 import service.IUserBookServiceImpl;
 import service.IUserServiceImpl;
 
@@ -27,39 +29,46 @@ public class PersonalMainPageAction extends ActionSupport {
     private HttpServletRequest request;
     private List<UserbookEntity> userbookEntityList;
     private List<BookarticleEntity> bookarticleEntityList;
+    private List<ExchangeEntity> requestList;
+    private List<ExchangeEntity> waitList;
+    private List<ExchangeEntity> exchangingList;
+    private List<ExchangeEntity> exchangedList;
     private BeuserEntity beuserEntity;
+
     @Autowired
     private IUserServiceImpl userService;
     @Autowired
     private IUserBookServiceImpl userBookService;
+    @Autowired
+    private IExchangeServiceImpl exchangeService;
 
     @Autowired
     private IBookArticleServiceImpl bookArticleService;
 
     public String execute() throws SQLException {
-        if(type==1){
-            boolean isLogin = false;
-            request =  ServletActionContext.getRequest();
-            for(Cookie cookie:request.getCookies()){
-                if(cookie.getName().equals("USERNAME")){
-                    username = cookie.getValue();
-                    isLogin = true;
-                    break;
-                }
+        boolean isLogin = false;
+        request = ServletActionContext.getRequest();
+        for (Cookie cookie : request.getCookies()) {
+            if (cookie.getName().equals("USERNAME")) {
+                username = cookie.getValue();
+                isLogin = true;
+                break;
             }
-            if(!isLogin){
+        }
+        if (type == 1) {
+            if (!isLogin) {
                 return "error";
             }
-            int count=0;
+            int count = 0;
             System.out.println(more);
             userbookEntityList = new ArrayList<UserbookEntity>();
             List<UserbookEntity> userbookEntityList2 = userBookService.getAllUserBook();
-            for(UserbookEntity userbookEntity:userbookEntityList2){
-                if(userbookEntity.getUsername().equals(username)){
+            for (UserbookEntity userbookEntity : userbookEntityList2) {
+                if (userbookEntity.getUsername().equals(username)) {
                     userbookEntityList.add(userbookEntity);
                     count++;
                     System.out.println(count);
-                    if(count==6&&more==0){
+                    if (count == 6 && more == 0) {
                         System.out.println("hello");
                         break;
                     }
@@ -67,9 +76,32 @@ public class PersonalMainPageAction extends ActionSupport {
             }
             bookarticleEntityList = bookArticleService.getAllBookArticleByName(username);
             beuserEntity = userService.getUserByName(username);
+        } else if (type == 4) {
+            showExchangeInfo();
         }
         return "success";
     }
+
+    private void showExchangeInfo() throws SQLException {
+        List<ExchangeEntity> list = exchangeService.getAllExchange();
+        request = ServletActionContext.getRequest();
+        requestList = new ArrayList<>();
+        exchangingList = new ArrayList<>();
+        exchangedList = new ArrayList<>();
+        waitList = new ArrayList<>();
+        for(ExchangeEntity entity:list){
+            if(entity.getStatus()==0&&entity.getUsernameb().equals(username)){
+                requestList.add(entity);
+            }else if(entity.getStatus()==0&&entity.getUsernamea().equals(username)){
+                waitList.add(entity);
+            }else if(entity.getStatus()==1){
+                exchangingList.add(entity);
+            }else{
+                exchangedList.add(entity);
+            }
+        }
+    }
+
     public int getType() {
         return type;
     }
@@ -140,5 +172,45 @@ public class PersonalMainPageAction extends ActionSupport {
 
     public void setBeuserEntity(BeuserEntity beuserEntity) {
         this.beuserEntity = beuserEntity;
+    }
+
+    public IExchangeServiceImpl getExchangeService() {
+        return exchangeService;
+    }
+
+    public void setExchangeService(IExchangeServiceImpl exchangeService) {
+        this.exchangeService = exchangeService;
+    }
+
+    public List<ExchangeEntity> getRequestList() {
+        return requestList;
+    }
+
+    public void setRequestList(List<ExchangeEntity> requestList) {
+        this.requestList = requestList;
+    }
+
+    public List<ExchangeEntity> getExchangingList() {
+        return exchangingList;
+    }
+
+    public void setExchangingList(List<ExchangeEntity> exchangingList) {
+        this.exchangingList = exchangingList;
+    }
+
+    public List<ExchangeEntity> getExchangedList() {
+        return exchangedList;
+    }
+
+    public void setExchangedList(List<ExchangeEntity> exchangedList) {
+        this.exchangedList = exchangedList;
+    }
+
+    public List<ExchangeEntity> getWaitList() {
+        return waitList;
+    }
+
+    public void setWaitList(List<ExchangeEntity> waitList) {
+        this.waitList = waitList;
     }
 }
