@@ -293,7 +293,7 @@
           还在为房间里堆满的旧书而烦恼吗?
         </h1>
         <h2>这里有你想要的一切</h2>
-        <div class="ui huge primary button" id="exchangeBurtton">开始交换吧 <i class="right arrow icon"></i></div>
+        <div class="ui huge primary button" id="exchangeButton">开始交换吧 <i class="right arrow icon"></i></div>
       </div>
     </div>
 

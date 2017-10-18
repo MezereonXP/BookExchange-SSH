@@ -121,8 +121,8 @@
 
         <a class="item" id="home">主页</a>
         <a class="item" id="exchange">书籍交换</a>
-        <a class="item">书评</a>
-        <a class="item">讨论区</a>
+        <a class="item" id="bookComment">书评</a>
+        <a class="item" id="discuss">讨论区</a>
         <div class="right item" id="right">
         </div>
     </div>
@@ -649,16 +649,6 @@
                     </button>
                 </div>
             </div>
-        </div>
-    </div>
-    <div class="actions">
-        <div class="ui red basic cancel inverted button" onclick="cancelUploadNum()">
-            <i class="remove icon"></i>
-            取消
-        </div>
-        <div class="ui green ok inverted button" onclick="uploadNumber()">
-            <i class="checkmark icon"></i>
-            保存
         </div>
     </div>
 </div>
