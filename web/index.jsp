@@ -149,8 +149,17 @@
                 $("#exchange").click(function () {
                     location.href = "/showExchange.action?page=1";
                 });
+                $("#exchange2").click(function () {
+                    location.href = "/showExchange.action?page=1";
+                });
+                $("#exchangeButton").click(function () {
+                    location.href = "/showExchange.action?page=1";
+                });
                 $("#bookComment").click(function () {
                    location.href = "/showBookComment.action?page=1";
+                });
+                $("#comment2").click(function () {
+                    location.href = "/showBookComment.action?page=1";
                 });
                 $("#personalCenter1").click(function () {
                     location.href = "/showPersonalMainPage.action?type=1&more=0";
@@ -159,6 +168,12 @@
                     location.href = "/showPersonalMainPage.action?type=1&more=0";
                 });
                 $("#discuss").click(function () {
+                    location.href = "/showDiscuss.action?page=1";
+                });
+                $("#discuss2").click(function () {
+                    location.href = "/showDiscuss.action?page=1";
+                });
+                $("#discussButton").click(function () {
                     location.href = "/showDiscuss.action?page=1";
                 });
                   // fix menu when passed
@@ -194,9 +209,9 @@
     <div class="ui large top fixed hidden menu">
     <div class="ui container">
       <a class="active item">主页</a>
-      <a class="item">书籍交换</a>
-      <a class="item">书评</a>
-      <a class="item">讨论区</a>
+      <a class="item" id="exchange2">书籍交换</a>
+      <a class="item" id="comment2">书评</a>
+      <a class="item" id="discuss2">讨论区</a>
       <div class="right menu" >
         <div class="item" id="login1">
           <a class="ui button" >登陆</a>
@@ -278,7 +293,7 @@
           还在为房间里堆满的旧书而烦恼吗?
         </h1>
         <h2>这里有你想要的一切</h2>
-        <div class="ui huge primary button">开始交换吧 <i class="right arrow icon"></i></div>
+        <div class="ui huge primary button" id="exchangeBurtton">开始交换吧 <i class="right arrow icon"></i></div>
       </div>
     </div>
 
@@ -297,7 +312,7 @@
         </div>
         <div class="row">
           <div class="center aligned column">
-            <a class="ui huge button">进入讨论区</a>
+            <a class="ui huge button" id="discussButton">进入讨论区</a>
           </div>
         </div>
       </div>
@@ -308,13 +323,13 @@
       <div class="ui equal width stackable internally celled grid">
         <div class="center aligned row">
           <div class="column">
-            <h3>"What a Company"</h3>
-            <p>That is what they all say about us</p>
+            <h3>看完书后分享心得</h3>
+            <p>What happy it is!</p>
           </div>
           <div class="column">
-            <h3>"I shouldn't have gone with their competitor."</h3>
+            <h3>有困惑的时候参与讨论</h3>
             <p>
-              <img src="assets/images/avatar/nan.jpg" class="ui avatar image"> <b>Nan</b> Chief Fun Officer Acme Toys
+              it is amazing!
             </p>
           </div>
         </div>
