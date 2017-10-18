@@ -44,9 +44,12 @@
           destroy-method="close" p:driverClass="${jdbc.driverClassName}"
           p:jdbcUrl="${jdbc.url}" p:user="${jdbc.username}" p:password="${jdbc.password}"
           p:testConnectionOnCheckout="${jdbc.c3p0.testConnectionOnCheckout}"
-          p:testConnectionOnCheckin="${jdbc.c3p0.testConnectionOnCheckin}"
+          p:testConnectionOnCheckin="false"
           p:idleConnectionTestPeriod="${jdbc.c3p0.idleConnectionTestPeriod}"
-          p:acquireIncrement="10"
+          p:acquireIncrement="60"
+          p:maxStatements="100"
+          p:numHelperThreads="100"
+          p:maxStatementsPerConnection="15"
           p:initialPoolSize="${jdbc.c3p0.initialPoolSize}" p:minPoolSize="${jdbc.c3p0.minPoolSize}"
           p:maxPoolSize="${jdbc.c3p0.maxPoolSize}" p:maxIdleTime="${jdbc.c3p0.maxIdleTime}" />
     <!-- 配置Hibernate事务管理器 -->
@@ -76,38 +79,49 @@
     <tx:advice id="txAdvice" transaction-manager="transactionManager">
         <!-- 事务属性定义 -->
         <tx:attributes>
-            <tx:method name="*" />
+            <tx:method name="add*" propagation="REQUIRED" rollback-for="Exception" />
+            <tx:method name="save*" propagation="REQUIRED" rollback-for="Exception" />
+            <tx:method name="update*" propagation="REQUIRED" rollback-for="Exception" />
+            <tx:method name="edit*" propagation="REQUIRED" rollback-for="Exception" />
+            <tx:method name="del*" propagation="REQUIRED" rollback-for="Exception"/>
+            <tx:method name="*" propagation="REQUIRED" read-only="true"/>
         </tx:attributes>
     </tx:advice>
+
+    <!-- hibernate模板 -->
+    <bean id="hibernateTemplate" class="org.springframework.orm.hibernate5.HibernateTemplate">
+        <property name="sessionFactory" ref="sessionFactory" />
+    </bean>
+
     <bean id="iBeuserEntityDaoImpl" class="dao.IBeuserEntityDaoImpl">
-        <property name="sessionFactory" ref="sessionFactory"></property>
+        <property name="hibernateTemplate" ref="hibernateTemplate"></property>
     </bean>
     <bean id="iBookArticleDaoImpl" class="dao.IBookArticleDaoImpl">
-        <property name="sessionFactory" ref="sessionFactory"></property>
+        <property name="hibernateTemplate" ref="hibernateTemplate"></property>
     </bean>
     <bean id="iArticleContentDaoImpl" class="dao.IArticleContentDaoImpl">
-        <property name="sessionFactory" ref="sessionFactory"></property>
+        <property name="hibernateTemplate" ref="hibernateTemplate"></property>
     </bean>
     <bean class="dao.IArticleCommentDaoImpl" id="iArticleCommentDaoImpl">
-        <property name="sessionFactory" ref="sessionFactory"></property>
+        <property name="hibernateTemplate" ref="hibernateTemplate"></property>
     </bean>
     <bean class="dao.IExchangeDaoImpl" id="iExchangeDaoImpl">
-        <property name="sessionFactory" ref="sessionFactory"></property>
+        <property name="hibernateTemplate" ref="hibernateTemplate"></property>
     </bean>
     <bean class="dao.IForumDaoImpl" id="iForumDaoImpl">
-        <property name="sessionFactory" ref="sessionFactory"></property>
+        <property name="hibernateTemplate" ref="hibernateTemplate"></property>
     </bean>
     <bean class="dao.IForumCommentDaoImpl" id="iForumCommentDaoImpl">
-        <property name="sessionFactory" ref="sessionFactory"></property>
+        <property name="hibernateTemplate" ref="hibernateTemplate"></property>
     </bean>
     <bean class="dao.IMessageDaoImpl" id="iMessageDaoImpl">
-        <property name="sessionFactory" ref="sessionFactory"></property>
+        <property name="hibernateTemplate" ref="hibernateTemplate"></property>
     </bean>
     <bean class="dao.IUserbookDaoImpl" id="iUserbookDaoImpl">
-        <property name="sessionFactory" ref="sessionFactory"></property>
+        <property name="hibernateTemplate" ref="hibernateTemplate"></property>
     </bean>
     <bean class="dao.IForumViewDaoImpl" id="iForumViewDao">
-        <property name="sessionFactory" ref="sessionFactory"></property>
+        <property name="hibernateTemplate" ref="hibernateTemplate"></property>
     </bean>
 
 
@@ -204,8 +218,12 @@
     <bean class="action.PersonalMainPageAction" name="showPersonalMainPage">
         <property name="userBookService" ref="iUserBookService"></property>
         <property name="userService" ref="IUserServiceImpl"></property>
+        <property name="exchangeService" ref="iExchangeService"></property>
     </bean>
     <bean class="action.UpdateUserAction" name="updateUserAction">
         <property name="userService" ref="IUserServiceImpl"></property>
+    </bean>
+    <bean class="action.Agree" name="agreeAction">
+        <property name="exchangeService" ref="iExchangeService"></property>
     </bean>
 </beans>

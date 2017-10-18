@@ -21,9 +21,10 @@ import java.util.List;
  */
 public class IArticleContentDaoImpl implements IArticleContentDao {
 
-    @Autowired
+
     private SessionFactory sessionFactory;
 
+    @Autowired
     private HibernateTemplate hibernateTemplate;
 
     @Override
@@ -34,6 +35,7 @@ public class IArticleContentDaoImpl implements IArticleContentDao {
     @Override
     public void delArticleContent(ArticlecontentEntity articlecontentEntity) throws SQLException {
         hibernateTemplate.delete(articlecontentEntity);
+        hibernateTemplate.getSessionFactory().getCurrentSession().clear();
     }
 
     @Override
@@ -48,7 +50,7 @@ public class IArticleContentDaoImpl implements IArticleContentDao {
 
     @Override
     public boolean isExists(int id) throws SQLException {
-        Query query = sessionFactory.openSession()
+        Query query = hibernateTemplate.getSessionFactory().getCurrentSession()
                 .createQuery("from articlecontent ac where ac.id = :id").setParameter("id", id);
         System.out.println(query.list().size());
         return query.list().size()>0?true:false;
@@ -60,7 +62,7 @@ public class IArticleContentDaoImpl implements IArticleContentDao {
     }
 
     public List<ArticlecontentEntity> getAllArticleContent() {
-        Session session = sessionFactory.getCurrentSession();
+        Session session = hibernateTemplate.getSessionFactory().getCurrentSession();
         EntityManager entityManager = session.getEntityManagerFactory().createEntityManager();
         CriteriaBuilder cb = entityManager.getCriteriaBuilder();
         CriteriaQuery criteriaQuery = cb.createQuery(ArticlecontentEntity.class);
@@ -68,6 +70,19 @@ public class IArticleContentDaoImpl implements IArticleContentDao {
         criteriaQuery.select(root);
         TypedQuery<ArticlecontentEntity> typedQuery = entityManager.createQuery(criteriaQuery);
         List<ArticlecontentEntity> list = typedQuery.getResultList();
+        hibernateTemplate.getSessionFactory().getCurrentSession().clear();
         return list;
+    }
+
+    public SessionFactory getSessionFactory() {
+        return sessionFactory;
+    }
+
+    public HibernateTemplate getHibernateTemplate() {
+        return hibernateTemplate;
+    }
+
+    public void setHibernateTemplate(HibernateTemplate hibernateTemplate) {
+        this.hibernateTemplate = hibernateTemplate;
     }
 }

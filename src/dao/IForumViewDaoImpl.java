@@ -13,9 +13,10 @@ import java.sql.SQLException;
  */
 public class IForumViewDaoImpl implements IForumViewDao {
 
-    @Autowired
+
     private SessionFactory sessionFactory;
 
+    @Autowired
     private HibernateTemplate hibernateTemplate;
     @Override
     public void saveForumView(ForumviewEntity forumviewEntity) throws SQLException {
@@ -39,9 +40,10 @@ public class IForumViewDaoImpl implements IForumViewDao {
 
     @Override
     public boolean isExists(int id) throws SQLException {
-        Query query = sessionFactory.openSession()
+        Query query = hibernateTemplate.getSessionFactory().getCurrentSession()
                 .createQuery("from forumview ac where ac.id = :id").setParameter("id", id);
         System.out.println(query.list().size());
+        hibernateTemplate.getSessionFactory().getCurrentSession().clear();
         return query.list().size()>0?true:false;
     }
 

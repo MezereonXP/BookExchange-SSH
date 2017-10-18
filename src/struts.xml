@@ -51,6 +51,9 @@
         <action name="sendExchange" class="action.SendExchangeAction">
             <result name="success">index.jsp</result>
         </action>
+        <action name="agree" class="action.Agree">
+            <result name="success">index.jsp</result>
+        </action>
     </package>
     <package name="bookComment" namespace="/" extends="struts-default">
         <action name="showBookComment" class="showBookCommentAction" method="list">

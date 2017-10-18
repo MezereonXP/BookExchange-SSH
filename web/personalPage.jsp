@@ -436,7 +436,195 @@
                     <button class="ui primary button" onclick="sub()">点击上传</button>
                 </div>
             </s:if>
-            <s:if test="type == 4"><p>交换信息界面</p></s:if>
+            <s:if test="type == 4">
+                <div class="ui grid vertically divided">
+                    <div class="row">
+                        <div class="ui grid">
+                            <div class="sixteen column">
+                                <p style="font-size: x-large;margin-left: 32px;width:110px;display: inline">交换请求</p>
+                                <div class="row">
+                                    <div class="ui items">
+                                        <s:iterator value="requestList">
+                                            <div class="item" style="margin-left: 30px;margin-top: 5px">
+                                                <div class="ui small image">
+                                                    <img src="<s:property value="booksrca"/>" style="height: 145px;width: 115px">
+                                                </div>
+                                                <i class="icon large exchange" style="margin-top: 60px;margin-right: 40px"></i>
+                                                <div class="ui small image">
+                                                    <img src="<s:property value="booksrcb"/>" style="height: 145px;width: 115px">
+                                                </div>
+                                                <div class="content">
+                                                    <div class="meta">
+                                                        <span class="cinema">
+                                                            <a><s:property value="usernamea"/></a>
+                                                        </span>
+                                                        <span class="cinema">
+                                                            于<s:property value="date"/>发起申请
+                                                        </span>
+                                                        <br>
+                                                        <br>
+                                                        <span class="cinema">
+                                                            使用<h4 style="display: inline;"><s:property value="booknamea"/></h4>
+                                                            <br>
+                                                            交换您的<h4 style="display: inline;"><s:property value="booknameb"/></h4>
+                                                        </span>
+                                                    </div>
+                                                    <button class="ui primary button" onclick="agree(<s:property value="id"/>)">同意</button>
+                                                    <button class="ui primary button negative" onclick="refuse(<s:property value="id"/>)">拒绝</button>
+                                                </div>
+                                            </div>
+                                        </s:iterator>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" style="padding-bottom: 30px">
+                        <div class="ui grid vertical divided">
+                            <div class="row" style="margin-left: 12px">
+                                <div class="sixteen column">
+                                    <p style="font-size: x-large;margin-left: 20px;display: inline">已发送申请</p>
+                                    <button class="ui right labeled icon button" style="float: right">
+                                        <i class="Angle Right icon"></i>
+                                        更多
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="ui items">
+                                    <s:iterator value="waitList">
+                                        <div class="item" style="margin-left: 45px;margin-top: 5px">
+                                            <div class="ui small image">
+                                                <img src="<s:property value="booksrca"/>" style="height: 145px;width: 115px">
+                                            </div>
+                                            <i class="icon large exchange" style="margin-top: 60px;margin-right: 40px"></i>
+                                            <div class="ui small image">
+                                                <img src="<s:property value="booksrcb"/>" style="height: 145px;width: 115px">
+                                            </div>
+                                            <div class="content">
+                                                <div class="meta">
+                                                    <span class="cinema">
+                                                        <a><s:property value="usernamea"/></a>
+                                                    </span>
+                                                    <span class="cinema">
+                                                        您于<s:property value="date"/>发起申请
+                                                    </span>
+                                                    <br>
+                                                    <br>
+                                                    <span class="cinema">
+                                                        使用您的<h4 style="display: inline;"><s:property value="booknamea"/></h4>
+                                                        <br>
+                                                        交换<h4 style="display: inline;"><s:property value="booknameb"/></h4>
+                                                        <br>
+                                                        <br>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </s:iterator>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" style="padding-bottom: 30px">
+                        <div class="ui grid vertical divided">
+                            <div class="row" style="margin-left: 12px">
+                                <div class="sixteen column">
+                                    <p style="font-size: x-large;margin-left: 20px;display: inline">交换中书籍</p>
+                                    <button class="ui right labeled icon button" style="float: right">
+                                        <i class="Angle Right icon"></i>
+                                        更多
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="ui items">
+                                    <s:iterator value="exchangingList">
+                                        <div class="item" style="margin-left: 45px;margin-top: 5px">
+                                            <div class="ui small image">
+                                                <img src="<s:property value="booksrca"/>" style="height: 145px;width: 115px">
+                                            </div>
+                                            <i class="icon large exchange" style="margin-top: 60px;margin-right: 40px"></i>
+                                            <div class="ui small image">
+                                                <img src="<s:property value="booksrcb"/>" style="height: 145px;width: 115px">
+                                            </div>
+                                            <div class="content">
+                                                <div class="meta">
+                                                    <span class="cinema">
+                                                        <a><s:property value="usernamea"/></a>
+                                                    </span>
+                                                    <span class="cinema">
+                                                        于<s:property value="date"/>开始发起交换
+                                                    </span>
+                                                    <br>
+                                                    <br>
+                                                    <span class="cinema">
+                                                        正在交换<h4 style="display: inline;"><s:property value="booknamea"/></h4>
+                                                        <br>
+                                                        与<h4 style="display: inline;"><s:property value="booknameb"/></h4>
+                                                        <br>
+                                                        <br>
+                                                        <button class="ui primary button" onclick="uploadNum(<s:property value="id"/>)">上传物流单号</button>
+                                                        <button class="ui primary button grey" onclick="checkState(<s:property value="id"/>)">查看状态</button>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </s:iterator>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" style="padding-bottom: 30px">
+                        <div class="ui grid vertical divided">
+                            <div class="row" style="margin-left: 12px">
+                                <div class="sixteen column">
+                                    <p style="font-size: x-large;margin-left: 20px;display: inline">已交换书籍</p>
+                                    <button class="ui right labeled icon button" style="float: right">
+                                        <i class="Angle Right icon"></i>
+                                        更多
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="ui items">
+                                    <s:iterator value="exchangedList">
+                                        <div class="item" style="margin-left: 45px;margin-top: 5px">
+                                            <div class="ui small image">
+                                                <img src="<s:property value="booksrca"/>" style="height: 145px;width: 115px">
+                                            </div>
+                                            <i class="icon large exchange" style="margin-top: 60px;margin-right: 40px"></i>
+                                            <div class="ui small image">
+                                                <img src="<s:property value="booksrcb"/>" style="height: 145px;width: 115px">
+                                            </div>
+                                            <div class="content">
+                                                <div class="meta">
+                                                    <span class="cinema">
+                                                        <a><s:property value="usernamea"/></a>
+                                                    </span>
+                                                    <span class="cinema">
+                                                        于<s:property value="date"/>开始发起交换
+                                                    </span>
+                                                    <br>
+                                                    <br>
+                                                    <span class="cinema">
+                                                        与<h4 style="display: inline;"><s:property value="booknamea"/></h4>
+                                                        <br>
+                                                        交换结束<h4 style="display: inline;"><s:property value="booknameb"/></h4>
+                                                        <br>
+                                                        <br>
+                                                        <button class="ui primary button" onclick="uploadNum(<s:property value="id"/>)">发布相关书评</button>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </s:iterator>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </s:if>
             <s:if test="type == 5"><p>通知消息界面</p></s:if>
             <%--上传书籍--%>
         </div>
@@ -590,6 +778,8 @@
             self.location = "showPersonalMainPage.action?type=" + num + "&more=0";
         } else if (num == 3) {
             self.location = "showPersonalMainPage.action?type=" + num;
+        } else if(num == 4){
+            self.location = "showPersonalMainPage.action?type="+num;
         }
 
     }
@@ -765,6 +955,32 @@
     }
     function personSubmit() {
         location.href = "updateUser.action?sign="+$("#signEle").text()+"&phone="+$("#phoneEle").text()+"&email="+$("#emailEle").text();
+    }
+
+    function agree(id) {
+        var formData = new FormData();
+        formData.append("exchangeID", id);
+        $.ajax({
+            url: "http://localhost:8099/agree.action",
+            type: "POST",
+            data: formData,
+            /**
+             *必须false才会自动加上正确的Content-Type
+             */
+            contentType: false,
+            /**
+             * 必须false才会避开jQuery对 formdata 的默认处理
+             * XMLHttpRequest会对 formdata 进行正确的处理
+             */
+            processData: false,
+            success: function (data) {
+                alert("操作成功!");
+                self.location = "showPersonalMainPage.action?type=4";
+            },
+            error: function () {
+                alert("操作失败!");
+            }
+        })
     }
     var path = getCookie("SRC");
     var html = "<img src=" + path.toString() + " class=\"image avatar ui\"/>";

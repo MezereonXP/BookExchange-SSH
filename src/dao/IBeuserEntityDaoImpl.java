@@ -21,9 +21,10 @@ import java.util.List;
  */
 public class IBeuserEntityDaoImpl implements IBeuserEntityDao{
 
-    @Autowired
+
     private SessionFactory sessionFactory;
 
+    @Autowired
     private HibernateTemplate hibernateTemplate;
 
     @Override
@@ -32,7 +33,7 @@ public class IBeuserEntityDaoImpl implements IBeuserEntityDao{
     }
 
     public List<BeuserEntity> getAllUser() {
-        Session session = sessionFactory.getCurrentSession();
+        Session session = hibernateTemplate.getSessionFactory().getCurrentSession();
         EntityManager entityManager = session.getEntityManagerFactory().createEntityManager();
         CriteriaBuilder cb = entityManager.getCriteriaBuilder();
         CriteriaQuery criteriaQuery = cb.createQuery(BeuserEntity.class);
@@ -40,6 +41,7 @@ public class IBeuserEntityDaoImpl implements IBeuserEntityDao{
         criteriaQuery.select(root);
         TypedQuery<BeuserEntity> typedQuery = entityManager.createQuery(criteriaQuery);
         List<BeuserEntity> list = typedQuery.getResultList();
+        hibernateTemplate.getSessionFactory().getCurrentSession().clear();
         return list;
     }
 
@@ -51,6 +53,7 @@ public class IBeuserEntityDaoImpl implements IBeuserEntityDao{
     @Override
     public void delUser(BeuserEntity user) throws SQLException {
         hibernateTemplate.delete(user);
+        hibernateTemplate.getSessionFactory().getCurrentSession().clear();
     }
 
     @Override
@@ -65,7 +68,7 @@ public class IBeuserEntityDaoImpl implements IBeuserEntityDao{
     }
 
     public BeuserEntity getUserByName(String username){
-        Query query = sessionFactory.openSession()
+        Query query = hibernateTemplate.getSessionFactory().getCurrentSession()
                 .createQuery("from BeuserEntity u where u.username = ?");
         query.setParameter(0,username);
         BeuserEntity beuserEntity = (BeuserEntity) query.list().get(0);
@@ -74,7 +77,7 @@ public class IBeuserEntityDaoImpl implements IBeuserEntityDao{
 
     @Override
     public boolean isExists(String username) {
-        Query query = sessionFactory.openSession()
+        Query query = hibernateTemplate.getSessionFactory().getCurrentSession()
                 .createQuery("from BeuserEntity u where u.username = ?");
         query.setParameter(0,username);
         System.out.println(query.list().size());
@@ -83,5 +86,13 @@ public class IBeuserEntityDaoImpl implements IBeuserEntityDao{
 
     public SessionFactory getSessionFactory() {
         return sessionFactory;
+    }
+
+    public HibernateTemplate getHibernateTemplate() {
+        return hibernateTemplate;
+    }
+
+    public void setHibernateTemplate(HibernateTemplate hibernateTemplate) {
+        this.hibernateTemplate = hibernateTemplate;
     }
 }

@@ -19,24 +19,28 @@ import java.util.List;
  * Created by Administrator on 2017/10/8/008.
  */
 public class IUserbookDaoImpl implements IUserbookDao{
-    @Autowired
+
     private SessionFactory sessionFactory;
 
+    @Autowired
     private HibernateTemplate hibernateTemplate;
 
     @Override
     public void saveUserbook(UserbookEntity userbookEntity) throws SQLException {
         hibernateTemplate.save(userbookEntity);
+        //hibernateTemplate.getSessionFactory().getCurrentSession().clear();
     }
 
     @Override
     public void delUserbook(UserbookEntity userbookEntity) throws SQLException {
         hibernateTemplate.delete(userbookEntity);
+        //hibernateTemplate.getSessionFactory().getCurrentSession().clear();
     }
 
     @Override
     public void editUserbook(UserbookEntity userbookEntity) throws SQLException {
         hibernateTemplate.update(userbookEntity);
+        //hibernateTemplate.getSessionFactory().getCurrentSession().clear();
     }
 
     @Override
@@ -46,7 +50,7 @@ public class IUserbookDaoImpl implements IUserbookDao{
 
     @Override
     public boolean isExists(int id) throws SQLException {
-        Query query = sessionFactory.openSession()
+        Query query = hibernateTemplate.getSessionFactory().getCurrentSession()
                 .createQuery("from userbook ac where ac.id = :id").setParameter("id", id);
         System.out.println(query.list().size());
         return query.list().size()>0?true:false;
@@ -54,11 +58,11 @@ public class IUserbookDaoImpl implements IUserbookDao{
 
     @Override
     public void setSessionFactory(SessionFactory sessionFactory) throws SQLException {
-        hibernateTemplate = new HibernateTemplate(sessionFactory);
+
     }
 
     public List<UserbookEntity> getAllForum() {
-        Session session = sessionFactory.getCurrentSession();
+        Session session = hibernateTemplate.getSessionFactory().getCurrentSession();
         EntityManager entityManager = session.getEntityManagerFactory().createEntityManager();
         CriteriaBuilder cb = entityManager.getCriteriaBuilder();
         CriteriaQuery criteriaQuery = cb.createQuery(UserbookEntity.class);
@@ -66,6 +70,15 @@ public class IUserbookDaoImpl implements IUserbookDao{
         criteriaQuery.select(root);
         TypedQuery<UserbookEntity> typedQuery = entityManager.createQuery(criteriaQuery);
         List<UserbookEntity> list = typedQuery.getResultList();
+        hibernateTemplate.getSessionFactory().getCurrentSession().clear();
         return list;
+    }
+
+    public HibernateTemplate getHibernateTemplate() {
+        return hibernateTemplate;
+    }
+
+    public void setHibernateTemplate(HibernateTemplate hibernateTemplate) {
+        this.hibernateTemplate = hibernateTemplate;
     }
 }
