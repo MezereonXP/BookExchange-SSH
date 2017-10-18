@@ -44,7 +44,7 @@
           destroy-method="close" p:driverClass="${jdbc.driverClassName}"
           p:jdbcUrl="${jdbc.url}" p:user="${jdbc.username}" p:password="${jdbc.password}"
           p:testConnectionOnCheckout="${jdbc.c3p0.testConnectionOnCheckout}"
-          p:testConnectionOnCheckin="false"
+          p:testConnectionOnCheckin="true"
           p:idleConnectionTestPeriod="${jdbc.c3p0.idleConnectionTestPeriod}"
           p:acquireIncrement="60"
           p:maxStatements="100"
