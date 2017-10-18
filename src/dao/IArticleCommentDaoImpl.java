@@ -30,17 +30,19 @@ public class IArticleCommentDaoImpl implements IArticleCommenntDao{
 
     @Override
     public void saveArticleComment(ArticlecommentEntity articleCommentEntity) throws SQLException {
+        hibernateTemplate.getSessionFactory().getCurrentSession().clear();
         hibernateTemplate.save(articleCommentEntity);
     }
 
     @Override
     public void delArticleComment(ArticlecommentEntity articleCommentEntity) throws SQLException {
-        hibernateTemplate.delete(articleCommentEntity);
         hibernateTemplate.getSessionFactory().getCurrentSession().clear();
+        hibernateTemplate.delete(articleCommentEntity);
     }
 
     @Override
     public void editArticleComment(ArticlecommentEntity articleCommentEntity) throws SQLException {
+        hibernateTemplate.getSessionFactory().getCurrentSession().clear();
         hibernateTemplate.update(articleCommentEntity);
     }
 
@@ -63,6 +65,7 @@ public class IArticleCommentDaoImpl implements IArticleCommenntDao{
     }
 
     public List<ArticlecommentEntity> getAllArticleComment() {
+        hibernateTemplate.getSessionFactory().getCurrentSession().clear();
         Session session = hibernateTemplate.getSessionFactory().getCurrentSession();
         EntityManager entityManager = session.getEntityManagerFactory().createEntityManager();
         CriteriaBuilder cb = entityManager.getCriteriaBuilder();
@@ -71,7 +74,6 @@ public class IArticleCommentDaoImpl implements IArticleCommenntDao{
         criteriaQuery.select(root);
         TypedQuery<ArticlecommentEntity> typedQuery = entityManager.createQuery(criteriaQuery);
         List<ArticlecommentEntity> list = typedQuery.getResultList();
-        hibernateTemplate.getSessionFactory().getCurrentSession().clear();
         return list;
     }
 

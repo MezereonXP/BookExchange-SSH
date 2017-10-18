@@ -26,26 +26,27 @@ public class IUserbookDaoImpl implements IUserbookDao{
     @Autowired
     private HibernateTemplate hibernateTemplate;
 
-    public List<UserbookEntity> searchForumByBookName(String s){
-        return (List<UserbookEntity>) hibernateTemplate.find("from UserbookEntity u where u.bookname like ?", "%s%");
+    public List<UserbookEntity> searchBookByName(String s){
+        String hql = "from UserbookEntity u where u.bookname like %?%";
+        return (List<UserbookEntity>) this.hibernateTemplate.find(hql,s);
     }
 
     @Override
     public void saveUserbook(UserbookEntity userbookEntity) throws SQLException {
+        hibernateTemplate.getSessionFactory().getCurrentSession().clear();
         hibernateTemplate.save(userbookEntity);
-        //hibernateTemplate.getSessionFactory().getCurrentSession().clear();
     }
 
     @Override
     public void delUserbook(UserbookEntity userbookEntity) throws SQLException {
+        hibernateTemplate.getSessionFactory().getCurrentSession().clear();
         hibernateTemplate.delete(userbookEntity);
-        //hibernateTemplate.getSessionFactory().getCurrentSession().clear();
     }
 
     @Override
     public void editUserbook(UserbookEntity userbookEntity) throws SQLException {
+        hibernateTemplate.getSessionFactory().getCurrentSession().clear();
         hibernateTemplate.update(userbookEntity);
-        //hibernateTemplate.getSessionFactory().getCurrentSession().clear();
     }
 
     @Override
@@ -67,6 +68,7 @@ public class IUserbookDaoImpl implements IUserbookDao{
     }
 
     public List<UserbookEntity> getAllForum() {
+        hibernateTemplate.getSessionFactory().getCurrentSession().clear();
         Session session = hibernateTemplate.getSessionFactory().getCurrentSession();
         EntityManager entityManager = session.getEntityManagerFactory().createEntityManager();
         CriteriaBuilder cb = entityManager.getCriteriaBuilder();
@@ -75,7 +77,6 @@ public class IUserbookDaoImpl implements IUserbookDao{
         criteriaQuery.select(root);
         TypedQuery<UserbookEntity> typedQuery = entityManager.createQuery(criteriaQuery);
         List<UserbookEntity> list = typedQuery.getResultList();
-        hibernateTemplate.getSessionFactory().getCurrentSession().clear();
         return list;
     }
 

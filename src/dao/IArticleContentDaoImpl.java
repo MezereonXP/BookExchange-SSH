@@ -29,17 +29,19 @@ public class IArticleContentDaoImpl implements IArticleContentDao {
 
     @Override
     public void saveArticleContent(ArticlecontentEntity articlecontentEntity) throws SQLException {
+        hibernateTemplate.getSessionFactory().getCurrentSession().clear();
         hibernateTemplate.save(articlecontentEntity);
     }
 
     @Override
     public void delArticleContent(ArticlecontentEntity articlecontentEntity) throws SQLException {
-        hibernateTemplate.delete(articlecontentEntity);
         hibernateTemplate.getSessionFactory().getCurrentSession().clear();
+        hibernateTemplate.delete(articlecontentEntity);
     }
 
     @Override
     public void editArticleContent(ArticlecontentEntity articlecontentEntity) throws SQLException {
+        hibernateTemplate.getSessionFactory().getCurrentSession().clear();
         hibernateTemplate.update(articlecontentEntity);
     }
 
@@ -62,6 +64,7 @@ public class IArticleContentDaoImpl implements IArticleContentDao {
     }
 
     public List<ArticlecontentEntity> getAllArticleContent() {
+        hibernateTemplate.getSessionFactory().getCurrentSession().clear();
         Session session = hibernateTemplate.getSessionFactory().getCurrentSession();
         EntityManager entityManager = session.getEntityManagerFactory().createEntityManager();
         CriteriaBuilder cb = entityManager.getCriteriaBuilder();
@@ -70,7 +73,6 @@ public class IArticleContentDaoImpl implements IArticleContentDao {
         criteriaQuery.select(root);
         TypedQuery<ArticlecontentEntity> typedQuery = entityManager.createQuery(criteriaQuery);
         List<ArticlecontentEntity> list = typedQuery.getResultList();
-        hibernateTemplate.getSessionFactory().getCurrentSession().clear();
         return list;
     }
 

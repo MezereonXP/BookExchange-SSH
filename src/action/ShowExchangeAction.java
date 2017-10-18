@@ -42,7 +42,10 @@ public class ShowExchangeAction extends ActionSupport {
         if(type==1){
             userbookEntities = iUserBookService.getAllUserBook();
         }else{
-            userbookEntities = doWithTag(iUserBookService.getiUserbookDao().searchForumByBookName(key),tag);
+            System.out.println("Tag: "+tag);
+            System.out.println("Key: "+key);
+            System.out.println("type: "+type);
+            userbookEntities = doWithTag(iUserBookService.getAllUserBook(),tag);
         }
 
         userBooksWithUserpics = new ArrayList<UserBooksWithUserpic>();
@@ -75,10 +78,11 @@ public class ShowExchangeAction extends ActionSupport {
     private List<UserbookEntity> doWithTag(List<UserbookEntity> userbookEntities, String tag) {
         List<UserbookEntity> list = new ArrayList<>();
         for(UserbookEntity ube:userbookEntities){
-            if(check(ube.getKind(),tag)){
+            if((ube.getBookname().indexOf(key)!=-1)&&check(ube.getKind(),tag)){
                 list.add(ube);
             }
         }
+        System.out.println("Tag: "+list.size());
         return list;
     }
 
@@ -86,6 +90,7 @@ public class ShowExchangeAction extends ActionSupport {
         String[] tags = tag.split(";");
         for(String t:tags){
             if(kind.indexOf(t)==-1){
+                System.out.println("Tag: "+t);
                 return false;
             }
         }

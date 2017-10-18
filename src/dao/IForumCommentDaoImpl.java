@@ -27,16 +27,19 @@ public class IForumCommentDaoImpl implements IForumCommentDao{
 
     @Override
     public void saveForumComment(ForumcommentEntity forumcommentEntity) throws SQLException {
+        hibernateTemplate.getSessionFactory().getCurrentSession().clear();
         hibernateTemplate.save(forumcommentEntity);
     }
 
     @Override
     public void delForumComment(ForumcommentEntity forumcommentEntity) throws SQLException {
+        hibernateTemplate.getSessionFactory().getCurrentSession().clear();
         hibernateTemplate.delete(forumcommentEntity);
     }
 
     @Override
     public void editForumComment(ForumcommentEntity forumcommentEntity) throws SQLException {
+        hibernateTemplate.getSessionFactory().getCurrentSession().clear();
         hibernateTemplate.update(forumcommentEntity);
     }
 
@@ -59,6 +62,7 @@ public class IForumCommentDaoImpl implements IForumCommentDao{
     }
 
     public List<ForumcommentEntity> getAllForumComment() {
+        hibernateTemplate.getSessionFactory().getCurrentSession().clear();
         Session session = hibernateTemplate.getSessionFactory().getCurrentSession();
         EntityManager entityManager = session.getEntityManagerFactory().createEntityManager();
         CriteriaBuilder cb = entityManager.getCriteriaBuilder();
@@ -67,7 +71,6 @@ public class IForumCommentDaoImpl implements IForumCommentDao{
         criteriaQuery.select(root);
         TypedQuery<ForumcommentEntity> typedQuery = entityManager.createQuery(criteriaQuery);
         List<ForumcommentEntity> list = typedQuery.getResultList();
-        hibernateTemplate.getSessionFactory().getCurrentSession().clear();
         return list;
     }
 

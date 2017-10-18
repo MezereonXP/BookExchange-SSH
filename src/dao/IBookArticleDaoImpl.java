@@ -35,6 +35,7 @@ public class IBookArticleDaoImpl implements IBookArticleDao {
 
     @Override
     public void saveArticle(BookarticleEntity bookarticleEntity) throws SQLException {
+        hibernateTemplate.getSessionFactory().getCurrentSession().clear();
         hibernateTemplate.save(bookarticleEntity);
     }
 
@@ -46,6 +47,7 @@ public class IBookArticleDaoImpl implements IBookArticleDao {
 
     @Override
     public void editArticle(BookarticleEntity bookarticleEntity) throws SQLException {
+        hibernateTemplate.getSessionFactory().getCurrentSession().clear();
         hibernateTemplate.update(bookarticleEntity);
     }
 
@@ -68,6 +70,7 @@ public class IBookArticleDaoImpl implements IBookArticleDao {
     }
 
     public List<BookarticleEntity> getAllBookArticle() {
+        hibernateTemplate.getSessionFactory().getCurrentSession().clear();
         Session session = hibernateTemplate.getSessionFactory().getCurrentSession();
         EntityManager entityManager = session.getEntityManagerFactory().createEntityManager();
         CriteriaBuilder cb = entityManager.getCriteriaBuilder();
@@ -76,7 +79,6 @@ public class IBookArticleDaoImpl implements IBookArticleDao {
         criteriaQuery.select(root);
         TypedQuery<BookarticleEntity> typedQuery = entityManager.createQuery(criteriaQuery);
         List<BookarticleEntity> list = typedQuery.getResultList();
-        hibernateTemplate.getSessionFactory().getCurrentSession().clear();
         return list;
     }
 

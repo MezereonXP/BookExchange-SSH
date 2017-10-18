@@ -33,6 +33,7 @@ public class IBeuserEntityDaoImpl implements IBeuserEntityDao{
     }
 
     public List<BeuserEntity> getAllUser() {
+        hibernateTemplate.getSessionFactory().getCurrentSession().clear();
         Session session = hibernateTemplate.getSessionFactory().getCurrentSession();
         EntityManager entityManager = session.getEntityManagerFactory().createEntityManager();
         CriteriaBuilder cb = entityManager.getCriteriaBuilder();
@@ -41,12 +42,12 @@ public class IBeuserEntityDaoImpl implements IBeuserEntityDao{
         criteriaQuery.select(root);
         TypedQuery<BeuserEntity> typedQuery = entityManager.createQuery(criteriaQuery);
         List<BeuserEntity> list = typedQuery.getResultList();
-        hibernateTemplate.getSessionFactory().getCurrentSession().clear();
         return list;
     }
 
     @Override
     public void saveUser(BeuserEntity user) throws SQLException {
+        hibernateTemplate.getSessionFactory().getCurrentSession().clear();
         hibernateTemplate.save(user);
     }
 
@@ -58,6 +59,7 @@ public class IBeuserEntityDaoImpl implements IBeuserEntityDao{
 
     @Override
     public void editUser(BeuserEntity user) throws SQLException {
+        hibernateTemplate.getSessionFactory().getCurrentSession().clear();
         hibernateTemplate.update(user);
     }
 

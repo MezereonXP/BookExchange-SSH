@@ -27,6 +27,7 @@ public class IMessageDaoImpl implements IMessageDao{
 
     @Override
     public void saveMessage(MessageEntity messageEntity) throws SQLException {
+        hibernateTemplate.getSessionFactory().getCurrentSession().clear();
         hibernateTemplate.save(messageEntity);
     }
 
@@ -38,6 +39,7 @@ public class IMessageDaoImpl implements IMessageDao{
 
     @Override
     public void editMessage(MessageEntity messageEntity) throws SQLException {
+        hibernateTemplate.getSessionFactory().getCurrentSession().clear();
         hibernateTemplate.update(messageEntity);
         //hibernateTemplate.getSessionFactory().getCurrentSession().clear();
     }
@@ -61,6 +63,7 @@ public class IMessageDaoImpl implements IMessageDao{
     }
 
     public List<MessageEntity> getAllForum() {
+        hibernateTemplate.getSessionFactory().getCurrentSession().clear();
         Session session = hibernateTemplate.getSessionFactory().getCurrentSession();
         EntityManager entityManager = session.getEntityManagerFactory().createEntityManager();
         CriteriaBuilder cb = entityManager.getCriteriaBuilder();
@@ -69,7 +72,6 @@ public class IMessageDaoImpl implements IMessageDao{
         criteriaQuery.select(root);
         TypedQuery<MessageEntity> typedQuery = entityManager.createQuery(criteriaQuery);
         List<MessageEntity> list = typedQuery.getResultList();
-        hibernateTemplate.getSessionFactory().getCurrentSession().clear();
         return list;
     }
 

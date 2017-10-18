@@ -31,16 +31,19 @@ public class IForumDaoImpl implements IForumDao {
 
     @Override
     public void saveForum(ForumEntity forumEntity) throws SQLException {
+        hibernateTemplate.getSessionFactory().getCurrentSession().clear();
         hibernateTemplate.save(forumEntity);
     }
 
     @Override
     public void delForum(ForumEntity forumEntity) throws SQLException {
+        hibernateTemplate.getSessionFactory().getCurrentSession().clear();
         hibernateTemplate.delete(forumEntity);
     }
 
     @Override
     public void editForum(ForumEntity forumEntity) throws SQLException {
+        hibernateTemplate.getSessionFactory().getCurrentSession().clear();
         hibernateTemplate.update(forumEntity);
     }
 
@@ -63,6 +66,7 @@ public class IForumDaoImpl implements IForumDao {
     }
 
     public List<ForumEntity> getAllForum() {
+        hibernateTemplate.getSessionFactory().getCurrentSession().clear();
         Session session = hibernateTemplate.getSessionFactory().getCurrentSession();
         EntityManager entityManager = session.getEntityManagerFactory().createEntityManager();
         CriteriaBuilder cb = entityManager.getCriteriaBuilder();
@@ -71,7 +75,6 @@ public class IForumDaoImpl implements IForumDao {
         criteriaQuery.select(root);
         TypedQuery<ForumEntity> typedQuery = entityManager.createQuery(criteriaQuery);
         List<ForumEntity> list = typedQuery.getResultList();
-        hibernateTemplate.getSessionFactory().getCurrentSession().clear();
         return list;
     }
 

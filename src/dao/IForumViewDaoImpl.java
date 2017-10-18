@@ -20,6 +20,7 @@ public class IForumViewDaoImpl implements IForumViewDao {
     private HibernateTemplate hibernateTemplate;
     @Override
     public void saveForumView(ForumviewEntity forumviewEntity) throws SQLException {
+        hibernateTemplate.getSessionFactory().getCurrentSession().clear();
         hibernateTemplate.save(forumviewEntity);
     }
 
@@ -30,6 +31,7 @@ public class IForumViewDaoImpl implements IForumViewDao {
 
     @Override
     public void editForumView(ForumviewEntity forumviewEntity) throws SQLException {
+        hibernateTemplate.getSessionFactory().getCurrentSession().clear();
         hibernateTemplate.update(forumviewEntity);
     }
 

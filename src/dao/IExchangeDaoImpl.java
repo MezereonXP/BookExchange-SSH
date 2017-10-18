@@ -28,6 +28,7 @@ public class IExchangeDaoImpl implements IExchangeDao{
 
     @Override
     public void saveExchange(ExchangeEntity exchangeEntity) throws SQLException {
+        hibernateTemplate.getSessionFactory().getCurrentSession().clear();
         hibernateTemplate.save(exchangeEntity);
     }
 
@@ -39,6 +40,7 @@ public class IExchangeDaoImpl implements IExchangeDao{
 
     @Override
     public void editExchange(ExchangeEntity exchangeEntity) throws SQLException {
+        hibernateTemplate.getSessionFactory().getCurrentSession().clear();
         hibernateTemplate.update(exchangeEntity);
     }
 
@@ -61,6 +63,7 @@ public class IExchangeDaoImpl implements IExchangeDao{
     }
 
     public List<ExchangeEntity> getAllExchange() {
+        hibernateTemplate.getSessionFactory().getCurrentSession().clear();
         Session session = hibernateTemplate.getSessionFactory().getCurrentSession();
         EntityManager entityManager = session.getEntityManagerFactory().createEntityManager();
         CriteriaBuilder cb = entityManager.getCriteriaBuilder();
@@ -69,7 +72,6 @@ public class IExchangeDaoImpl implements IExchangeDao{
         criteriaQuery.select(root);
         TypedQuery<ExchangeEntity> typedQuery = entityManager.createQuery(criteriaQuery);
         List<ExchangeEntity> list = typedQuery.getResultList();
-        hibernateTemplate.getSessionFactory().getCurrentSession().clear();
         return list;
     }
 

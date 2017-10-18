@@ -266,6 +266,7 @@
     </div>
     <p></p>
     <p></p>
+    </div>
     <div class="center aligned row">
         <div class="center aligned column">
             <div class="ui divided items">
@@ -373,12 +374,12 @@
         var tag="";
         var tli = document.getElementById("tag").getElementsByTagName("a");
         for (i = 0; i < tli.length; i++) {
-            tag = tag+tli[i].innerText;
+            tag = tag+tli[i].innerText.trim();
             if(i!=tli.length-1){
                 tag = tag+";";
             }
         }
-        self.location="showExchange.action?type=2&key="+$("#key").val()+"&tag="+tag;
+        self.location="showExchange.action?type=2&key="+$("#key").val()+"&tag="+tag+"&page=1";
     }
     function getCookie(name) {
         var arr, reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)");
@@ -392,7 +393,8 @@
     }
     function changePage(num) {
         //window.alert(""+num);
-        self.location ="showExchange.action?page="+num+"&type=<s:property value="type"/>&key=<s:property value="key"/>";
+        self.location ="showExchange.action?page="+num
+                +"&type=<s:property value="type"/>&key=<s:property value="key"/>&tag=<s:property value="tag"/>";
     }
     var path = getCookie("SRC");
     if(path!="null") {
