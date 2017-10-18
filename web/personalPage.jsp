@@ -78,12 +78,21 @@
             $("#home").click(function () {
                 location.href = "/index.jsp";
             });
-            $("#exchange").click(function () {
-                location.href = "/exchange.jsp";
-            });
-            $("#uploadImage").click(function () {
+            // fix menu when passed
+            $('.masthead')
+                .visibility({
+                    once: false,
+                    onBottomPassed: function() {
+                        $('.fixed.menu').transition('fade in');
+                    },
+                    onBottomPassedReverse: function() {
+                        $('.fixed.menu').transition('fade out');
+                    }
+                });
+            // create sidebar and attach to menu open
+            $('.ui.sidebar')
+                .sidebar('attach events', '.toc.item');
 
-            });
         })
     ;
 </script>
@@ -130,7 +139,7 @@
                 <div class="row" style="margin-left: 30px;padding-top: 30px;padding-bottom: 30px" onmouseenter="show(1)"
                      onmouseleave="hide(1)">
                     <div style="margin-top: 8px">手机号码:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
-                    <div style="margin-top: 8px" id="phoneSign" class="ui transition">
+                    <div style="margin-top: 8px;" id="phoneSign" class="ui transition">
                         <div id="phoneEle" style="display: inline"><s:property value="beuserEntity.getPhone()"/>
                         </div>&nbsp;&nbsp;&nbsp;<a href="#" class="ui transition hidden" id="phone"
                                                    onclick="showInput(1)"><i class="icon pencil "></i>修改</a></div>
@@ -149,7 +158,7 @@
                 <div class="row" style="margin-left: 30px;padding-top: 30px;padding-bottom: 30px" onmouseenter="show(2)"
                      onmouseleave="hide(2)">
                     <div style="margin-top: 8px">电子邮箱:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
-                    <div style="margin-top: 8px" id="emailSign" class="ui transition">
+                    <div style="margin-top: 8px;" id="emailSign" class="ui transition">
                         <div id="emailEle" style="display: inline"><s:property value="beuserEntity.getEmail()"/>
                         </div>&nbsp;&nbsp;&nbsp;<a href="#" class="transition hidden" id="email" onclick="showInput(2)"><i
                             class="icon pencil"></i>修改</a></div>
@@ -168,7 +177,7 @@
                 <div class="row" style="margin-left: 30px;padding-top: 30px;padding-bottom: 30px" onmouseenter="show(3)"
                      onmouseleave="hide(3)">
                     <div style="margin-top: 8px">个性签名:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
-                    <div style="margin-top: 8px" id="signSign" class="ui transition">
+                    <div style="margin-top: 8px;" id="signSign" class="ui transition">
                         <div id="signEle" style="display: inline"><s:property value="beuserEntity.getSignatrue()"/>
                         </div>&nbsp;&nbsp;&nbsp;<a href="#" class="transition hidden" id="sign"
                                                    onclick="showInput(3)"><i class="icon pencil"></i>修改</a></div>
