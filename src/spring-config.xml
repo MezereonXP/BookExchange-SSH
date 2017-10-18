@@ -233,6 +233,9 @@
     <bean class="action.UploadNumAction" name="uploadNumAction" scope="prototype">
         <property name="exchangeService" ref="iExchangeService"></property>
     </bean>
+    <bean class="action.SendDiscussionAction" name="sendDiscussionAction">
+        <property name="forumService" ref="iForumService"></property>
+    </bean>
     <bean class="action.addCommentAction" name="addCommentAction">
         <property name="bookArticleService" ref="iBookArticleService"></property>
         <property name="articleContentService" ref="iArticleContentService"></property>
