@@ -8,7 +8,7 @@ import service.IExchangeServiceImpl;
 /**
  * Created by Mezereon on 2017/10/18.
  */
-public class Refuse extends ActionSupport{
+public class RefuseAction extends ActionSupport{
 
     @Autowired
     private IExchangeServiceImpl exchangeService;

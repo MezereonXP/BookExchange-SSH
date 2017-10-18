@@ -18,6 +18,10 @@ public class IForumServiceImpl implements IForumService {
     @Autowired
     private IForumDaoImpl iForumDao;
 
+    public List<ForumEntity> searchForumByTitle(String t){
+        return iForumDao.searchForumByTitle(t);
+    }
+
     public List<ForumEntity> getAllForumByName(String name){
         List<ForumEntity> forumEntities = new ArrayList<>();
         for(ForumEntity forumEntity:iForumDao.getAllForum()){

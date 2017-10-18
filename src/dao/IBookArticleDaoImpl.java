@@ -28,6 +28,11 @@ public class IBookArticleDaoImpl implements IBookArticleDao {
     @Autowired
     private HibernateTemplate hibernateTemplate;
 
+    public List<BookarticleEntity> searchBookArticleEntity(String t){
+        return (List<BookarticleEntity>) this.getHibernateTemplate()
+                .find("from BookarticleEntity u where u.title like ?", "%t%");
+    }
+
     @Override
     public void saveArticle(BookarticleEntity bookarticleEntity) throws SQLException {
         hibernateTemplate.save(bookarticleEntity);
