@@ -31,7 +31,6 @@ public class IBookArticleDaoImpl implements IBookArticleDao {
     @Override
     public void saveArticle(BookarticleEntity bookarticleEntity) throws SQLException {
         hibernateTemplate.save(bookarticleEntity);
-        hibernateTemplate.getSessionFactory().getCurrentSession().clear();
     }
 
     @Override
@@ -43,7 +42,6 @@ public class IBookArticleDaoImpl implements IBookArticleDao {
     @Override
     public void editArticle(BookarticleEntity bookarticleEntity) throws SQLException {
         hibernateTemplate.update(bookarticleEntity);
-        hibernateTemplate.getSessionFactory().getCurrentSession().clear();
     }
 
     @Override

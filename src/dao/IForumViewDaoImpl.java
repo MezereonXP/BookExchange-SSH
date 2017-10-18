@@ -21,19 +21,16 @@ public class IForumViewDaoImpl implements IForumViewDao {
     @Override
     public void saveForumView(ForumviewEntity forumviewEntity) throws SQLException {
         hibernateTemplate.save(forumviewEntity);
-        hibernateTemplate.getSessionFactory().getCurrentSession().clear();
     }
 
     @Override
     public void delForumView(ForumviewEntity forumviewEntity) throws SQLException {
         hibernateTemplate.delete(forumviewEntity);
-        hibernateTemplate.getSessionFactory().getCurrentSession().clear();
     }
 
     @Override
     public void editForumView(ForumviewEntity forumviewEntity) throws SQLException {
         hibernateTemplate.update(forumviewEntity);
-        hibernateTemplate.getSessionFactory().getCurrentSession().clear();
     }
 
     @Override

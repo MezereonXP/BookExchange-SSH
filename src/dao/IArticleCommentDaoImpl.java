@@ -31,7 +31,6 @@ public class IArticleCommentDaoImpl implements IArticleCommenntDao{
     @Override
     public void saveArticleComment(ArticlecommentEntity articleCommentEntity) throws SQLException {
         hibernateTemplate.save(articleCommentEntity);
-        hibernateTemplate.getSessionFactory().getCurrentSession().clear();
     }
 
     @Override
@@ -43,7 +42,6 @@ public class IArticleCommentDaoImpl implements IArticleCommenntDao{
     @Override
     public void editArticleComment(ArticlecommentEntity articleCommentEntity) throws SQLException {
         hibernateTemplate.update(articleCommentEntity);
-        hibernateTemplate.getSessionFactory().getCurrentSession().clear();
     }
 
     @Override

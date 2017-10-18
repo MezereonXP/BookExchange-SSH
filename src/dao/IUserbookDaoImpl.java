@@ -28,19 +28,19 @@ public class IUserbookDaoImpl implements IUserbookDao{
     @Override
     public void saveUserbook(UserbookEntity userbookEntity) throws SQLException {
         hibernateTemplate.save(userbookEntity);
-        hibernateTemplate.getSessionFactory().getCurrentSession().clear();
+        //hibernateTemplate.getSessionFactory().getCurrentSession().clear();
     }
 
     @Override
     public void delUserbook(UserbookEntity userbookEntity) throws SQLException {
         hibernateTemplate.delete(userbookEntity);
-        hibernateTemplate.getSessionFactory().getCurrentSession().clear();
+        //hibernateTemplate.getSessionFactory().getCurrentSession().clear();
     }
 
     @Override
     public void editUserbook(UserbookEntity userbookEntity) throws SQLException {
         hibernateTemplate.update(userbookEntity);
-        hibernateTemplate.getSessionFactory().getCurrentSession().clear();
+        //hibernateTemplate.getSessionFactory().getCurrentSession().clear();
     }
 
     @Override

@@ -28,19 +28,16 @@ public class IForumCommentDaoImpl implements IForumCommentDao{
     @Override
     public void saveForumComment(ForumcommentEntity forumcommentEntity) throws SQLException {
         hibernateTemplate.save(forumcommentEntity);
-        hibernateTemplate.getSessionFactory().getCurrentSession().clear();
     }
 
     @Override
     public void delForumComment(ForumcommentEntity forumcommentEntity) throws SQLException {
         hibernateTemplate.delete(forumcommentEntity);
-        hibernateTemplate.getSessionFactory().getCurrentSession().clear();
     }
 
     @Override
     public void editForumComment(ForumcommentEntity forumcommentEntity) throws SQLException {
         hibernateTemplate.update(forumcommentEntity);
-        hibernateTemplate.getSessionFactory().getCurrentSession().clear();
     }
 
     @Override

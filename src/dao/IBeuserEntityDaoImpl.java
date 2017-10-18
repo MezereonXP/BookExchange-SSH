@@ -48,7 +48,6 @@ public class IBeuserEntityDaoImpl implements IBeuserEntityDao{
     @Override
     public void saveUser(BeuserEntity user) throws SQLException {
         hibernateTemplate.save(user);
-        hibernateTemplate.getSessionFactory().getCurrentSession().clear();
     }
 
     @Override
@@ -60,7 +59,6 @@ public class IBeuserEntityDaoImpl implements IBeuserEntityDao{
     @Override
     public void editUser(BeuserEntity user) throws SQLException {
         hibernateTemplate.update(user);
-        hibernateTemplate.getSessionFactory().getCurrentSession().clear();
     }
 
     @Override

@@ -30,7 +30,6 @@ public class IArticleContentDaoImpl implements IArticleContentDao {
     @Override
     public void saveArticleContent(ArticlecontentEntity articlecontentEntity) throws SQLException {
         hibernateTemplate.save(articlecontentEntity);
-        hibernateTemplate.getSessionFactory().getCurrentSession().clear();
     }
 
     @Override
@@ -42,7 +41,6 @@ public class IArticleContentDaoImpl implements IArticleContentDao {
     @Override
     public void editArticleContent(ArticlecontentEntity articlecontentEntity) throws SQLException {
         hibernateTemplate.update(articlecontentEntity);
-        hibernateTemplate.getSessionFactory().getCurrentSession().clear();
     }
 
     @Override

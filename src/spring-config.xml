@@ -223,4 +223,7 @@
     <bean class="action.UpdateUserAction" name="updateUserAction">
         <property name="userService" ref="IUserServiceImpl"></property>
     </bean>
+    <bean class="action.Agree" name="agreeAction">
+        <property name="exchangeService" ref="iExchangeService"></property>
+    </bean>
 </beans>

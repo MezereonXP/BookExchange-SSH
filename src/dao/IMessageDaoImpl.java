@@ -28,19 +28,18 @@ public class IMessageDaoImpl implements IMessageDao{
     @Override
     public void saveMessage(MessageEntity messageEntity) throws SQLException {
         hibernateTemplate.save(messageEntity);
-        hibernateTemplate.getSessionFactory().getCurrentSession().clear();
     }
 
     @Override
     public void delMessage(MessageEntity messageEntity) throws SQLException {
         hibernateTemplate.delete(messageEntity);
-        hibernateTemplate.getSessionFactory().getCurrentSession().clear();
+        //hibernateTemplate.getSessionFactory().getCurrentSession().clear();
     }
 
     @Override
     public void editMessage(MessageEntity messageEntity) throws SQLException {
         hibernateTemplate.update(messageEntity);
-        hibernateTemplate.getSessionFactory().getCurrentSession().clear();
+        //hibernateTemplate.getSessionFactory().getCurrentSession().clear();
     }
 
     @Override

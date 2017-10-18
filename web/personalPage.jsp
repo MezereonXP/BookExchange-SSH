@@ -460,7 +460,7 @@
                                                             交换您的<h4 style="display: inline;"><s:property value="booknameb"/></h4>
                                                         </span>
                                                     </div>
-                                                    <button class="ui primary button" onclick="aggre(<s:property value="id"/>)">同意</button>
+                                                    <button class="ui primary button" onclick="agree(<s:property value="id"/>)">同意</button>
                                                     <button class="ui primary button negative" onclick="refuse(<s:property value="id"/>)">拒绝</button>
                                                 </div>
                                             </div>
@@ -946,6 +946,32 @@
     }
     function personSubmit() {
         location.href = "updateUser.action?sign="+$("#signEle").text()+"&phone="+$("#phoneEle").text()+"&email="+$("#emailEle").text();
+    }
+
+    function agree(id) {
+        var formData = new FormData();
+        formData.append("exchangeID", id);
+        $.ajax({
+            url: "http://localhost:8099/agree.action",
+            type: "POST",
+            data: formData,
+            /**
+             *必须false才会自动加上正确的Content-Type
+             */
+            contentType: false,
+            /**
+             * 必须false才会避开jQuery对 formdata 的默认处理
+             * XMLHttpRequest会对 formdata 进行正确的处理
+             */
+            processData: false,
+            success: function (data) {
+                alert("操作成功!");
+                self.location = "showPersonalMainPage.action?type=4";
+            },
+            error: function () {
+                alert("操作失败!");
+            }
+        })
     }
     var path = getCookie("SRC");
     var html = "<img src=" + path.toString() + " class=\"image avatar ui\"/>";

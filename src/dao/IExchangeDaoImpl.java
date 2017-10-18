@@ -29,7 +29,6 @@ public class IExchangeDaoImpl implements IExchangeDao{
     @Override
     public void saveExchange(ExchangeEntity exchangeEntity) throws SQLException {
         hibernateTemplate.save(exchangeEntity);
-        hibernateTemplate.getSessionFactory().getCurrentSession().clear();
     }
 
     @Override
@@ -41,7 +40,6 @@ public class IExchangeDaoImpl implements IExchangeDao{
     @Override
     public void editExchange(ExchangeEntity exchangeEntity) throws SQLException {
         hibernateTemplate.update(exchangeEntity);
-        hibernateTemplate.getSessionFactory().getCurrentSession().clear();
     }
 
     @Override

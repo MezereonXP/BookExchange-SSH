@@ -28,19 +28,16 @@ public class IForumDaoImpl implements IForumDao {
     @Override
     public void saveForum(ForumEntity forumEntity) throws SQLException {
         hibernateTemplate.save(forumEntity);
-        hibernateTemplate.getSessionFactory().getCurrentSession().clear();
     }
 
     @Override
     public void delForum(ForumEntity forumEntity) throws SQLException {
         hibernateTemplate.delete(forumEntity);
-        hibernateTemplate.getSessionFactory().getCurrentSession().clear();
     }
 
     @Override
     public void editForum(ForumEntity forumEntity) throws SQLException {
         hibernateTemplate.update(forumEntity);
-        hibernateTemplate.getSessionFactory().getCurrentSession().clear();
     }
 
     @Override
