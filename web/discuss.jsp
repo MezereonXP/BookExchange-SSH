@@ -213,6 +213,11 @@
                 </div>
             </div>
         </div>
+        <div class="row center aligned">
+            <div class="column center aligned">
+                <a style="display: inline" class="ui blue large button" onclick="sendDiscussion()">发布讨论</a>
+            </div>
+        </div>
     </div>
     <p></p>
     <p></p>
@@ -355,6 +360,9 @@
     }
     function showDiscuss(id) {
         self.location = "showOneDiscuss.action?forumID="+id;
+    }
+    function sendDiscussion() {
+        self.location = "sendDiscussion.jsp";
     }
 </script>
 </body>

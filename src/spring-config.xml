@@ -235,6 +235,7 @@
     </bean>
     <bean class="action.SendDiscussionAction" name="sendDiscussionAction">
         <property name="forumService" ref="iForumService"></property>
+        <property name="forumViewService" ref="iForumViewService"></property>
     </bean>
     <bean class="action.addCommentAction" name="addCommentAction">
         <property name="bookArticleService" ref="iBookArticleService"></property>
