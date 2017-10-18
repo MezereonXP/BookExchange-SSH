@@ -1,4 +1,5 @@
 package dao;
+import entity.ForumEntity;
 import entity.MessageEntity;
 import entity.UserbookEntity;
 import org.hibernate.Session;
@@ -24,6 +25,10 @@ public class IUserbookDaoImpl implements IUserbookDao{
 
     @Autowired
     private HibernateTemplate hibernateTemplate;
+
+    public List<UserbookEntity> searchForumByBookName(String s){
+        return (List<UserbookEntity>) hibernateTemplate.find("from UserbookEntity u where u.bookname like ?", "%s%");
+    }
 
     @Override
     public void saveUserbook(UserbookEntity userbookEntity) throws SQLException {

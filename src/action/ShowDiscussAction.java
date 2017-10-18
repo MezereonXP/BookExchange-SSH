@@ -29,12 +29,23 @@ public class ShowDiscussAction extends ActionSupport {
     private List<Page> pageNum;
     private List<SuperForum> forumList;
 
+    private int type;
+    private String tag;
+    private String key;
+
     private int page;
 
     @Override
     public String execute() throws Exception {
         forumList = new ArrayList<>();
-        forumEntities = forumService.getAllForum();
+        if(type==0){
+            type = 1;
+        }
+        if(type==2){
+            forumEntities = forumService.searchForumByTitle(tag);
+        }else{
+            forumEntities = forumService.getAllForum();
+        }
         List<ForumEntity> list = new ArrayList<>();
         List<ForumEntity> list2 = new ArrayList<>();
         int count = 0;
@@ -117,5 +128,25 @@ public class ShowDiscussAction extends ActionSupport {
 
     public void setForumViewService(IForumViewServiceImpl forumViewService) {
         this.forumViewService = forumViewService;
+    }
+
+    public String getTag() {
+        return tag;
+    }
+
+    public void setTag(String tag) {
+        this.tag = tag;
+    }
+
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
     }
 }

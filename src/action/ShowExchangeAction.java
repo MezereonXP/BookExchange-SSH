@@ -30,10 +30,21 @@ public class ShowExchangeAction extends ActionSupport {
     private List<Page> pageNum;
 
     private int page;
+    private int type;
+    private String tag;
+    private String key;
 
     @Override
     public String execute() throws Exception {
-        userbookEntities = iUserBookService.getAllUserBook();
+        if(type==0){
+            type = 1;
+        }
+        if(type==1){
+            userbookEntities = iUserBookService.getAllUserBook();
+        }else{
+            userbookEntities = doWithTag(iUserBookService.getiUserbookDao().searchForumByBookName(key),tag);
+        }
+
         userBooksWithUserpics = new ArrayList<UserBooksWithUserpic>();
         List<UserbookEntity> list = new ArrayList<>();
         int count = 0;
@@ -59,6 +70,26 @@ public class ShowExchangeAction extends ActionSupport {
             pageNum.add(page);
         }
         return SUCCESS;
+    }
+
+    private List<UserbookEntity> doWithTag(List<UserbookEntity> userbookEntities, String tag) {
+        List<UserbookEntity> list = new ArrayList<>();
+        for(UserbookEntity ube:userbookEntities){
+            if(check(ube.getKind(),tag)){
+                list.add(ube);
+            }
+        }
+        return list;
+    }
+
+    private boolean check(String kind, String tag) {
+        String[] tags = tag.split(";");
+        for(String t:tags){
+            if(kind.indexOf(t)==-1){
+                return false;
+            }
+        }
+        return true;
     }
 
     public IUserBookServiceImpl getiUserBookService() {
@@ -107,5 +138,29 @@ public class ShowExchangeAction extends ActionSupport {
 
     public void setPage(int page) {
         this.page = page;
+    }
+
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
+    }
+
+    public String getTag() {
+        return tag;
+    }
+
+    public void setTag(String tag) {
+        this.tag = tag;
+    }
+
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
     }
 }
