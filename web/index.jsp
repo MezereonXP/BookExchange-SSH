@@ -263,7 +263,7 @@
                       </div>
                       <div class="column center" style="margin: 10px">
                         <div id="personalCenter1" class="ui medium primary button"><i class="user icon"></i>个人中心 </div>
-                        <div class="ui medium negative button"><i class="power icon"></i>注销 </div>
+                        <div class="ui medium negative button" onclick="logout()"><i class="power icon"></i>注销 </div>
                       </div>
 
                   </div>
@@ -403,6 +403,10 @@
       }
       function hideUserPic2() {
         $('#userCard2').transition("fly up");
+      }
+      function logout() {
+          delCookie("USERNAME");
+          delCookie("SRC");
       }
   </script>
   </body>

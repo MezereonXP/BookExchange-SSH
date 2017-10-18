@@ -613,7 +613,7 @@
                                                         交换结束<h4 style="display: inline;"><s:property value="booknameb"/></h4>
                                                         <br>
                                                         <br>
-                                                        <button class="ui primary button" onclick="uploadNum(<s:property value="id"/>)">发布相关书评</button>
+                                                        <button class="ui primary button">发布相关书评</button>
                                                     </span>
                                                 </div>
                                             </div>
@@ -627,6 +627,38 @@
             </s:if>
             <s:if test="type == 5"><p>通知消息界面</p></s:if>
             <%--上传书籍--%>
+        </div>
+    </div>
+</div>
+<div class="ui modal transition floated" id="uploadNumber">
+    <i class="close icon"></i>
+    <div class="header">
+        上传物流信息
+    </div>
+    <div class="content">
+        <div class="ui grid vertically divided">
+            <div class="row" style="margin-left: 30px;padding-top: 30px;padding-bottom: 30px">
+                    <div class="ui input">
+                        <input type="text" placeholder="请输入订单编号" id="num" name="num">
+                    </div>
+                    <button class="ui primary button" id="upload" onclick="uploadNumber()">
+                        保存
+                    </button>
+                    <button class="ui button" id="cancel" onclick="cancel()">
+                        取消
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="actions">
+        <div class="ui red basic cancel inverted button" onclick="cancelUploadNum()">
+            <i class="remove icon"></i>
+            取消
+        </div>
+        <div class="ui green ok inverted button" onclick="uploadNumber()">
+            <i class="checkmark icon"></i>
+            保存
         </div>
     </div>
 </div>
@@ -980,6 +1012,32 @@
         formData.append("exchangeID", id);
         $.ajax({
             url: "http://localhost:8099/refuse.action",
+            type: "POST",
+            data: formData,
+            contentType: false,
+            processData: false,
+            success: function (data) {
+                alert("操作成功!");
+                self.location = "showPersonalMainPage.action?type=4";
+            },
+            error: function () {
+                alert("操作失败!");
+            }
+        })
+    }
+    var currentID;
+    function uploadNum(id) {
+        $("#uploadNumber").modal("show");
+        currentID = id;
+    }
+
+    function uploadNumber() {
+        var formData = new FormData();
+        window.alert(currentID);
+        formData.append("exchangeID", currentID);
+        formData.append("number",$("#num").val());
+        $.ajax({
+            url: "http://localhost:8099/uploadNum.action",
             type: "POST",
             data: formData,
             contentType: false,
