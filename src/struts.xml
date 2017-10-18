@@ -111,4 +111,10 @@
             <result name="error">login.jsp</result>
         </action>
     </package>
+    <package name="sendDiscussion" namespace="/" extends="struts-default">
+        <action name="sendDiscussion" class="sendDiscussionAction">
+            <result name="success" type="redirect"><![CDATA[showDiscuss.action?page=1]]></result>
+            <result name="error">login.jsp</result>
+        </action>
+    </package>
 </struts>
