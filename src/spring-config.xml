@@ -225,5 +225,9 @@
     </bean>
     <bean class="action.Agree" name="agreeAction">
         <property name="exchangeService" ref="iExchangeService"></property>
+        <property name="userBookService" ref="iUserBookService"></property>
+    </bean>
+    <bean class="action.Refuse" name="refuseAction">
+        <property name="exchangeService" ref="iExchangeService"></property>
     </bean>
 </beans>
