@@ -230,4 +230,8 @@
     <bean class="action.Refuse" name="refuseAction">
         <property name="exchangeService" ref="iExchangeService"></property>
     </bean>
+    <bean class="action.addCommentAction" name="addCommentAction">
+        <property name="bookArticleService" ref="iBookArticleService"></property>
+        <property name="articleContentService" ref="iArticleContentService"></property>
+    </bean>
 </beans>

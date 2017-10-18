@@ -139,7 +139,7 @@
                     location.href = "/showExchange.action?page=1";
                 });
                 $("#personalCenter").click(function () {
-                    location.href = "/personalPage.jsp?type=1";
+                    location.href = "/showPersonalMainPage.action?type=1&more=0";
                 });
                 $("#discuss").click(function () {
                     location.href = "/showDiscuss.action?page=1";

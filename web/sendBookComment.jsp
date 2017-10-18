@@ -25,7 +25,7 @@
 <link rel="stylesheet" type="text/css" href="./pages/semantic/dist/components/header.css">
 <link rel="stylesheet" type="text/css" href="./pages/semantic/dist/components/image.css">
 <link rel="stylesheet" type="text/css" href="./pages/semantic/dist/components/menu.css">
-
+<link rel="stylesheet" type="text/css" href="./pages/semantic/dist/components/dimmer.css">
 <link rel="stylesheet" type="text/css" href="./pages/semantic/dist/components/divider.css">
 <link rel="stylesheet" type="text/css" href="./pages/semantic/dist/components/dropdown.css">
 <link rel="stylesheet" type="text/css" href="./pages/semantic/dist/components/segment.css">
@@ -38,6 +38,7 @@
 <script src="./pages/semantic/dist/components/visibility.js"></script>
 <script src="./pages/semantic/dist/components/sidebar.js"></script>
 <script src="./pages/semantic/dist/components/transition.js"></script>
+<script src="./pages/semantic/dist/components/dimmer.js"></script>
 <script src='https://cloud.tinymce.com/stable/tinymce.min.js'></script>
 <script>
     tinymce.init({
@@ -130,6 +131,9 @@
 <script>
     $(document)
             .ready(function() {
+                $('.special.cards .image').dimmer({
+                    on: 'hover'
+                });
                 $("#login").click(function(){
                     location.href = "/login.jsp";});
                 $("#login1").click(function(){
@@ -169,6 +173,12 @@
     ;
 </script>
 <body>
+<div class="ui segment" style="width: 100%;height: 100%;margin: 0px;padding: 0px;display: none" id="loader">
+    <div class="ui active dimmer">
+        <div class="ui text loader">Loading</div>
+    </div>
+    <p></p>
+</div>
 <div class="ui fixed inverted menu">
     <div class="ui container">
         <a href="#" class="header item">
@@ -203,37 +213,62 @@
 
     </div>
 </div>
-
-<div class="ui main text container" style="margin-top: 70px">
-    <h1 class="ui header">发布书评</h1>
-    <div class="ui labeled input">
-        <a class="ui blue label">
-            书名
-        </a>
-        <input type="text" placeholder="请输入书名" name="bookName">
-    </div>
-    <p>
-    <div class="ui labeled input">
-        <a class="ui blue label">
-            标题
-        </a>
-        <input type="text" placeholder="请输入标题" name="title">
-    </div>
-    <p>
-    <div style="text-align: center">
-        <form method="post">
-            <textarea id="mytextarea" name="content" style="height: 400px;width: 800px"></textarea>
-        </form>
-    </div>
-    <div class="ui equal width stackable internally celled grid">
-
-        <div class="row center aligned">
-            <a style="display: inline" class="ui blue large button" onclick="sendBookComment()">发布书评</a>
+<form id="form">
+    <div class="ui main text container" style="margin-top: 70px;position:relative;" id="main">
+        <h1 class="ui header">发布书评</h1>
+        <div class="ui labeled input">
+            <a class="ui blue label">
+                书名
+            </a>
+            <input type="text" placeholder="请输入书名" name="bookName">
         </div>
+        <br>
+        <br>
+        <br>
+        <div class="ui labeled input" \>
+            <a class="ui blue label">
+                标题
+            </a>
+            <input type="text" placeholder="请输入标题" name="title">
+        </div>
+        <br>
+        <br>
+        <br>
+        <div class="ui special cards raised"
+             style="width:160px;height:200px;margin-bottom: 100px;position: absolute;right: 0;top:0">
+            <div class="card">
+                <div class="blurring dimmable image">
+                    <div class="ui dimmer">
+                        <div class="content">
+                            <div class="center">
+                                <input type="file" id="bookImgSrc" style="display: none"
+                                       onchange="fileSelected()">
+                                <div class="ui inverted button" onclick="F_Open_dia()">点击上传书籍图片
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <img src="../assets/book.jpg" style="width: 160px;height: 200px" id="bookImg">
+                </div>
+            </div>
+        </div>
+
+        <div style="text-align: center">
+            <form method="post">
+                <textarea id="mytextarea" name="content" style="height: 400px;width: 800px"></textarea>
+            </form>
+        </div>
+        <div class="ui equal width stackable internally celled grid">
+
+            <div class="row center aligned">
+                <a style="display: inline" class="ui blue large button" onclick="sub()">发布书评</a>
+            </div>
+        </div>
+        <input name="bookImgSrc" style="display: none"/>
+        <p></p>
+        <p></p>
     </div>
-    <p></p>
-    <p></p>
-</div>
+</form>
 
 <div class="ui inverted vertical footer segment">
     <div class="ui center aligned container">
@@ -281,6 +316,63 @@
     </div>
 </div>
 <script>
+    function sub() {
+        if ($(" input[ name='bookName' ] ").val() == "" || $(" input[ name='title' ] ").val() == "" || $(" input[ id='bookImgSrc' ] ").val() == ""||tinymce.get('mytextarea').getContent()=="" ) {
+            window.alert("请填完所有内容");
+        } else {
+            $("#main").css("display", "none");
+            $("#loader").show();
+            var formData = new FormData();
+            formData.append("file", document.getElementById("bookImgSrc").files[0]);
+            $.ajax({
+                url: "http://mezereon.gotoip2.com/bookEx/addArticle.php",
+                type: "POST",
+                data: formData,
+                /**
+                 *必须false才会自动加上正确的Content-Type
+                 */
+                contentType: false,
+                /**
+                 * 必须false才会避开jQuery对 formdata 的默认处理
+                 * XMLHttpRequest会对 formdata 进行正确的处理
+                 */
+                processData: false,
+                success: function (data) {
+                    console.log(data);
+                    alert(data);
+                    $(" input[ name='bookImgSrc' ] ").val(data);
+                    //$(" input[ name='content' ] ").val(tinymce.get('mytextarea').getContent());
+                    $("#form").submit();
+                },
+                error: function () {
+                    alert("上传失败！");
+                }
+            })
+        }
+    }
+    function F_Open_dia(){
+        $("#bookImgSrc").click();
+    }
+    function fileSelected() {
+        var $file = $('#bookImgSrc');
+        var fileObj = $file[0];
+        var windowURL = window.URL || window.webkitURL;
+        var dataURL;
+        var $img = $("#bookImg");
+
+        if (fileObj && fileObj.files && fileObj.files[0]) {
+            dataURL = windowURL.createObjectURL(fileObj.files[0]);
+            $img.attr('src', dataURL);
+        } else {
+            dataURL = $file.val();
+            var imgObj = document.getElementById("bookImgSrc");
+// 两个坑:
+// 1、在设置filter属性时，元素必须已经存在在DOM树中，动态创建的Node，也需要在设置属性前加入到DOM中，先设置属性在加入，无效；
+// 2、src属性需要像下面的方式添加，上面的两种方式添加，无效；
+            imgObj.style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale)";
+            imgObj.filters.item("DXImageTransform.Microsoft.AlphaImageLoader").src = dataURL;
+        }
+    }
     function getCookie(name) {
         var arr, reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)");
         if (arr = document.cookie.match(reg))

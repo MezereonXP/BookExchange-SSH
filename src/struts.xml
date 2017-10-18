@@ -102,4 +102,10 @@
             <result name="error">login.jsp</result>
         </action>
     </package>
+    <package name="addComment" namespace="/" extends="struts-default">
+        <action name="addComment" class="addCommentAction">
+            <result name="success" type="redirect">bookcomment.jsp</result>
+            <result name="error">login.jsp</result>
+        </action>
+    </package>
 </struts>
