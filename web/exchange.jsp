@@ -331,7 +331,7 @@
     }
     function changePage(num) {
         //window.alert(""+num);
-        self.location ="showExchange.action?page="+num;
+        self.location ="showExchange.action?page="+num+"&type=<s:property value="type"/>&key=<s:property value="key"/>";
     }
     var path = getCookie("SRC");
     if(path!="null") {
