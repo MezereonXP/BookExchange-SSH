@@ -32,11 +32,15 @@ public class ShowBookCommentAction extends ActionSupport {
     public String list() throws Exception {
         bookarticleEntities = iBookArticleService.getAllBookArticle();
         bookarticleEntities2 = new ArrayList<BookarticleEntity>();
+        List<BookarticleEntity>  bookarticleEntityList = new ArrayList<>();
         int count = 0;
         if(!(page!= 1&&page!=1)){
             page = 1;
         }
-        for(BookarticleEntity entity:bookarticleEntities){
+        for(int i=bookarticleEntities.size()-1;i>=0;i--){
+            bookarticleEntityList.add(bookarticleEntities.get(i));
+        }
+        for(BookarticleEntity entity:bookarticleEntityList){
             count++;
             if(count<=5*page&&count>5*(page-1)){
                 bookarticleEntities2.add(entity);
