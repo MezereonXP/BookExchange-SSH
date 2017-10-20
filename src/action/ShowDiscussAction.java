@@ -30,7 +30,6 @@ public class ShowDiscussAction extends ActionSupport {
     private List<SuperForum> forumList;
 
     private int type;
-    private String tag;
     private String key;
 
     private int page;
@@ -42,18 +41,23 @@ public class ShowDiscussAction extends ActionSupport {
             type = 1;
         }
         if(type==2){
-            forumEntities = forumService.searchForumByTitle(tag);
+            System.out.println("key "+key);
+            forumEntities = doWithKey(forumService.getAllForum());
+            for(int i=forumEntities.size()-1;i>=0;i--){
+                System.out.println(forumEntities.get(i).getTitle());
+            }
         }else{
             forumEntities = forumService.getAllForum();
         }
         List<ForumEntity> list = new ArrayList<>();
         List<ForumEntity> list2 = new ArrayList<>();
         int count = 0;
-        if(!(page!= 1&&page!=1)){
+        if(!(page!= 1&&page!=0)){
             page = 1;
         }
         for(int i=forumEntities.size()-1;i>=0;i--){
             list.add(forumEntities.get(i));
+            System.out.println(forumEntities.get(i).getTitle());
         }
         for(ForumEntity entity:list){
             count++;
@@ -73,7 +77,16 @@ public class ShowDiscussAction extends ActionSupport {
         }
         return SUCCESS;
     }
-
+    private List<ForumEntity> doWithKey(List<ForumEntity> forumEntities) {
+        List<ForumEntity> list = new ArrayList<>();
+        for(ForumEntity fe:forumEntities){
+            if((fe.getTitle().indexOf(getKey())!=-1)){
+                list.add(fe);
+            }
+        }
+        System.out.println("Tag: "+list.size());
+        return list;
+    }
     public IForumServiceImpl getForumService() {
         return forumService;
     }
@@ -130,14 +143,6 @@ public class ShowDiscussAction extends ActionSupport {
         this.forumViewService = forumViewService;
     }
 
-    public String getTag() {
-        return tag;
-    }
-
-    public void setTag(String tag) {
-        this.tag = tag;
-    }
-
     public int getType() {
         return type;
     }
@@ -148,5 +153,8 @@ public class ShowDiscussAction extends ActionSupport {
 
     public void setKey(String key) {
         this.key = key;
+    }
+    public String getKey() {
+        return key;
     }
 }

@@ -216,7 +216,7 @@
                         <input class="prompt" type="text" placeholder="请输入查询关键字" id="key">
                         <i class="search icon" ></i>
                     <div class="results"></div>
-                </div>
+                    </div>
                     <a class="ui  blue button" onclick="sear()" >搜索</a>
                     <br>
                 <div class="ui multiple dropdown" id="tag">

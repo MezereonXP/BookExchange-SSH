@@ -206,10 +206,12 @@
             <div class="center aligned column">
                 <div class="ui search">
                     <div class="ui icon input">
-                        <input class="prompt" type="text" placeholder="请输入查询关键字">
+                        <input class="prompt" type="text" placeholder="请输入查询关键字" id="key">
                         <i class="search icon"></i>
                     </div>
                     <div class="results"></div>
+                    <a class="ui  blue button" onclick="sear()" >搜索</a>
+                    <br>
                 </div>
             </div>
         </div>
@@ -324,6 +326,9 @@
     </div>
 </div>
 <script>
+    function sear() {
+        self.location="showDiscuss.action?type=2&key="+$("#key").val()+"&page=1";
+    }
     function getCookie(name) {
         var arr, reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)");
         if (arr = document.cookie.match(reg))
@@ -336,7 +341,8 @@
     }
     function changePage(num) {
         //window.alert(""+num);
-        self.location ="showDiscuss.action?page="+num;
+        self.location ="showDiscuss.action?page="+num
+            +"&type=<s:property value="type"/>&key=<s:property value="key"/>";
     }
     var path = getCookie("SRC");
     if(path!="null") {

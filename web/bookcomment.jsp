@@ -169,7 +169,6 @@
             <img class="logo" src="../assets/logo2.png">
             BookExchange
         </a>
-
         <a class="item" id="home">主页</a>
         <a class="item" id="exchange">书籍交换</a>
         <a class="active item" id="bookComment">书评</a>
@@ -206,10 +205,11 @@
             <div class="center aligned column">
                 <div class="ui search">
                     <div class="ui icon input">
-                        <input class="prompt" type="text" placeholder="请输入查询关键字">
+                        <input class="prompt" type="text" placeholder="请输入查询关键字" id="key">
                         <i class="search icon"></i>
                     </div>
                     <div class="results"></div>
+                    <a class="ui  blue button" onclick="sear()" >搜索</a>
                 </div>
             </div>
         </div>
@@ -319,6 +319,9 @@
     </div>
 </div>
 <script>
+    function sear(){
+        self.location="showBookComment.action?type=2&key="+$("#key").val()+"&page=1";
+    }
     function getCookie(name) {
         var arr, reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)");
         if (arr = document.cookie.match(reg))
@@ -331,7 +334,7 @@
     }
     function changePage(num) {
         //window.alert(""+num);
-        self.location ="showBookComment.action?page="+num;
+        self.location ="showBookComment.action?page="+num+"&type=<s:property value="type"/>&key=<s:property value="key"/>";
     }
     var path = getCookie("SRC");
     if(path!="null") {

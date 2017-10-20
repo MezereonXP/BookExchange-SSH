@@ -3,14 +3,10 @@ package action;
 import com.opensymphony.xwork2.ActionSupport;
 import entity.BookarticleEntity;
 import entity.Page;
-import entity.UserBooksWithUserpic;
 import entity.UserbookEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import service.IBookArticleServiceImpl;
-import service.IUserBookServiceImpl;
-import service.IUserServiceImpl;
 
-import java.awt.print.Book;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,14 +23,27 @@ public class ShowBookCommentAction extends ActionSupport {
 
     private List<Page> pageNum;
     private int page;
+    private int type;
+    private String key;
 
     public String list() throws Exception {
-        bookarticleEntities = iBookArticleService.getAllBookArticle();
+        if(type==0){
+            type = 1;
+        }
+        if(type==1){
+            bookarticleEntities = iBookArticleService.getAllBookArticle();
+        }else{
+            System.out.println("Key: "+key);
+            System.out.println("type: "+type);
+            bookarticleEntities = doWithKey(iBookArticleService.getAllBookArticle());
+        }
+
+
 
         bookarticleEntities2 = new ArrayList<BookarticleEntity>();
         List<BookarticleEntity>  bookarticleEntityList = new ArrayList<>();
         int count = 0;
-        if(!(page!= 1&&page!=1)){
+        if(!(page!= 1&&page!=0)){
             page = 1;
         }
         for(int i=bookarticleEntities.size()-1;i>=0;i--){
@@ -70,7 +79,16 @@ public class ShowBookCommentAction extends ActionSupport {
     public void setBookarticleEntities(List<BookarticleEntity> bookarticleEntities) {
         this.bookarticleEntities = bookarticleEntities;
     }
-
+    private List<BookarticleEntity> doWithKey(List<BookarticleEntity> bookarticleEntities) {
+        List<BookarticleEntity> list = new ArrayList<>();
+        for(BookarticleEntity bae:bookarticleEntities){
+            if((bae.getTitle().indexOf(getKey())!=-1)){
+                list.add(bae);
+            }
+        }
+        System.out.println("Tag: "+list.size());
+        return list;
+    }
     public List<BookarticleEntity> getBookarticleEntities2() {
         return bookarticleEntities2;
     }
@@ -93,5 +111,21 @@ public class ShowBookCommentAction extends ActionSupport {
 
     public void setPage(int page) {
         this.page = page;
+    }
+
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
+    }
+
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
     }
 }
