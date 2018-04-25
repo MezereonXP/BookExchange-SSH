@@ -10,9 +10,8 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Created by Mezereon on 2017/10/8.
@@ -36,6 +35,10 @@ public class SuperTool {
         return time;
     }
     public static String getRawString(String s){
+        Map map = new HashMap<>();
+        map =new TreeMap<>();
+        map =new ConcurrentHashMap<>();
+
         return s.replaceAll("</?[^>]+>", "");
     }
 }

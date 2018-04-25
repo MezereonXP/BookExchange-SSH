@@ -565,7 +565,7 @@
                                                         <br>
                                                         <br>
                                                         <button class="ui primary button" onclick="uploadNum(<s:property value="id"/>)">上传物流单号</button>
-                                                        <button class="ui primary button grey" onclick="checkState(<s:property value="id"/>)">查看状态</button>
+                                                        <button class="ui primary button grey" onclick="checkState('<s:property value="numbera"/>', '<s:property value="numberb"/>', '<s:property value="usernamea"/>')">查看状态</button>
                                                     </span>
                                                 </div>
                                             </div>
@@ -1013,6 +1013,16 @@
             }
         })
     }
+
+    function checkState(numbera, numberb, usernamea){
+        console.log("saber")
+        if (usernamea == getCookie("username")){
+            window.alert(numbera==''?'暂无物流信息':numbera);
+        } else {
+            window.alert(numberb==''?'暂无物流信息':numberb);
+        }
+    }
+
     var currentID;
     function uploadNum(id) {
         $("#uploadNumber").modal("show");

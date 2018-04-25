@@ -15,6 +15,7 @@ import java.util.Map;
  * Created by Mezereon on 2017/9/24.
  */
 public class Main {
+
     private static final SessionFactory ourSessionFactory;
     private static final ServiceRegistry serviceRegistry;
 
