@@ -241,7 +241,7 @@
                 <a class="item" onclick="changeType(1)">
                     个人主页
                 </a>
-                <a class="item" onclick="changeType(2)">
+                <a class="item" onclick="changeType(2)" style="display: none;">
                     已上传书籍
                 </a>
                 <a class="item" onclick="changeType(3)">
@@ -250,7 +250,7 @@
                 <a class="item" onclick="changeType(4)">
                     交换信息
                 </a>
-                <a class="item" onclick="changeType(5)">
+                <a class="item" onclick="changeType(5)" style="display: none;">
                     通知消息
                 </a>
             </div>
@@ -566,6 +566,7 @@
                                                         <br>
                                                         <button class="ui primary button" onclick="uploadNum(<s:property value="id"/>)">上传物流单号</button>
                                                         <button class="ui primary button grey" onclick="checkState('<s:property value="numbera"/>', '<s:property value="numberb"/>', '<s:property value="usernamea"/>')">查看状态</button>
+                                                        <button class="ui primary button" onclick="acceptBook(<s:property value="id"/>,'<s:property value="usernamea"/>')">确认收货</button>
                                                     </span>
                                                 </div>
                                             </div>
@@ -613,7 +614,7 @@
                                                         交换结束<h4 style="display: inline;"><s:property value="booknameb"/></h4>
                                                         <br>
                                                         <br>
-                                                        <button class="ui primary button">发布相关书评</button>
+                                                        <button class="ui primary button" onclick="jumpToSendArticle()">发布相关书评</button>
                                                     </span>
                                                 </div>
                                             </div>
@@ -692,6 +693,10 @@
                 }
             })
         }
+    }
+
+    function jumpToSendArticle(){
+        self.location = ("http://localhost:8099/sendBookComment.jsp");
     }
 
     function getCookie(name) {
@@ -1015,11 +1020,11 @@
     }
 
     function checkState(numbera, numberb, usernamea){
-        console.log("saber")
-        if (usernamea == getCookie("username")){
-            window.alert(numbera==''?'暂无物流信息':numbera);
+        console.log("saber", getCookie("USERNAME"));
+        if (usernamea == getCookie("USERNAME")){
+            window.alert(numbera==''?'暂无物流信息':(numbera=='-1'?'已确认收货':numbera));
         } else {
-            window.alert(numberb==''?'暂无物流信息':numberb);
+            window.alert(numberb==''?'暂无物流信息':(numberb=='-1'?'已确认收货':numberb));
         }
     }
 
@@ -1031,7 +1036,6 @@
 
     function uploadNumber() {
         var formData = new FormData();
-        window.alert(currentID);
         formData.append("exchangeID", currentID);
         formData.append("number",$("#num").val());
         $.ajax({
@@ -1049,6 +1053,26 @@
             }
         })
     }
+
+    function acceptBook(id, username){
+        var type = 1;
+        if(username == getCookie("USERNAME")){
+            type = 2;
+        }
+        $.ajax({
+            url: "http://localhost:8099/acceptBook.action?id="+id+"&type="+type,
+            type: "GET",
+            contentType: false,
+            processData: false,
+            success: function (data) {
+                alert("操作成功!");
+            },
+            error: function () {
+                alert("操作失败!");
+            }
+        })
+    }
+
     var path = getCookie("SRC");
     var html = "<img src=" + path.toString() + " class=\"image avatar ui\"/>";
     var html2 = "<img src=" + path.toString() + " style=\"width:160px;height:160px\"id='personSRC'/>";

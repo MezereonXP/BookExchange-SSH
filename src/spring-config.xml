@@ -241,4 +241,7 @@
         <property name="bookArticleService" ref="iBookArticleService"></property>
         <property name="articleContentService" ref="iArticleContentService"></property>
     </bean>
+    <bean class="action.AcceptBookAction" name="acceptBookAction">
+        <property name="exchangeService" ref="iExchangeService"></property>
+    </bean>
 </beans>

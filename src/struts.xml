@@ -60,6 +60,9 @@
         <action name="uploadNum" class="action.UploadNumAction">
             <result name="success">index.jsp</result>
         </action>
+        <action name="acceptBook" class="action.AcceptBookAction">
+            <result name="success">index.jsp</result>
+        </action>
     </package>
     <package name="bookComment" namespace="/" extends="struts-default">
         <action name="showBookComment" class="showBookCommentAction" method="list">
