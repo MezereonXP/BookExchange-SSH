@@ -283,7 +283,9 @@
                                                     </div>
                                                 </s:if>
                                                 <s:if test="state==2">
-                                                    已交换
+                                                    <div class="ui dark ribbon label">
+                                                        已交换
+                                                    </div>
                                                 </s:if>
                                                 <img src="<s:property value="src"/>" style="height: 145px;width: 115px">
                                             </div>

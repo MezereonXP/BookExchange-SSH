@@ -2,8 +2,10 @@ package action;
 
 import com.opensymphony.xwork2.ActionSupport;
 import entity.ExchangeEntity;
+import entity.UserbookEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import service.IExchangeServiceImpl;
+import service.IUserBookServiceImpl;
 
 import java.util.List;
 
@@ -17,6 +19,9 @@ public class AcceptBookAction extends ActionSupport{
     @Autowired
     private IExchangeServiceImpl exchangeService;
 
+    @Autowired
+    private IUserBookServiceImpl userBookService;
+
     @Override
     public String execute() throws Exception {
         List<ExchangeEntity> exchangeEntities = exchangeService.getAllExchange();
@@ -24,8 +29,14 @@ public class AcceptBookAction extends ActionSupport{
             if (e.getId() == id){
                 if (type == 1){
                     e.setNumberb("-1");
+                    UserbookEntity userbookEntity = userBookService.getiUserbookDao().getUserbookById(Integer.parseInt(e.getBookidb()));
+                    userbookEntity.setState(2);
+                    userBookService.updateUserBook(userbookEntity);
                 }else {
                     e.setNumbera("-1");
+                    UserbookEntity userbookEntity = userBookService.getiUserbookDao().getUserbookById(Integer.parseInt(e.getBookida()));
+                    userbookEntity.setState(2);
+                    userBookService.updateUserBook(userbookEntity);
                 }
                 if (e.getNumbera().equals("-1")&&e.getNumberb().equals("-1")){
                     e.setStatus(2);
@@ -59,5 +70,13 @@ public class AcceptBookAction extends ActionSupport{
 
     public void setExchangeService(IExchangeServiceImpl exchangeService) {
         this.exchangeService = exchangeService;
+    }
+
+    public IUserBookServiceImpl getUserBookService() {
+        return userBookService;
+    }
+
+    public void setUserBookService(IUserBookServiceImpl userBookService) {
+        this.userBookService = userBookService;
     }
 }

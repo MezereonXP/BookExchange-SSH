@@ -243,5 +243,6 @@
     </bean>
     <bean class="action.AcceptBookAction" name="acceptBookAction">
         <property name="exchangeService" ref="iExchangeService"></property>
+        <property name="userBookService" ref="iUserBookService"></property>
     </bean>
 </beans>
